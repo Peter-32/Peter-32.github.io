@@ -1,0 +1,1643 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Peter Myers - Notes">
+  <meta name="keywords" content="Blog,Programming">
+  <meta name="author" content="Peter Myers">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/main.css">
+<title>Peter Myers - Notes</title>
+</head>
+
+<body>
+<div id="allcontent">
+
+<div class="container">
+
+<div class="page-header">
+<h1 id="Logo">Peter Myers - Notes</h1>
+</div>
+
+<div class="jumbotron">
+<p>
+	<a href="../Java/Main.html" class="btn btn-default btn-lg" >Java</a>
+	<a href="../SQL/Main.html" class="btn btn-default btn-lg" >SQL</a>
+	<a href="../JavaScript/Main.html" class="btn btn-default btn-lg" >JavaScript/HTML/CSS</a>
+	<a href="../Scala/Main.html" class="btn btn-default btn-lg" >Scala</a>
+	<a href="../Data_Management/Main.html" class="btn btn-default btn-lg" >Data Management</a>
+	<a href="../Machine_Learning_and_R/Main.html" class="btn btn-default btn-lg" >Machine Learning and R</a>
+</p>
+</div>
+<div class="jumbotron">
+
+<div class="top-nav-bar">
+<p><a href="#contents">To Contents</a></p>
+</div>
+
+<blockquote><p>Great Java programmers reuse code</p></blockquote>
+<blockquote><p>This section is focused on answering what you need to know and why.  How to do it can be found with a search online.</p></blockquote>
+<blockquote><p>Gather a list of requirements you want, then program.  Simple.</p></blockquote>
+<p>A large part of these notes are paraphrased from the following books and YouTube channels.</p>
+<ul>
+	<li><a href="http://www.mindview.net/Books/TIJ/">Thinking in Java 3rd Edition (free)</a></li>
+	<li><a href="https://www.youtube.com/watch?v=TBWX97e1E9g&amp;list=PLE7E8B7F4856C9B19">Derek Banas - Java Tutorial</a></li>
+	<li>Data Structures and Algorithms in Java</li>
+	<li>Head First Design Patterns</li>
+	<li><a href="https://www.youtube.com/user/koushks">Java Brains - Java Tutorials</a></li>
+	<li>Java - The Complete Reference 8th Edition (Continue reading this, I'm at the beginning of chapter 16)</li>
+	<li>Java Concurrency in Practice</li>
+	<li>JUnit in Action</li>
+	<li>Java Puzzlers</li>
+</ul>
+
+</div>
+
+<div class="jumbotron">
+<h1>Java</h1>
+
+<h2><a id="contents">Contents</a></h2>
+<ul>
+	<li><a href="#core_java">Core Java - Most Important Topics</a><ul>
+		<li><a href="#java_strengths_weaknesses">What are Java's Strengths and Weaknesses</a></li>
+		<li><a href="#what_are_objects">What are Objects</a></li>
+		<li><a href="#data_types">Data Types</a></li>
+		<li><a href="#frequently_used">Frequently Used</a></li>
+		<li><a href="#passing_variables_into_methods">Passing Variables into Methods</a></li>
+		<li><a href="#static_keyword">Static Keyword, and Public/Private Accessor Keywords</a></li>
+		<li><a href="#basic_oop">Basic Object Oriented Principles</a></li>
+		<li><a href="#collections">Collections</a></li>
+		<li><a href="#constructors">Constructors</a></li>
+		<li><a href="#javadocs">Easily Generate Documentation of Your Program</a></li>
+		<li><a href="#java_flow">Flow and Control of a Program</a></li>
+		<li><a href="#packages_compiling_importing">Packages, Compiling, and Importing</a></li>
+		<li><a href="#overloading__">Overloading, Overriding, Implements, Recursion, Nested Classes, Command Line Arguments, and Final</a></li>
+		<li><a href="#design_basic_principles">Enums and Annotations</a></li>
+		<li><a href="#input_output">I/O</a></li>
+		<li><a href="#generics">Generics</a></li>
+		<li><a href="#strings">Strings</a></li>
+		<li><a href="#design_basic_principles">OOP Design Basic Principles (Head First)</a></li>
+		<li><a href="https://docs.oracle.com/javase/8/docs/api/">Oracle Java API</a></li>
+		
+	</ul></li>
+	<li><a href="#testing">Testing and JUnit</a></li>
+	<li><a href="#ds_and_algorithms">Data Structures and Algorithms</a></li>
+	<li><a href="#eclipse_and_maven">Eclipse and Maven</a></li>
+	<li><a href="#servlets_jsps">Servlets and JSPs</a></li>
+	<li><a href="#hibernate">Hibernate</a></li>
+	<li><a href="#struts2">Struts2</a></li>
+	<li><a href="#spring_framework">Spring Framework</a></li>
+	<li><a href="#design_patterns">Design Patterns (Head First)</a></li>
+	<li><a href="#concurrency">Concurrency</a></li>
+	<li><a href="#OOAD">Object Oriented Analysis and Design (Head First)</a></li>
+	<li><a href="#effective_java">Effective Java Rules</a></li>
+	<li><a href="#java_puzzlers">Java Puzzlers</a></li>
+	<li><a href="#android_development">Android Development</a></li>
+	<li><a href="#misc">Misc</a></li>
+</ul>
+
+<h2><a id="additional">Additional Contents</a></h2>
+<ul>
+	<li><strong>Code</strong><ul>
+		<li><a href="https://github.com/Peter-32/Game-Clones">Advance Wars, Dodger, Memory Puzzle, and Sliding Puzzle</a></li>
+		<li><a href="https://github.com/Peter-32/Data-Structures-and-Algorithms">Data Structures and Algorithms</a></li>
+		<li><a href="https://github.com/Peter-32/ShipSimulator/tree/master/src/com/petermyers/gc/battle">Fleet Battle Simulation</a></li>
+	</ul></li>
+</ul>
+<p>
+<img src="../../../resources/Medium_Images/advance_wars.png">
+<img src="../../../resources/Medium_Images/dodger.png">
+<img src="../../../resources/Medium_Images/memory_puzzle.png">
+<img src="../../../resources/Medium_Images/sliding_puzzle.png">
+</p>
+
+<h2><a id="core_java">Core Java - Most Important Topics</a></h2>
+<h3><a id="java_strengths_weaknesses">What are Java's Strengths and Weaknesses</a></h3>
+<p>
+Thinking in Java 3rd Edition describes the strengths and weaknesses as follows<br>
+50% of programming activities use client/server computing.  There are many requests coming in and sometimes Middleware
+and client-side programming like JavaScript can help.<br>
+Strengths<br>
+</p>
+<ul>
+	<li>Solve problems with using servers with Servlets and JSPs</li>
+	<li>Time to market is 2x faster than C++</li>
+	<li>Cross platform</li>
+	<li>Easy to understand and maintain small/large projects</li>
+	<li>Garbage collector makes code simpler and avoid memory leaks</li>
+	<li>Useful for offline and online programs</li>
+</ul>
+<ul>
+	<li>C or C++ might be 20 to 50 times faster</li>
+	<li>JavaScript is better at client-side programming than Java's Applets</li>
+</ul>
+<p>
+It is said that Java should be preferred over C++ in most cases because the programmer is 2x as productive.  As of 2015, applets 
+are considered no longer very useful because some major browsers have decided to no longer support them (also they may require JRE to be installed on a client's computer).
+</p>
+<h3><a id="what_are_objects">What are Objects</a></h3>
+<p>
+Object-oriented programming has been adopted by almost every modern language.
+This is needed to add structure to a program; data and operations are placed in containers.
+An object combines data and operations and can implement an interface.
+</p>
+<p>
+Objects are service providers; if I could magically pull an object out of a hat, which objects would solve my problem?  Objects make programs
+ less complicated and are intuitive because they closely reflect the way humans think.  The blueprint for creating an object is called a class.
+ There are two types of programmers, class creators and client programmers.  Class creators expose what is necessary with interfaces but keeps the rest hidden.
+ The client programmer collects these classes and uses them to solve problems.  You create a class to define your own blueprint for an object.
+ An object is made up of fields, getters/setters, methods, and a constructor.  When you compare two objects use the equals method instead of ==.  
+ You can save objects after a program is finished by saving it to a database.
+</p>
+ <ul>
+	<li>fields: variables that the object stores</li>
+	<li>getters/setters: setters let you set new values to the fields and getters let you get the values in the fields.</li>
+	<li>methods: behavior of the object</li>
+	<li>constructor: code you want to run when it is created</li>
+</ul>
+<p>You can set up classes to allow parameters to be passed to methods or constructors.  One public class is allowed per file.</p>
+<h3><a id="data_types">Data Types</a></h3>
+<p>
+Primitives are not objects and are special.  In almost all cases you can use just four primitives and they are int, double, char, and boolean.
+If a primitive type variable holds the value 4, then just think that the variable represents 4.
+Strings are objects and are unchangable and don't require the new keyword.  You want to use BigInteger and BigDecimal objects for really big numbers.
+Everything else is an object that is created with the new keyword.  There is a TV and a remote control, the TV is every object
+you create, and the remote control is every variable you assign an object.  An array or list is just a collection of many remote controls.
+</p>
+<p>Java is a statically typed language, so when you initialize a variable as a data type, you then use it as that data type.  If a function requires
+an integer parameter, you are unable to pass in a string parameter like "6".  Doing so would be okay in a dynamically typed language.
+</p>
+
+<h3><a id="frequently_used">Frequently Used</a></h3>
+<p>
+These are good things that may be frequently used:
+</p>
+<ul>
+	<li>Integer.parseInt()</li>
+	<li>Double.parseDouble()</li>
+	<li>++, +=, %</li>
+	<li>Scanner</li>
+	<li>Math.random() and Math library</li>
+	<li><a href="https://www.youtube.com/watch?v=EWj60p8esD0&amp;list=PLE7E8B7F4856C9B19&amp;index=6
+">Exception throwing</a></li>
+	<li><a href="https://www.youtube.com/watch?v=F-CkaU8aQZI&amp;index=17&amp;list=PLE7E8B7F4856C9B19
+">Threads</a> and <a href="https://www.youtube.com/watch?v=G2Xd5avyk_0&amp;list=PLE7E8B7F4856C9B19&amp;index=18
+">concurrent.locks.ReentrantLock</a></li>
+	<li><a href="https://www.youtube.com/watch?v=F-CkaU8aQZI&amp;index=17&amp;list=PLE7E8B7F4856C9B19
+">Dates</a>, Calendar, Locale, java.text.DateFormat</li>
+	<li><a href="https://www.youtube.com/watch?v=h2tVne5nDUg&amp;list=PLE7E8B7F4856C9B19&amp;index=16
+">Cloneable</a>, toString, hashCode, equals, and className</li>
+	<li><a href="https://www.youtube.com/watch?v=s_PfopWcMwI&amp;list=PLE7E8B7F4856C9B19&amp;index=19
+">regex</a>: replace or find, case insensitive or sensitive</li>
+	<li><a href="https://www.youtube.com/watch?v=3XB3in9Xqy8&amp;index=20&amp;list=PLE7E8B7F4856C9B19
+">Swing</a>, Dimension, Toolkit, jFrame, panel, label, button, textfield, textArea, scrollbar, title, exit on close</li>
+	<li><a href="https://www.youtube.com/watch?v=3ifwR5feRQI&amp;index=20&amp;list=PLE7E8B7F4856C9B19#t=1.533059
+">AWT events, key/window/mouse events</a></li>
+	<li><a href="https://www.youtube.com/watch?v=mgnWYBaJuUk&amp;list=PLE7E8B7F4856C9B19&amp;index=28">FlowLayout</a> is simple.</li>
+	<li>BorderLayout is good for laying out multiple panels.  You place components on panels and then use this layout to place the panels on another panel that takes up the whole JFrame.</li>
+	<li>Box Layout gives spacing and it centers components.  Can put components relative to edges on the screen.</li>
+
+	
+	<li><a href="https://www.youtube.com/watch?v=ya_kEknUNIE&amp;list=PLE7E8B7F4856C9B19&amp;index=29
+">GridBagLayout</a>: You give an estimate of where you want the components and their weights.</li>
+	<li>GridLayout: Very constrained version of GridBagLayout.  Define the number of components in the rows, columns, and the horizontal and vertical spacing.</li>
+	<li><a href="https://www.youtube.com/watch?v=Em-AhbqVe48&amp;list=PLE7E8B7F4856C9B19&amp;index=34
+">MySQL connection</a></li>
+	<li><a href="https://www.youtube.com/watch?v=zy6LZ3QRDu4&amp;list=PLE7E8B7F4856C9B19&amp;index=36
+">Stopping slow queries</a>, pasting queries, using views</li>
+	<li><a href="https://www.youtube.com/watch?v=wFgeUC5dw_4&amp;list=PLE7E8B7F4856C9B19&amp;index=39
+">JTables</a></li>
+	<li><a href="https://www.youtube.com/watch?v=IuIX8H_avn8&amp;index=44&amp;list=PLE7E8B7F4856C9B19
+">TomCat</a> and Servlets</li>
+	<li><a href="https://www.youtube.com/watch?v=q-oQ5D91TAk&amp;index=47&amp;list=PLE7E8B7F4856C9B19
+">XML parsing</a> and XPath</li>
+	<li>Read and Write <a href="https://www.youtube.com/watch?v=MmKgTeEd8yM&amp;index=48&amp;list=PLE7E8B7F4856C9B19
+">XML files</a></li>
+	<li><a href="https://www.youtube.com/watch?v=ydQWhluoBXM&amp;list=PLE7E8B7F4856C9B19&amp;index=50
+">2D Graphics</a></li>
+</ul>
+
+<h3><a id="passing_variables_into_methods">Passing Variables into Methods</a></h3>
+<p class="coding">void methodName(int parameterValue1, String parameterValue2) </p>
+<p>
+For primitive parameters, the value passed in is cloned onto the parameter variable.  Since it is cloned, changing the parameter 
+variable's value will not affect variables assigned outside the method.  For objects, you pass in remote controls that are programmed
+to either TVs or nothing; the parameter variable is a remote controller that is programmed to control the same thing as the remote passed 
+into the function.  If you decide to reprogram the parameter variable it won't affect the remote control you passed into the function.
+If you change the object with this remote control, you will be changing it for both remote controllers because they point to the same TV.
+A String is unchangable so if two remote controls point to one String and one remote control tries to change the String, the result
+will be that one remote will look at the old String, and the remote that changed the String will just point at a newly created String.
+</p>
+<h3><a id="static_keyword">Static Keyword, and Public/Private Accessor Keywords</a></h3>
+<p>
+Static means it isn't tied to a particular instance of the class.  Classes cannot be static.  Methods and fields can be static.
+</p>
+<ol>
+	<li>Reason 1: You want to keep track of the total number of pandas in your Panda class</li>
+	<li>Reason 2: You want to use methods of a class without creating the class</li>
+</ol>
+<p>
+Public/private is a keyword placed before a class, field, getter/setter, constructor, or method.  Private means it is hidden from other classes
+and public means it is visible to other classes.
+</p>
+<h3><a id="basic_oop">Basic Object Oriented Principles</a></h3>
+<ol>
+	<li>Encapsulation</li>
+	<li>Abstraction</li>
+	<li>Inheritance</li>
+	<li>Polymorphism</li>
+</ol>
+<p>
+A good description for these <a href="https://chesterli0130.wordpress.com/2012/10/04/four-major-principles-of-object-oriented-programming-oop/">four major principles of OOP.</a> can be found here.
+When you use these principles, your programs will be easier to maintain, which is very important when you have to change the code.
+I'm still learning about these principles, so I won't describe this accurately, but I'll explain it simply.  
+To use <strong>encapsulation</strong> set the fields to private, all tasks that the object should be doing should live inside that class.  This means that if class B needs something
+to be done and it makes sense for class A to do it, class B may need to delegate work to class A.
+</p>
+<p>
+You will probably be using <strong>abstraction</strong> by simply creating an object.
+</p>
+<p>
+<strong>Inheritance</strong> is useful, but even the creator of Java jokingly said inheritance was their biggest mistake.  
+Inheritance is similar to cloning a class and providing slightly different behavior and maybe different fields.  
+Inheritance is done by using the "extends" keyword in the class definition.  
+One benefit to inheritance is upcasting.  Try to rarely use inheritance unless it is a clear choice.
+You have two choices
+</p>
+<ol>
+	<li>Add a new method (consider if the main class could just have this added)</li>
+	<li>Change an existing method (overriding)</li>	
+</ol>
+<p>
+Inheritance should have an IS-A relationship such as "a dog IS-A animal" or "a circle IS-A shape".  So to reiterate, if you need a dog
+and already have an animal class, you might choose to create a dog class that inherits from animal.  If you have IS-LIKE-A relationship you might turn to inheritance too.
+In this case, if you need two classes that are similar, you might create a third abstract class to be the parent of both classes.  Creating this
+third class can help the design better follow these principles.
+</p>
+<p>
+<strong>Polymorphism</strong> is used when you use the strategy design pattern.  You implement interfaces with the "implements" keyword in the class definition.
+This is overriding (which was just mentioned) that does different behavior
+based on which what the object's class is.  A very useful form of polymorphism is composition.  Composition is used with HAS-A relationships (A car HAS-A tire)
+An example of composition is defining Shape as a field in your class
+and at runtime you have the option of setting a child of shape to that field, such as triangle or circle; when you tell that field to draw, it behaves
+differently based on which child you set to the field.<br>
+</p>
+<h3><a id="collections">Collections</a></h3>
+<p>
+Collections have different big O notations for their methods.
+</p>
+<ul>
+	<li>Arrays, Multi-dimensional Arrays, Lists, Maps, and Iterator</li>
+	<li>ArrayList and LInkedList have the same base class List</li>
+	<li>Sets: unique values only</li>
+</ul>
+<p>
+It is easy to initialize collections in Java.  fill() helps fill arrays.
+Need to read Java - The Complete Reference Chapter 19.
+</p>
+<p>
+Use Map as the type and HashMap as the implementation.  HashMap is good for registering things.  You can get from the HashMap with a method that
+checks if the key is not contained and throws an error, otherwise it returns the value for the key.
+</p>
+<p class="coding">int[] a1 = { 1, 2, 3};</p>
+<p>
+It is important to know the many standard Java collections.
+</p>
+
+<h3><a id="constructors">Constructors</a></h3>
+<p>
+The order of initialization is:
+<ol>
+	<li><strong>Base class</strong> - Statics fields first if they haven't already been initialized by a previous object creation</li>
+	<li><strong>Base class</strong> - Non-statics</li>
+	<li><strong>Base class</strong> - constructor</li>
+	<li><strong>Children classes</strong> - Statics fields first if they haven't already been initialized by a previous object creation</li>
+	<li><strong>Children classes</strong> - Non-statics</li>
+	<li><strong>Children classes</strong> - constructor</li>	
+</ol>
+<p>
+You can call constructors within constructors, including the superclass constructor.
+
+</p>
+
+
+<h3><a id="javadocs">Easily Generate Documentation of Your Program</a></h3>
+<p>
+Documentation is important because it lets you share your program with others.
+You can easily generate documentation by typing /** and pressing enter above your methods in an IDE.  Then in Eclipse go to "Project" > "Generate Java Doc".
+When prompted, you usually only add public accessors, then click yes to all.  There are tags found online to improve your Java Doc.<br>
+Thinking in Java 3rd Edition recommends adding //: folder:filename.java to the top of the file.  Then add ///:~ to the end of the file.
+</p>
+<h3><a id="java_flow">Flow and Control of a Program</a></h3>
+<p>
+You use if, else if, and else.  There are also switch statements, while loops, do while loops, for loops, and enhanced for loops.
+if, else if, and else
+</p>
+<p class="coding"> if (number > 10)<br> System.out.println("Greater than 10");<br> 
+else if <br>(number < 5) <br>System.out.println("Less than 5");<br>
+else System.out.println("Between 5 and 10");
+</p>
+
+<p>
+Ternary operator, is a quick way to do if else
+</p>
+<p class="coding">
+minVal = (a < b) ? a : b; (Example from <a href="http://alvinalexander.com/java/edu/pj/pj010018">alvinalexander</a>)
+</p>
+
+<p>for loop
+</p>
+<p class="coding"> for(int i = 0; i < n; i++) {System.out.println(i);}
+</p>
+
+<p>enhanced for loop
+</p>
+<p class="coding"> 
+int[] numbers = new int[10];<br>
+for (int number : numbers) {System.out.println(number);}
+</p>
+
+<p>
+switch statement
+</p>
+<p class="coding"> 
+switch(i) {<br>
+case 0:<br>
+System.out.println("0");<br>
+break;<br>
+case 1:<br>
+System.out.println("1");<br>
+break;<br>
+default:<br>
+System.out.println("default");<br>
+break;<br>
+}
+</p>
+<p>
+Statement "break;" will break out of an interation statement like "while" or "for loops".  Statement "continue;" will skip to the next iteration of the iteration statement.
+</p>
+
+<h3><a id="packages_compiling_importing">Packages, Compiling, and Importing</a></h3>
+<p>
+<strong>Package</strong> names are always lowercase.  Always make your package namet he reverse of your website domain so it is guarenteed to be unique.
+</p>
+<p>
+<strong>Compile</strong> files to get .class files which are runnable.  Group the .class files into jars to share your library.  You may need to define the classpath
+to .class directories unless eclipse/Intellij does this for you.
+</p>
+<p>
+<strong>Importing</strong> is done with the import keyword.  This is how you use other packages.  Classes are put in packages, which are put in libraries.
+
+<h3><a id="overloading__">Overloading, Overriding, Implements, Recursion, Nested Classes, Command Line Arguments</a></h3>
+<p>
+<strong>Overloading</strong> is a term that means that you define the same method (applies to constructors too) multiple times in a class, but you define each with its own unique
+parameter signature.  A parameter signature is the number of parameters used, and the data types of the first parameter, second parameter, etc.  So you
+can define the same method name as long as the signature is different.
+</p>
+<p>
+<strong>Overriding</strong> is a term for when you define a method of the same name as an implemented parent method.  Overriding will replace the method
+behavior with the newly defined behavior
+</p>
+<p>
+<strong>Implements</strong> is a term for when you define a method of the same name as an unimplemented parent method.  Implemented means a method definition is defined.
+</p>
+<p>
+<strong>Recursion</strong> is when you define a method in terms of itself (Java - The Complete Reference).  It is used because it is easy to understand.
+Recursion usually works by defining an exit condition at the top of the method, and later having the method call itself but getting closer to reaching the
+exit condition.
+</p>
+<p>
+<strong>Nested Classes</strong> are used when only one class will make use of the class and you want to keep it hidden from other classes.  It is 
+perfectly valid to define a class inside a class.  You define the nested class in the same area you would define a method/field/constructor for the first class.
+</p>
+<p>
+<strong>Command line arguments</strong> are passed into the function by the "String[] args" parameter passed into the main function.  All Java programs begin
+with a main(String[] args) call.
+</p>
+<p>
+<strong>Final</strong> is used to say "this cannot be changed".  Use it for design not efficiency (although it runs slightly faster).
+Final to an object means you can't reprogram the remote control to another object.  Final static public is common.  Naming for final is usually
+in all capital letters.  You must initiialize final fields in the fields or in the constructor.  Useful to prevent overriding.  Final placed on classes
+means that you cannot inherit from that class.
+</p>
+
+<h3><a id="design_basic_principles">OOP Design Basic Principles (Head First)</a></h3>
+<ul>
+	<li>Interfaces/composition are preferred over inheritance</li>
+	<li>Program to an interface not an implementation</li>
+	<li>Separate the things that change from the things that stay the same with encapsulation.</li>
+	<li>Maintainability and extendibility are very important</li>
+	<li>Classes have a specific use, not too big and not too large.  One purpose and one reason it may change in the future.</li>
+	<li>Four choices<ol>
+		<li>HAS-A relationship, use composition.</li>
+		<li>Clone someone's class or refactor a switch (or if/else) statement, use extends for inheritance</li>
+		<li>IS-LIKE-A relationship, use abstract class</li>
+		<li>Implement an interface</li>
+	</ol></li>
+	<li>Make a plan.  Think about what objects, interfaces, reusable code, and automated tests to use.</li>
+</ul>
+<p>
+</p>
+
+<h3><a id="enums_annotations">Enums and Annotations</a></h3>
+<p>
+This section has information from Java - The Complete Reference
+</p>
+<p>
+An example enum is: 
+</p>
+<p class="coding">enum Answers {<br>
+NO, YES, MAYBE, LATER, SOON, NEVER<br>
+}
+</p>
+<p>
+So now I can return data type "Answers" from a function and I can then use enums in the boolean part of a switch (or if/else) statement.
+</p>
+
+<p>
+Annotations look confusing and I plan to avoid using them unless necessary.  You use the reflective library to read annotations at runtime.
+Annotations don't change the behavior of the code, but is useful for documentation that can be read at runtime.
+</p>
+
+<h3><a id="input_output">I/O</a></h3>
+<p>
+This section is based on a chapter in Java - The Complete Reference <br>
+Text-based console I/O is just not that useful in real-world Java programming.  I/O through streams; streams are an abstraction that either produces or
+consumes information (this abstraction makes things simple to have many types of input and output).  Use java.io for streams.  Two stream types
+</p>
+<ol>
+	<li>Byte Streams - handles binary data</li>
+	<li>Character Streams - handles character data</li>
+</ol>
+<p>
+Character streams are preferred and are better for internationalization and maintainability.
+java.lang automatically is imported and has a class called System.
+</p>
+<ol>
+	<li>System.out - standard output stream</li>
+	<li>System.in - standard input stream</li>
+	<li>System.err - standard error stream</li>
+</ol>
+<h4>Reading/Writing from Files</h4>
+You can also read and write to files and it is extremely convenient that you write code like this so files automatically close.
+<p class="coding">
+try (FileInputStream fin = new FileInputStream(file1Here);<br>
+FileOutputStream fout = new FileOutputStream(file2Here);
+</p>
+I notice that FileInputStream is used with a string parameter and there is no need to do BufferedReader.  The code gets much longer
+If you first define "fin" and "fout" outside of the "try" block and then have to close the files in a "finally" block, which also has a "try" block!
+Try to use the code above where you define the file in the try block.
+<h4>Reading from Other Sources</h4>
+<p>
+System.in is a type of InputStream, which is passed into InputStreamReader.  InputStreamReader converts Bytes to characters.
+BufferedReader helps create a character stream.  Putting it all together you have:
+</p>
+<p class="coding">BufferedReader br = new BufferedReader(new<br>
+InputStreamReader(System.in));
+</p>
+<p>
+One option you have with br is to read characters one at a time.
+</p>
+<p class="coding">
+do {<br>
+c = (char) br.read();<br>
+} while (c != 'q');
+</p>
+<p>
+Another option is to read strings one line at a time
+</p>
+<p class="coding">
+do {<br>
+  str = br.readLine();<br>
+} while (!str.equals("stop"));
+</p>
+
+<h4>Writing to Other Sources</h4>
+In real world applications you should use PrintWriter instead of System.out.
+<p class="coding">
+PrintWriter pw = new PrintWriter(System.out, true);
+</p>
+
+<p class="coding">Scanner in = new Scanner(System.in);</p>
+
+<h3><a id="generics">Generics</a></h3>
+<p>
+Chapter 14 of Java The Complete Reference (Unread)
+</p>
+
+<h3><a id="strings">Strings</a></h3>
+<ul>
+	<li>Concat with the plus sign (+).</li>
+	<li>toString() is a common method in functions.</li>
+	<li>charAt() is a popular function on strings.</li>
+	<li>toCharArray() is often used and getChars() is like substring and toCharArray().</li>
+	<li>equals() and equalsIgnoreCase().</li>
+	<li>regionMatches() helps you compare two strings to see if they are identical for a subset of each string.</li>
+	<li>startsWith() and endsWith() returns a boolean about whether the string starts/ends with a string pattern like "bar".</li>
+	<li>compareTo() is used for sorting.</li>
+	<li>Arrays.sort(a, Collections.reverseOrder()) helps sort in descending order</li>
+	<li>indexOf() and lastIndexOf() are used for searching strings.</li>
+	<li>substring(). concat() is like using a plus (+).</li>
+	<li>replace() replaces all occurrences of a char or string with a char or string;  To delete a pattern in a string, 
+	use string parameters with "" as the second parameter.</li>
+	<li>trim() and contains().</li>
+	<li>split() uses regExp</li>
+	<li>replaceFirst and replaceAll use regExp.</li>
+	<li>StringBuffer is used to quickly add or subtract to a string.
+	Use append(), insert(), reverse(), delete(), deleteCharAt() with StringBuilder.
+	After using stringBuilder, turn it back into a string before comparing to strings.
+	</li>
+</ul>
+
+<p>
+</p>
+
+<h3><a id="frameworks_tools_websites">Frameworks and Tools for Websites</a></h3>
+<ul>
+	<li>MySQL</li>
+	<li>Hibernate - database access and object persistence</li>
+	<li>Servlets and JSPs</li>
+	<li>Spring - makes it maintainable to use many frameworks.  Also used for transactions and security.</li>
+	<li>Struts 2 - Web layer for small applications</li>
+	<li>Spring MVC - An improvement over using Struts 2</li>
+	<li>Spring REST (Representational State Transfer)</li>
+	<li>Spring SOAP (Simple Object Access Protocol)</li>
+	<li>Log4J - Logging</li>
+	<li>Eclipse + Maven</li>
+	<li>JUnit and a Mock Framework</li>
+	<li>JavaScript and Reactive.js</li>
+	<li>Bootstrap</li>
+	<li>UI Components</li>
+</ul>
+
+
+<h2><a id="testing">Testing and JUnit</a></h2>
+<ul>
+	<li>The acronym I use is Assemble, Act, and Assert.</li>
+	<li><strong>Red light, green light programming</strong> - Tests come first, then the program.</li>
+	<li>After every five single method tests, add a larger test that combines methods or objects.</li>
+	<li>Must test exceptions.  This makes sure the exception is thrown under certain condition(s).</li>
+</ul>
+<h3>Udemy Course (free)</h3>
+<ul>
+	<li>fail() is a function that fails a test.</li>
+	<li>assertEquals also can fail a test.  It checks if two values are equal</li>  
+	<li>Method assertFalse() has one boolean parameter.</li>
+	<li>assertTrue()</li>
+	<li>assertArrayEquals compares two arrays.</li>
+	<li>It is good to create a maven project when using JUnit, Package Explorer > Right click on the project  > Properties > Type Build > Build Path > Libraries > Add Library > JUnit (Most recent version)</li>
+	<li>Keep the code files and test files in separate folders inside “src”.  Create a new JUnit test case (Right click on folder OR the ribbon on the top of the screen).</li>
+</ul>
+<p>
+Test a single unit.  A unit is a single method, group of methods, or a set of classes.
+Use "Maven Projects" when using unit tests.  Create a new "JUnit Test Case" in the test directory
+to start a test.  A test that completes is a success.  
+Have one test per unit test,
+but if you choose to have two, write a String message at each assertion; that will be displayed if the test fails.
+Specific unit test names make the tests more maintainable.
+If code is used for multiple unit tests in a test class, consider if it can be run as fields outside the unit tests
+but within the test class.  Test class names usually end with "Test" and unit tests
+can start with the name "test".  @Test is placed above each unit test.  
+@Before and @After are annotations placed above new methods; @before is used before every unit test and @after is used after every unit test 
+(so it would be called multiple times if you have more than one unit test in the test class).
+@BeforeClass and @AfterClass annotations are also used before new methods, too.  @BeforeClass is the method run first in the class.  @AfterClass is the
+method run last in the class after all unit tests.
+</p>
+<h4>Testing Exceptions</h4>
+<p>
+The special way of testing exceptions is by placing an annotation before the method like this: @Test(expected=NULLPointerException.class)
+This will fail if the exception isn't thrown.
+</p>
+<h4>Testing Performance</h4>
+<p>
+To test for performance you set a timeout time in milliseconds.  So you would add the annotation @Test(timeout=1000).
+</p>
+<h4>Test a Method Many Times</h4>
+<p>
+If you want to test a method many times, you can use parameterized JUnit tests, which involve arrays.
+</p>
+<ol>
+	<li>Use a new class definition for each unit test that will use a parameterized lizt.</li>
+	<li>Place the annotation @RunWith(Parameterized.class) above the unit class.</li>
+	<li>Create the method below</li>
+	<li>Create private fields for "expectedOutput" and "input"</li>
+	<li>Create a constructor for those two fields</li>
+	<li>Use those two fields in the unit test</li>
+</ol>
+<p class="coding">
+@Parameters<br>
+public static Collection<String[]> testCondition {<br>
+String expectedOutputs[][] = {<br>
+{ "AAD", "CD" },<br>
+{ "ACD", "CD" } };<br>
+return Arrays.asList(expectedOutputs);<br>
+}
+</p>
+<p>
+A test Suite can be created like a unit test class.  It groups the unit tests so you can run a set of them all at once.
+It is like a job file in Pentaho.  You could try running the slower unit tests less often out of convenience.
+</p>
+
+<h3>JUnit in Action (Book)</h3>
+<blockquote><p>Nearly all programmers don't like to make tests (Review of book)</p></blockquote>
+<blockquote><p>A Vital aspect of unit tests are that they are finely grained.  A unit test independently examines each object you create, so you can isolate the problems as they occur. (book)</p></blockquote>
+<h4>Main Assert methods</h4>
+<ul>
+	<li>assertTrue</li>
+	<li>assertFalse</li>
+	<li>assertEquals (Uses equals method)</li>
+	<li>assertNotNull</li>
+	<li>assertNull</li>
+	<li>assertSame (Same object)</li>
+	<li>assertNotSame</li>
+	<li>fail</li>
+</ul>
+<p>
+<h4>Example: Testing a HashMap</h4>
+If you plan to allow adding objects to a HashMap, a test can be to add an object to a HashMap and compare it to the same Object.
+</p>
+<h4>Steps of Testing</h4>
+<ol>
+	<li>Assemble</li>
+	<li>Act</li>
+	<li>Assert</li>
+</ol>
+<h4>Best Practices</h4>
+<ul>
+	<li>When using assert methods, use the String parameter to explain the failure.</li>
+	<li>Eliminate duplicate code by putting it in the @Before annotation method, or a utility method.</li>
+	<li>Test the main path.  Also, test the exception-handling.</li>
+	<li>Test anything that could possibly fail.</li>
+	<li>Test getters and setters when hand typed; this is optional if the IDE generates them for you.</li>
+</ul>
+
+<h2><a id="ds_and_algorithms">Data Structures and Algorithms</a></h2>
+<p>
+Data structures are a way of storing data in a computer.  Algorithms are the procedures used to manipulate the data structures.
+Algorithms can involve complicated math.  To improve the efficiency of solving problems, more sophisticated techniques are necessary.
+</p>
+<p>
+Data structures and algorithms are useful for three main categories
+</p>
+<ol>
+	<li>Real-world data storage</li>
+	<li>Programmer tools</li>
+	<li>Modeling</li>
+</ol>
+<p>
+Common algorithms are
+</p>
+<ul>
+	<li>insert</li>
+	<li>delete</li>
+	<li>search</li>
+	<li>iterate</li>
+	<li>sort</li>
+</ul>
+<h3>Some data structures</h3>
+<ul>
+<li>Stack, queue, deque, priority queue, list, tree?</li>
+<li>Stack-want last in</li>
+<li>Queue-want first in</li>
+<li>Deque-Want flexibility insert/delete from both ends</li>
+<li>Priority Queue-Want max or min key</li>
+<li>List</li>
+<li>Tree</li>
+<li>binary tree</li>
+<li>Red black tree</li>
+<li>2-3-4 tree</li>
+<li>2-3 tree</li>
+<li>B-tree</li>
+<li>Hash table</li>
+<li>Array</li>
+<li>Linked list</li>
+<li>Iterator</li>
+<li>Circular linked list</li>
+<li>2 dimensional linked list</li>
+</ul>
+
+
+<h3>
+Problems with procedural languages
+</h3>
+<ul>
+<li>Only global / method local variable access (Not class access)</li>
+<li>Objects reflect real world / virtual world objects better because objects usually have both methods and variables.</li>
+<li>Classes are useful as blueprints to encapsulating data and reflect real world objects.</li>
+<li>With classes you can have local and global variables and the global variables are encapsulated in one object</li>
+</ul>
+<h4>Do you have a lot of data, or a little data?</h4>
+<p>
+If little data, do you know how many items will be in it?  Do you need to insert or search more often?<br>
+The data structures to use are sorted/unsorted arrays or lists.  It might also be useful to use stacks, queues, deque, priority queue.
+</p>
+<p>
+If a lot of data, do you need to run operations extremely fast?  Then use a hash table.  Otherwise use a tree.<br>
+Is it possible that the data could be passed in in ascending or descending order?  In that case don't use a binary tree, but instead use
+a red-black or rebalancing tree.  Otherwise a binary tree works pretty well.
+</p>
+<p>
+	There are elementary sorts like bubble sort, selection sort, and insertion sort.  However, when simple and quick is ideal, use shellsort.
+	If it becomes to slow, switch to quicksort.  Merge sort is also a viable option.  Radix sort is extremely fast, and actually seemed very simple
+	when implemented in one case.  There is also count sorts which are extremely fast when the range of values are small; this is different from a compare sort.
+</p>
+
+<p>
+Stacks and Queues have O(1) time insert/removes.  Not used as much for search, isnert, and delete.  Deques are double ended, while queues are first in
+first out, and stacks are last in is first out.  You can implement a queue or a stack with a deque.  One problem these help solve is evaluating math equations with postfix.
+</p>
+
+<h3>Recursion</h3>
+<h4>Features</h4>
+<ol>
+	<li>It calls itself</li>
+	<li>When it calls itself, it does so to solve a smaller problem</li>
+	<li>There is some version of the problem that is simple enough that the routine can solve it, and return it without calling itself.</li>
+	<li>To remember how to use recursion, think: n, n-1, 1</li>
+</ol>
+<p>
+Favor loops and stacks over recursion most times, it simplifies a problem concepually, but isn't most efficient for the computer.  It is similar to
+mathematical induction.  Merge sort will use recursion.  You want to transform these problems into stacks to be more efficient; so rethink how to 
+solve the problem with a stack.
+</p>
+
+<h3>Binary Trees</h3>
+<p>
+Use it for quick search and quick insert/delete.  Some other data structures provide either quick search or fast insert/delete but not both of these
+at the same time.  A tree has nodes and is connected by edges, so it is an instance of a graph.  A binary tree has a maximum of two children.
+Left children are less than the parent, and right children are greater than or equal to the parent.  Beware unbalanced trees, which usually occur
+when you insert nodes in sorted order, so all children would be on one side of each parent.
+</p>
+<p>
+Goals are to find a node, insert a node, traverse the tree, and delete a node.  Finding is simple.  Inserting is simple.  Traversing is three steps.
+</p>
+<ol>
+	<li>Visit the node.</li>
+	<li>Call itself to traverse the node's left subtree (recursion)</li>
+	<li>Call itself to traverse the node's right subtree (recursion)</li>
+</ol>
+<p>
+If you want to traverse in a different order you can rearrange these steps.  Min and max is easy to find, just go left everytime or right everytime.
+Deleting is complicated; the simple way is to say isDeleted=TRUE, but this wastes memory.  The complicated way is to:
+</p>
+<ol>
+	<li>Find the node you want to delete</li>
+	<li>Three cases<ul>
+		<li>The node to be deleted is a leaf, this is easy, just point the parent to null</li>
+		<li>The node to be deleted has one child, simply replace the deleted with that child</li>
+		<li>The node to be deleted has two children, find the next inOrder element as successor, attach the correct connections.  The next
+		successor is when you travel right once, then keep going left until null.  This successor probably takes the place of the deleted node, and
+		has the children connected to it.</li>
+		</ul></li>
+</ol>
+
+<p>
+Trees can be represented with an array, it is inefficient, but left child and right child can be found by plugging the current index
+into a formula.  Deletion can leave wasted memory and potentially complicated.  Usually delete is not allowed with this set up.
+Can be useful for graphically showing a tree.
+</p>
+<p>
+You must decide if your binary tree will allow duplicate keys.  If you don't allow duplicates, you can make inserts fail when a duplicate is found.
+  If you allow duplicates you may have to continue searching when searching/deleting data.
+</p>
+
+<h3>Solving the Unbalanced Tree Problem</h3>
+<p>
+Red-Black Rules When inserting (or deleting) a new node, certain rules, which we call the red-black rules, must be followed. If they're followed, the tree will be balanced. Let's look briefly at these rules:
+</p>
+<ol>
+<li>Every node is either red or black.</li>
+<li>The root is always black.</li>
+<li>If a node is red, its children must be black (although the converse is not necessarily true).</li>
+<li>Every path from the root to a leaf, or to a null child, must contain the same number of black nodes.</li>
+</ol>
+
+<p>
+X: current; P: parent; G: grandparent
+Insertion: (Always inserts red)  There are only three cases, these hold true always and will be all you need to balance insertions.
+</p>
+<ol>
+<li>Parent is black: no issue</li>
+<li>Parent is red and X is outside grandChild: Rotate P towards G; swap colors of G and P.</li>
+<li>Parent is red and X is inside grandChild: Same as # except you first rotate P left.  X becomes the parent so you’ll end up swapping that node color (X becomes P, P becomes X)</li>
+</ol>
+
+<p>
+Using color flips on the way down has eliminated the situations in which a rotation could introduce any rule violations further up the tree. It ensures that one or two rotations will restore red-black correctness in the entire tree. Actually, proving this is beyond the scope of this book, but such a proof is possible.
+
+If you code this manually instead of a library you may want to make a simple delete with a boolean statement on the nodes, because deleting is even more complicated.
+</p>
+
+<h3>2-3-4 Trees and External Storage</h3>
+<p>
+2-3-4 is a very simple balanced tree to visualize and understand intuitively.  It is essentially equivalent to the red-black tree because it can be turned into one with a transformation.  Inserts are always done on leafs, leafs at the bottom row, and full leafs do a split which affects rows higher up.
+
+They're balanced trees like red-black trees. They're slightly less efficient than red-black trees but easier to program.  They serve as an easy-to-understand introduction to B-trees.
+ 
+A B-tree is another kind of multiway tree that's particularly useful for organizing data in external storage.
+
+2-3-4 tree is self balancing
+
+ 
+For searches you go right or left based on how high or low the number is.  The node 60|70|80 has four children; one for less than 60, one for greater than 60 and less than 70, one for greater than 70 less than 80, and one for greater than 80.
+
+
+
+New data items are always inserted in leaves, which are on the bottom row of the tree. If items were inserted in nodes with children, the number of children would need to be changed to maintain the structure of the tree,
+
+Insertion
+Either simple or more complicated.  All insertion happens in the leaf nodes (bottom).  If the leaf isn’t full, it is simple.  If the leaf is full it must be split; splitting keeps the tree balanced.
+
+insert full node (not root):
+
+
+insert full root node:
+
+Examples:
+
+
+Here's why the splits are so different. In either kind of tree a node split requires three data items: one to be kept in the node being split, one to move right into the new node, and one to move up to the parent node.
+ 
+2-3 tree splits:
+
+Seems like you can treat it the same as 2-3-4 by first inserting it, then treating it like 2-3-4.
+
+B-Tree
+In fact, the structure of a B-tree is similar to that of a 2-3-4 tree, except that there are more data items per node and more links to children.
+ 
+
+Because there are so many records per node, and so many nodes per level, operations on B-trees are very fast,
+
+This minimizes disk accesses; because there are less levels with 4 slots per node.  One block can be accessed at a time and they take 10 milliseconds to access; I think the B-Tree stores one block per node.
+
+Although searching is faster in B-trees than in sequentially ordered disk files, it's for insertion and deletion that B-trees show the greatest advantage.
+ 
+This is 5 accesses in addition to the 6 necessary to find the insertion point (splits), for a total of 12. This is a major improvement over the 500,000 accesses required for insertion in a sequential file.
+
+with a different key, can be created for the same file. In one index the keys can be last names; in another, telephone numbers; in another, addresses. Because the indexes are small compared with the file, this doesn't increase the total data storage very much.  It does make deleting more complicated.
+
+A B-tree is a multiway tree in which each node may have dozens or hundreds of keys and children.
+
+
+
+b
+faster search, insert, and delete.  Wastes space
+3rd (1,2,3) index 2
+False, inserted not located
+a (new root)        b
+splitting and there is growth upwards
+a
+2
+double child red parent split (rotations or double color flips??)
+c (Seems true, but least likely true)     b
+Log2N         LogN
+a (kind of false / relative)        d
+N or N-1, or unlimited
+I would say 2-3-4 similarities, or also true
+a
+</p>
+
+<h3>Hash Tables</h3>
+<p>
+No matter how many data items there are, insertion and searching (and sometimes deletion) can take close to constant time: O(1) in big O notation. In practice this is just a few machine instructions.
+
+Not only are they fast, hash tables are relatively easy to program. Hash tables do have several disadvantages. They're based on arrays, and arrays are difficult to expand after they've been created. For some kinds of hash tables, performance may degrade catastrophically when a table becomes too full, so the programmer needs to have a fairly accurate idea of how many data items will need to be stored (or be prepared to periodically transfer data to a larger hash table, a time-consuming process).
+
+Also, there's no convenient way to visit the items in a hash table in any kind of order (such as from smallest to largest). If you need this capability, you'll need to look elsewhere.
+
+However, if you don't need to visit items in order, and you can predict in advance the size of your database, hash tables are unparalleled in speed and convenience.
+
+Hash functions and hash tables
+ 
+ 
+We multiply the word into a large number:
+
+ 
+
+Then using the modulo operator (%), we squeeze the resulting huge range of numbers into a range about twice as big as the number of items we want to store.
+Example:
+ 
+We pay a price for squeezing a large range into a small one. There's no longer a guarantee that two words won't hash to the same array index.
+</p>
+<p>
+Even so, it's impossible to avoid hashing several different words into the same array location, at least occasionally. We had hoped that we could have one data item per index number, but this turns out not to be possible. The best we can do is hope that not too many words will hash to the same index.
+</p>
+<ol>
+<li>Remember that we have specified an array with twice as many cells as data items. Thus, perhaps half the cells are empty. One approach, when a collision occurs, is to search the array in some systematic way for an empty cell and insert the new item there, instead of at the index specified by the hash function. This approach is called open addressing.(open addressing)</li>
+<li>second approach is to create linked lists instead of words themselves at array positions. (Separate chaining)</li>
+</ol>
+<h4>Open Addressing</h4>
+<p>
+Three methods talked about. Linear probing is walking forward until a blank is found when not found on initial look.
+</p>
+
+
+<h2><a id="eclipse_and_maven">Eclipse and Maven</a></h2>
+I recommend this one video: <a href="https://www.youtube.com/watch?v=sNEcpw8LPpo">Eclipse + Maven</a>
+<p>
+To create a jar you need to compile .java to become .class.  To compile from .java to .class you need all dependencies of the .java file to be in the CLASSPATH.  Run unit test.  Combine all classes to a jar.
+
+Maven does many things.  Maven makes it simpler to make jar Files, it used to require hand written code (in Ant) but Maven does it for you.
+</p>
+<h3>
+Maven says convention over configuration:
+Default classes should be in
+</h3>
+<ol>
+	<li>src/main/java</li>
+	<li>src/test/java</li>
+	<li>pom.xml in root (same directory as src)</li>
+</ol>
+<p>
+"If one class is dependent on another class that hasn't been compiled yet, the program won't run."
+
+All projects have steps:
+compile, run tests + validate main/java is fine, package jars, and install it / deploy it.
+maven does these for you.  
+
+mvn install (Shortcut to do all of these at once: validate, compile, test, package jar, integration test, verify, and install)
+
+Share the jar with a friend so they can use your class as a dependency.
+</p>
+<p>
+Import project to eclipse
+File>Import; search "general" if from Intellij, search "maven" if compiled with maven.  The choice has the word "existing" in it both times.
+
+This is the pom.xml file I am using, not sure if it is a standard one; it seems to work
+</p>
+<p>
+Pom is made up of<br>
+name: groupId and artifactId together are the name. <br>
+version: 1.0.1-SNAPSHOT: made up a major, minor, incremental, and the snapshot keyword;  Use snapshot when still in development of that version.  Major changes with major changes, minor with minor changes, and incremental with things like bug fixes.<br>
+packaging: jar should work
+</p>
+<p>
+dependencies: could be Spring MVC (with version number), Hibernate, JUnit.
+The maven repository holds all the versions of the possible dependencies.  Maven will get it from the repository.
+Some dependencies have dependencies come along with them.  The dependencies should be listed in "Maven Dependencies" in Eclipse.  To exclude commons-logging from hibernate, you can add to the &#x3C;exclusions&#x3E; tag inside the dependency tag so it isn't one of your dependencies.  Dependency hierarchy tells you more about how the dependencies are coming into the "Maven Dependencies". 
+Maven gets the highest version it has that satisfies the version range.  Different range examples: [,4.1]  [,4.1)  (4.1,]  [4.1, 4.4] [4.1,]
+scope is where the dependency will be used.
+</p>
+<p>
+plugings: source and target need be the Java version.  You may use groupId, artifactId org.apache.maven.plugin, maven-compiler-plugin
+</p>
+
+<h3>Commands to also know:</h3>
+<ul>
+	<li>mvn compile (Requires the src/main/java and src/test/java when run in the src directory; creates a target directory with the main/java directory's code compiled) (Creates target/classes)</li>
+	<li>mvn test-compile (Compiles the tests) (creates target/test-classes) (This gets it ready to test the files)</li>
+	<li>mvn test (Runs the test files, requires compiled main/java and test/java files)</li>
+	<li>mvn clean (Deletes the target folder)</li>
+	<li>javac theJavaCodeFile.java    (Makes a class version)</li>
+	<li>java theJavaCodeFile    (Runs the Java code; don't use extension .class in the command; you can pass parameters after the file)</li>
+	<li>jar cfv Project1.jar *  (Puts everything in the current directory inside a jar)</li>
+	<li>Someone recommended this code: javac com.mypackage/.*java  (Compiles all java code)</li>
+	<li>And this code: java com.mypackage.MyClass  (This will run the main method in class MyClass)</li>
+</ul>
+
+<h3>Top 10 Eclipse Hotkeys - from a blog, not sure which one.</h3>
+<ol>
+<li>Run: fn+shift+command+F11</li>
+<li>Auto-Complete: option+space</li>
+<li>Auto System.out.println: type sysout+option+space</li>
+<li>Rename: Command+option+R</li>
+<li>Search Entire Project: control+H</li>
+<li>Delete Line: command+D</li>
+<li>Indent: command+I</li>
+<li>Auto create imports: Command+shift+o</li>
+<li>Auto Generate getters/setters: alt command s > click on getters/setters</li>
+</ol>
+
+<h3>Eclipse Tutorial <a href="https://www.youtube.com/watch?v=sPq5fKweIhY">Refactor Hotkeys</a></h3>
+<ol>
+<li>Rename: option+shift+R</li>
+<li>Extract to Method: Highlight some code and command+option+m</li>
+<li>See all Refactor options: command+option+T</li>
+<li>Opposite of Extract to Method is Inline Method: Highlight and command+option+I</li>
+<li>Move (move class or method elsewhere)</li>
+<li>change method signature (add or remove parameters to a method)</li>
+<li>Extract Interface (Helps create an interface based on methods)</li>
+<li>Extract Superclass (Helps create a superclass)</li>
+<li>Extract Local Variable (Replaces code and similar code with local variable)</li>
+<li>Extract Constant</li>
+<li>Introduce Parameter (Moves it to a parameter to the method)</li>
+</ol>
+
+<h3>Eclipse Tutorial Code Generation</h3>
+<h4>Options showing up: </h4>
+<ul>
+<li>command+shift+S</li>
+<li>Generate Getters/Setters</li>
+<li>Generate toString()</li>
+<li>Generate hashCode()</li>
+<li>Generate equals()</li>
+<li>Generate Constructor()</li>
+</ul>
+
+<h3>Eclipse Tutorial <a href="https://www.youtube.com/watch?v=8z1OynHluOg">General Hotkeys</a></h3>
+<ol>
+<li>Jump to the Last Edit Location: control+Q</li>
+<li>Run Java App or JUnit: fn+option+command+x+(J or T)</li>
+<li>Quick Fix: command+1</li>
+<li>Auto Improved For Loop: type fore+option+space</li>
+<li>Minimize/Maximize perspective: control+m  (use maximize when coding)</li>
+<li>Open a Resource (File): command+shift+R   (CamelCase search works too; use caps)</li>
+<li>Open a Type (Class): command+shift+t</li>
+<li>See Class Hierarchy of a Class: command+t while on the class page</li>
+<li>Comment Out Line(s): command+/  (optionally highlight multiple rows)</li>
+<li>Outline of Methods Present In Class: command+O</li>
+<li>Jump Between Tabs Open: command+E</li>
+<li>Get the Definition: F3 OR command+click</li>
+<li>Get the Type Hierarchy: F4</li>
+<li>Go To Line: command+L</li>
+<li>Move a line: option+(up/down arrows)</li>
+<li>Auto format: command+shift+F   (Can be done by default when file is saved if preferences are set correctly)</li>
+</ol>
+
+<p>
+A quick <a href="https://www.youtube.com/watch?v=dngB4zZQ8YY&amp;index=10&amp;list=PLBBog2r6uMCSmPLJMkXXa0lgMFwGScAP8">save actions</a> tutorial is found here.
+Save actions are actions taken by Eclipse when the document is saved, like auto formatting or adding tabs.
+</p>
+<p>
+Put a breakpoint.  Stop where I put the breakpoint.
+Right click on line (left of coding area) > Toggle Breakpoint
+Right click on code area > Debug As > ...
+
+you can right click on a variable and change the value too in the variables view
+
+top of screen > Run > 
+     Resume,  (continue until next breakpoint or end of program)
+     terminate,
+     step into (goes into method),  (Hotkey available)
+     step over   (Hotkey available)
+
+can hover over the variables on the code area and the values pop up
+
+right click on a variable in the code > Watch
+     You can apply a function like multiply the value by 5
+     or invoke toString() or another function
+</p>
+<h3>Define preferred formatting</h3>
+<p>
+Eclipse > preferences > formatter > Edit
+command+shift+F will auto format based on your rules
+Auto format on Save
+Eclipse > Preferences > Save Actions > Format Source Code
+</p>
+
+<h3>Views are things like package explorer and JUnit</h3>
+<p>
+Window >show views > others: shows all available views
+</p>
+<h3>A perspective is a combination of views</h3>
+<ol>
+<li>Java (To code Java)</li>
+<li>Debug</li>
+<li>Show “Expression" view</li>
+<li>Java Browsing (When understanding a project structure)</li>
+</ol>
+<h3>Others</h3>
+<ol>
+<li>Java Type Hierarchy (Displays class hierarchy like superclasses) Show “Package Explorer view drag and drop the package into the type hierarchy</li>
+<li>Git Repository</li>
+</ol>
+
+<h2><a id="servlets_jsps">Servlets and JSPs</a></h2>
+<p>
+Someone can develop any web application with Servlets.
+One servlet can be reused for many clients.  There are request and response objects.
+You work with GET and POST requests often.  Parameters are passed in the GET or POST requests.
+GET shows the parameters in the URL and post does not.  JSPs are HTML pages with Java code
+embedded in the document.  JSTL is an improvement on JSPs.
+</p>
+<p>
+There is a tutorial for JSPs online that covers these topics.
+</p> 
+<ul>
+	<li><a href="https://www.youtube.com/watch?v=b42CJ0r-1to&list=PLE0F6C1917A427E96">Setup Tomcat</a> and Eclipse EE</li>
+	<li><a href="https://www.youtube.com/watch?v=gU0RebsaFzQ&index=3&list=PLE0F6C1917A427E96">GET Request</a> with Java</li>
+	<li>Understanding the <a href="https://www.youtube.com/watch?v=YxuCG0f14hM&list=PLE0F6C1917A427E96&index=4">Servlet</a></li>
+	<li><a href="https://www.youtube.com/watch?v=w6YPK9xunCk&list=PLE0F6C1917A427E96&index=5">Use web.xml</a> file to annotate the path</li>
+	<li><a href="https://www.youtube.com/watch?v=MnUJl3NYRRc&list=PLE0F6C1917A427E96&index=6">POST</a></li>
+	<li><a href="https://www.youtube.com/watch?v=sHpUrCJmCWs&index=10&list=PLE0F6C1917A427E96">Persist data</a> at Context, session, or request level</li>
+	<li><a href="https://www.youtube.com/watch?v=cv1lp_uCtQc&list=PLE0F6C1917A427E96&index=13">JSPs</a> basics</li>
+	
+</ul>
+
+<h2><a id="hibernate">Hibernate</a></h2>
+<p>
+Watch <a href="https://www.youtube.com/watch?v=Yv2xctJxE-w&amp;list=PL4AFF701184976B25">JavaBrains</a> tutorials on Hibernate or read the documentation online.  Viewed about half of these.
+</p>
+<p>
+Here is working <a href="hibernate_five_worked_with_this.txt">Hibernate 5 code</a>.
+</p>
+<p>
+It's useful to know that an object is similar to a database record with a class field similar to a database field.
+</p>
+<p>
+Any database software is fine.
+</p>
+<p>
+One issue with my first attempt was that I thought I set a password, but actually didn’t.  Downloaded the jars and didn’t use Maven and that works well.  Used Hibernate 5 code instead of some Hibernate 3 code used in videos.
+</p>
+<p>
+To fix the mapping issue, the solution was to update the way you get the sessionFactory for the version 5 of Hibernate.
+</p>
+<p>
+Hibernate can be set to do things like “create”, “create-delete”, “update”, etc.
+</p>
+<p>
+Hibernate has annotations for primary key, column name, entity name, table name, data type.  The data type is still guessed well if you don’t use the annotation.
+</p>
+<p>
+It seems like changing the data type might require an annotation near the getter instead of the field.
+</p>
+<p>
+You can retrieve objects by: primary key, HQL, SQL, or perhaps another way too.
+You can set a field as auto generated primary key with an annotation.
+</p>
+<p>
+You can store into the database: objects or collections.  That are fields of the model.  Entities are their own tables, they are independent and provide meaning by themselves.  You can makes dto objects embeddable or embedded to store some of the values of an object of an entity object onto the table.  You can use attribute override to rename the columns that you are embedding; useful when you have two of those objects because you need unique column names.  There is an embeddedId too; this makes the primary key the combination of many fields (either all of the model fields or all of the fields in an object on the model object, not sure which one).
+</p>
+<p>
+User Set (HashSet) or Collection (ArrayList).
+</p>
+<p>
+hilo generator no longer works; instead you can use:  @GenericGenerator(name="sequence-gen", strategy = "sequence")   
+</p>
+<p>
+Hibernate is lazy by default and won’t define objects within objects.  The object within the model object will be filled when you call the getter on it.  To do this, Hibernate extends your class and overrides your getter method.  You can configure Hibernate to not by lazy with certain objects by using an annotation.
+</p>
+<p>
+More videos talk about One to One, One to Many (There is also Many to One) and Many to Many.  Only the many to many requires a third table (Entity + Entity + Relationship tables); however, Hibernate will by default create a third table for One to Many relationships.
+</p>
+<p>
+For Java, relationships are stored in objects; collections or sets are X to many relationships.  Individual fields are X to one relationships; where X can be one or many depending on the other object using a collection/set/regular-field.  
+</p>
+<h4>Important Points in Tutorial</h4>
+<p>
+Get object by primary key id (HQL and SQL are other ways not covered yet)
+auto generate id
+objects within objects 1 to 1 relationship (put data on own table)
+overriding the names of objects when using objects within objects.
+sets/arrays inside objects 1 to many relationship (put data on new table) (many to many would be three tables required, where one maps the relationships and two are for the entities)
+</p>
+<h2><a id="struts2">Struts2</a></h2>
+<p>
+Watch <a href="https://www.youtube.com/watch?v=f46WEeM8HTA&amp;list=PLB7BB551126EDD5E0">JavaBrains</a> tutorials on Struts2 or read the documentation online.  Viewed these.
+</p>
+<p>
+Google: Apache Struts 2 download<br>
+View update notes for 2.3 (2.5 was newest version)<br>
+Copy the maven dependency (reminder: right click on an existing project in eclipse to find an option to make a Maven project)
+</p>
+<p>
+Files to use:
+</p>
+<ol>
+	<li>web.xml</li>
+	<li>struts.xml</li>
+	<li>Java classes (Action Class or Business Classes)</li>
+	<li>JSPs or HTML pages</li>
+</ol>
+<p>
+namespace allows new url combinations like tutorials/tutorial1
+</p>
+<p>
+org.myers.actions - can hold the Java action classes
+org.myers.service - can hold the Java business services called by action classes
+</p>
+<p>
+One major change when using Struct2 is that you really want to avoid assigning parameters and attributes to the request, service, application, and page.  Instead you use tags.  Save the variables to an object’s fields.  This is because an action class is created for each and every request; in regular servlets new threads are created, instead of new objects.  So, use getters for Struct2 and session/application/page scope for regular Servlets.  If you need something at session scope with Struts2, you just save it as a new variable name that you will use for session type information.  All action classes (and some others the tutorial hasn’t talked about yet) have their fields stored on the action stack.  The action stack will return the most recent instance of that field value using a getter.  Older versions of that field can be accessed if needed using another method.
+</p>
+<p>
+Intercepters save the input into the value stack action class fields (Is this safe, to allow these to be updated?)
+</p>
+<p>
+extending a class, adding validate method: if the validate fails Struts2 will return “input”.  Adds field errors to user.
+</p>
+<p>
+You can have a different method run by default other than execute().
+</p>
+<p>
+Use a model object in a model package to store the data, for passing around and validation.  You can tell Struts to set parameters to the model fields instead of the action fields.  Struts automatically instanciates the models if they are private fields in the action.  Another way is to implement the ModelDriven interface. 
+</p>
+
+<h2><a id="spring_framework">Spring Framework</a></h2>
+<p>
+Watch <a href="https://www.youtube.com/watch?v=GB8k2-Egfv0&amp;list=PLC97BDEFDCDD169D7">JavaBrains</a> tutorials on the Spring Framework or read the documentation online.  Viewed these.
+</p>
+<p>
+Spring allows loose coupling though dependency injection by constructor or setter method.
+</p>
+	
+<h2><a id="design_patterns">Design Patterns (Head First)</a></h2>
+<p>
+Programs change, otherwise they die.  It is best if programs are maintainable, and patterns allow this.
+</p>
+<h3>Design Principles</h3>
+<ol>
+	<li>Identify aspects of you aplication taht vary and separate them from what stays the same.</li>
+	<li>Program to an interface, not an implementation</li>
+	<li>Prefer composition (interface) over inheritance</li>
+	<li>Think at the pattern level, not the object level</li>
+	<li>Loosely couple your code.  When two objects have to interact, make it so they know very little about each other (Ch. 2 Observer)</li>
+	<li>Open/close principle.  Open to extension, closed to modification (Ch. 3 Decorator)</li>
+	<li>Depend upon abstractions.  Do not depend upon concrete classes.  (use factories not new keyword, don't inherit from concrete class, no overriding methods; all this isn't required)</li>
+</ol>
+
+<h3>4 Basic OOP Principles</h3>
+<ol>
+	<li>Encapsulation: fields are hidden</li>
+	<li>Abstraction: Defines essential characteristics of an object</li>
+	<li>Inheritance: Splits what's the same with what varies</li>
+	<li>Polymorphism: Overload -> same method name different parameters
+     Override -> Same method name and parameter type; parent and subclasses will lead to this happening.
+     Using an interface is using polymorphism.</li>
+</ol>
+
+<h3>Strategy Pattern</h3>
+<p>
+Uses composition by storing an interface type on the object and it can change at runtime.  The task is delegated to the interface.
+</p>
+<h3>Observer Pattern</h3>
+<p>
+A one-to-many dependency between objects so that when one object changes state, all of its dependents are notified and updated automatically.
+Picture this by thinking of a newspaper subscription service with a publisher and subscribers.  The observer requests on or off the list and the subject adds or removes them from the list.
+Either design your own or use Java's slightly flawed Observable and Observer (java.util) code.
+</p>
+<h3>Decorator Pattern</h3>
+<p>
+The decorator becomes the same supertype as what it is decorating.  This allows extending without modifying the original class code.  One example is java.io.* which uses this a lot.  Each time you add a decorator you pass in what it is decorating to the constructor and when a method is called you add behavior before or after delegating to that which is being decorated.
+</p>
+<p>
+Careful: Makes code more complicated and breaks code that doesn't program to a superclass.  Involves creation of many small classes.
+</p>
+<h3>Factory Method</h3>
+<p>
+
+Create a factory for each group of products.  One method.  One product can have many components but they are not changeable.
+</p>
+<h3>Abstract Factory</h3>
+<p>
+Create a factory for each group of products.  Many methods, allowing mixing and matching of components of a product.
+</p>
+<h3>Command Pattern</h3>
+<p>
+Interface for execute.  Pass the device into the remote constructor then delegate execute to the device when buttons are pressed.
+Create the remote, the command (has execute method), and the device.  Put the device inside the command and the command inside the remote. 
+</p>
+<p>
+(The device is the one who knows how to do the task.  The remote is the one that decides when to request the task.  The remote says what to do, and the device does it.  The command portion can call multiple methods in the device to complete the command)
+</p>
+<p>
+Note: Not very far in the book yet
+</p>
+<p>
+Additional Notes
+Inheritance helps with code reuse but doesn't offer much flexibility.
+</p>
+<h2><a id="concurrency">Concurrency</a></h2>
+
+<ul>
+	<li>If using a framework or threads, you need your application to be thread safe</li>
+	<li>When the rules are followed, your application will be thread safe</li>
+	<li>Don't share state variables across threads, otherwise make the state variable immutable, otherwise use synchronization whenever accessing the state variable.</li>
+	<li>Using rules, variable hiding, and immutability will help make thread-safe classes.</li>
+	<li>A class is thread safe if it behaves correctly when accessed from multiple threads.</li>
+	<li>Thread safe classes encapsulate any need for synchronization so the client need not provide their own.</li>
+	<li>Stateless objects are always thread safe.</li>
+	<li>Operations A and B are atomic when all of B has executed or none of it has. (Need to review what this is meant to say)</li>
+	<li>When practical, use existing thread safe objects like AtomicLong</li>
+	<li>One Atomic operation may involve locks to two or more variables.</li>
+</ul>
+
+
+<h2><a id="OOAD">Object Oriented Analysis and Design (Head First)</a></h2>
+<h3>Three Steps for Great Design</h3>
+<ol>
+	<li>Fulfill customer requirements.</li>
+	<li>Flexible and OO principles used (I.e. encapsulation and objects not doing too much or too little work).</li>
+	<li>Maintainability (loosely coupled, delegating to objects (delegate to the object whose job it is), areas likely to change are easy to change (perhaps all changes occur in one object, little/no duplicate code).</li>
+</ol>
+
+<h3>Key Points:</h3>
+<ul>
+	<li>Gather requirements and list them out.  Build use case(s) for how to satisfy the requirements.  Use cases have steps of the program and also 1. Clear value, 2. start and stop conditions, and 3. An external initiator.  Consider alternative paths where things go wrong (happy path and alternative path)</li>
+	<li>Test all use case scenarios and use cases can help find missing requirements.</li>
+	<li>Make sure to update your requirements.</li>
+	<li>Requirements will always change over time.</li>
+	<li>Encapsulate what varies.</li>
+	<li>Build objects for entities IN your system.</li>
+	<li>Delegation shields your objects from implementation changes to other objects in your software</li>
+	<li>The nouns in the use case are typically the classes involved</li>
+	<li>The verbs in your use case are usually your methods</li>
+	<li>Think in terms of aggregations and fact tables.  Find out the requirements.  Generate the fact table which is the use case scenarios.  Create the aggregation called "UML" (nouns and verbs help here) and add to the other aggregation called "requirements".  Last, write the code which is most granular part.</li>
+	<li>Decide what your interface and objects will be at the start of your project.</li>
+</ul>
+
+<h3>Web Controllers</h3>
+<p>You can use the interfaces, Request which takes a string, Response, RequestHandler which processes a request with the method "process" and can throw an exception.
+Controller would have a method processRequest and takes a Request; it has an addHandler method which takes a Request and a RequestHandler.
+You will make an ErrorResponse, which stores the original request and exception.  Core of the controller class is processRequest which returns the Response or the ErrorResponse
+which are both implementations of Response.
+</p>
+
+
+
+
+<h2><a id="effective_java">Effective Java Rules</a></h2>
+<p>
+
+</p>
+
+<h2><a id="java_puzzlers">Java Puzzlers</a></li>
+
+<h2><a id="android_development">Android Development</a></h2>
+<p>
+
+</p>
+
+<h2><a id="misc">Misc</a></h2>
+<h3>IOException</h3>
+<p>
+Thrown when IO operations fail and a string message can be included.  The common subclasses of this are for file not found,
+end of file, unsuported encoding, socket, and SSL.  Try printing the exception out and fixing it when it occurs.
+</p>
+<h3>org.apache.commons.logging.Log;</h3>
+<p>
+Log is the interface and there are several implementing classes such as Log4JLogger, which I've heard is a popular logging framework or tool.
+This abstracts away different logging APIs.  The class implementing this is instantiated using the LogFactory.  The constructor of these objects
+have a single parameter simply to "name" the Log.  The implementation of the logging will group logs into six groups going from least serious to
+most serious they are: trace, debug, info, warn, error, and fatal.  You can log messages to any of these logs in your code.
+</p>
+<p>
+To log the data in areas that are performance concerns, try an if condition checking if debug is enabled, if it is, log the result to the debug logging level.
+Configuration of logging is usually based on the logging API used.
+</p>
+<h4>Methods:</h4>
+<p>
+Log the message to one of the six log groups.  Check if each of the six log groups are currently enabled (Boolean returned).  Log a message to one of the six
+log groups and also throw an exception.
+</p>
+<h3>org.apache.commons.logging.LogFactory;</h3>
+<p>
+A factory for creating classes that implement the Log interface.  The constructor is protected, so will likely use static methods.
+Simple usage of this involves using static method getLog which takes in a string of the name you want to give the Log.
+A good name is yourClassName.class where yourClassName is the class you're working inside with the log; this outputs a string like "class yourClassName".
+</p>
+<h3>java.lang.Throwable</h3>
+<p>
+Is a superclass of all errors and exceptions.  This concrete class or subclasses of it are the only ones the JVM allows to be thrown by the "throw"
+keyword or be the argument type in a catch clause.  The exception should be thrown in the lower level, and not propogated to the upper level.
+More to be written on this.
+</p>
+<h3>org.apache.hadoop.conf</h3>
+<p>
+Configuration files.  You specify a path, or you can also create default files.  The default files should show up at etc/hadoop/conf, but I'm not certain.
+These filse contain xml tags called "property" which contain a key, value, and optionally final which is true or false.
+The Configuration class has a get function that looks up the key and returns the value.  There are different get functions that expect the value to
+be a certain data type or collection.
+There is also a set used to set the values.
+You can add keys and values as new resources.  You can flag things as deprecated.
+</p>
+<h3>org.apache.hadoop.hbase.HBaseConfiguration;</h3>
+<p>
+Inherits from org.apache.hadoop.conf.Configuration.  Has static methods create() and create(org.apache.hadoop.conf.Configuration that).  No constructors should
+be used.  No parameters creates a configuration with HBase resources.  Using parameters uses the hbase-*.xml files and the given configuration.
+</p>
+<h3>org.apache.hadoop.hbase.MasterNotRunningException and ZooKeeperConnectionException</h3>
+<p>
+These extend IOException.  Thrown if master is not running, and when the client can't connect to zookeeper respectively.
+</p>
+<h3></h3>
+<p>
+</p>
+<h3></h3>
+<p>
+</p>
+<h3></h3>
+<p>
+</p>
+<h3></h3>
+<p>
+</p>
+<h3></h3>
+<p>
+</p>
+<h3></h3>
+<p>
+</p>
+<h3></h3>
+<p>
+</p>
+<h3></h3>
+<p>
+</p>
+<h3></h3>
+<p>
+</p>
+
+<h3>vi command</h3>
+<p>
+Lets you update a file.  Press i to start updates.  Press escape to stop updating.  Type :wq to save and quit.  Type :q! to quit without saving.
+</p>
+
+<h3>UTF-8</h3>
+<p>A type of encoding to be used in a document like an XML document or HTML document.  The UTF-8 represents each character using two bytes to allow
+for use of accents or currency symbols.  Version 1.0 of XML is usually sufficient.</p>
+<h3>log4j.properties file (mkyong.com)</h3>
+<p>
+Stores in project conf folder.
+Three choices include logging output to the console, a file, or both.  The rootLogger option is used to determine if the logs will go to
+a file, the console, and/or standard output.  The logger threshold is the least important log group you want to be notified of (ALL) is for all.
+A message is accepted by the logger, then are handed off to the appender, which will add the message to the console, file, and/or standard output.
+You define two appenders if you want to send logs to a file and the console.  It is a good habit to send things to log4j even if you're testing
+and outputing to the console.  The layout of the appender is meant to format a logging event and return the results in a StringBuffer.
+The EnhancedPatternLayout is preferred over PatternLayout.  The conversion pattern is similar to the printf function for string interpolation.
+%d is the date format for the logging event (i.e. %d{ISO8601}), %p is the priority of the event as a string, %t is the name of the thread,
+%c is the category of the logging event.  The category name will be like alpha.beta.gamma, and %c{2} will return the last two elements, a minus sign before
+the 2 will remove the last two elements.  %m is the message to be outputed. %n does the platform dependent line separator.  The appender target
+is where it will target the output.
+</p>
+<h3>printf</h3>
+<p>
+Use %-10s to left justify and give a total width of 10 characters.  You can save the format and use it as a variable for each call of printf.
+One format to create a table is "%-10s %s\n" if the first string is 10 characters at most.
+</p>
+
+<h3>.avsc files</h3>
+<p>
+.avsc files are for Avro, a serialization framework mentioned when working with Kafka.  Avro probably helps with serialization and Schema Registries.
+The file itself is a schema, that will be serialized by Avro.
+</p>
+<p>
+Avro uses the .avsc file to create a Java class.  Get Avro with Maven by adding the maven code with groupId org.apache.avro.
+The .avsc is a schema file, defined in JSON.  Types allowed are simple types: null, boolean, int, long, float, double, bytes, and string; Also allowed are complex types: record, enum, array, map, union, and fixed.
+The namespace we want to put this in, namespace: "example.avro" and name: "User" will create a class "example.avro.User".  In three examples I see
+"type": "record" so it is good to go with that.  The fields are the table columns and their types (types allowed were just mentioned).  The unions
+complex type is like this: "type": ["int", "null"].  Unions allow any of the specified types to be used for that field.
+Use command: java -jar /path/to/avro-tools-1.7.6.jar compile schema &lt;schema file&gt; &lt;destination&gt;<br>
+For example: java -jar /path/to/avro-tools-1.7.6.jar compile schema user.avsc .<br>
+This will create a class example.avro.User at this current directory ".".
+</p>
+
+<h3>Openning a .jar</h3>
+Use command: java -jar &lt;dest-to-jar-file&gt;<br>
+And this will open a jar file and execute it.  You can probably add commands after it to compile it into classes.
+<p>
+
+</p>
+
+<h3>jar files</h3>
+<p>
+Libraries are stored as jars in Java.  A jar can be a library and a runnable jar if you specify the main class.  Create a manifest document with one
+line to specify which class is the main class.  Do this with echo manifest.txt (any name is fine but this is a good standard one)
+and add the line Main-Class: yourClassName.  Use command <br>
+jar cvfm MyJarName.jar manifest.txt *.class<br>
+cvfm is create jar verbose.  You specify the jar and the manifest, and the list of class files.
+The manifest file is optional and you can replace "manifest.txt" in the command to use the "MyMainClass"; but if you put more in the manifest file you need the file.
+</p>
+
+<h3>echo</h3>
+<p>
+Use command: echo anyText >> newFileName.txt<br>
+to create a text file with text in it from the command line.
+</p>
+
+<h3>Forking a GitHub Maven Project</h3>
+<p>
+Go to the GitHub project in the browser and find the fork button.  Use the button to add it to your repository.  Use Intellij>VCS>Checkout>GitHub to checkout
+the forked project from your GitHub account.  Close the current project and import the new project.  If it isn't already a Maven project, click on 
+the far right side "Maven Projects" (written sideways on the right edge).  Add the pom.xml inside the project to convert it into a Maven project.
+
+</p>
+
+<h3>Some linux commands</h3>
+<p>
+"export -p" will list the variables
+"|" pipe takes the output from one process and sends it as input into the next process.
+"egrep [MyPattern]" use egrep for regular expression grep.  Grep finds a pattern from the input.  Flag -i ignores the case.
+</p>
+
+<h3>Downloading a GitHub Projects without an IDE</h3>
+<p>
+Use command "git clone https://github.com/..." for the URL obtained from the GitHub project.
+Use mvn package to build the project.
+
+</p>
+
+<h3>PATH and CLASSPATH</h3>
+<p>
+PATH is used by the OS to find executables.  CLASSPATH is used by Java to find classes or jar files.
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+<h3></h3>
+<p>
+
+</p>
+
+
+
+
+
+
+
+
+
+</div> <!-- jumbotron -->
+
+</div> <!-- container -->
+
+<div id="footer">
+© 2017
+</div>
+
+</div>  <!-- allcontent -->
+
+
+<script type="text/javascript"
+  src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

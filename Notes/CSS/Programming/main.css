@@ -1,0 +1,97 @@
+body {
+
+}
+
+table, th, td {
+	border-bottom: 1px solid #ddd;
+	padding: 0 20px 0 20px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#allcontent {
+	font-size: large;
+	font-family: Veranda, Geneva, Arial, sans-serif;
+
+}
+
+#Logo {
+	font-family: cursive;
+
+}
+
+.center {
+	display: block;
+	margin: 0 auto 0 auto;
+	border: black solid;
+}
+
+.coding {
+	font-family: monospace;
+	background-color: white;
+}
+
+.top-nav-bar {
+	display:inline-block;
+	top: 0px;
+	position: fixed;
+	right: 50%;
+}
+
+#allcontent p {
+	font-size: 100%;
+} 
+
+#allcontent li {
+	font-size: 100%;
+} 
+
+blockquote {
+	font-style: italic;
+}
+
+h1, h2, h3, h4, h5 {
+	font-weight: bold;
+}
+
+h1 {
+	font-size: 170%;
+	text-align: center;
+}
+
+h2 {
+	font-size: 140%;
+}
+
+h3 {
+	font-size: 120%;
+}
+
+h4 {
+	font-size: 108%;
+}
+
+h5 {
+	font-size: 102%;
+}
+
+li {
+/*	list-style-image: url("../../../resources/Small_Images/Java/CoffeeIcon.gif"); */
+}
+a:link {
+	
+}
+
+a:visited {
+	
+}
+
+a:hover {
+	
+}
+
+#footer {
+	text-align: center;
+}

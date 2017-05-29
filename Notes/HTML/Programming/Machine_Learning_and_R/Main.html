@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Peter Myers - Notes">
+  <meta name="keywords" content="Blog,Programming">
+  <meta name="author" content="Peter Myers">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/main.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/r_coding.css">
+<title>Peter Myers - Notes</title>
+</head>
+
+<body>
+<div id="allcontent">
+
+<div class="container">
+
+<div class="page-header">
+<h1 id="Logo">Peter Myers - Notes</h1>
+</div>
+
+<div class="jumbotron">
+<p>
+	<a href="../Java/Main.html" class="btn btn-default btn-lg" >Java</a>
+	<a href="../SQL/Main.html" class="btn btn-default btn-lg" >SQL</a>
+	<a href="../JavaScript/Main.html" class="btn btn-default btn-lg" >JavaScript/HTML/CSS</a>
+	<a href="../Scala/Main.html" class="btn btn-default btn-lg" >Scala</a>
+	<a href="../Data_Management/Main.html" class="btn btn-default btn-lg" >Data Management</a>
+	<a href="../Machine_Learning_and_R/Main.html" class="btn btn-default btn-lg" >Machine Learning and R</a>
+</p>
+</div>
+<div class="jumbotron">
+
+<div class="top-nav-bar">
+<p><a href="#contents">To Contents</a></p>
+</div>
+
+<blockquote><p></p></blockquote>
+<blockquote><p></p></blockquote>
+<p>A large part of these notes are paraphrased from the following books and YouTube channels.</p>
+<ul>
+	<li><a href="http://www-bcf.usc.edu/~gareth/ISL/">Introduction to Statistical Learning</a></li>
+	<li><a href="https://www.coursera.org/specializations/jhu-data-science">Coursera Data Science Track</a></li>
+</ul>
+<h1>Machine Learning and R</h1>
+
+<h2><a id="contents">Contents</a></h2>
+<ul>
+	<li><a href="#itsl">Introduction to Statistical Learning (free)</a></li>
+	<li><a href="#tensor_flow">Tensor Flow</a></li>
+</ul>
+<h2><a id="additional">Additional Contents</a></h2>
+<ul>
+	<li><strong>Coursera R Class (free)</strong><ul>
+		<li><a href="https://db.tt/hWpGli0JEU">Overview of R</a></li>
+		<li><a href="https://db.tt/5L7VPKsueG">R Programming Basics</a></li>
+		<li><a href="https://db.tt/ppPRdGeZvG">Cleaning Data</a></li>
+		<li><a href="https://db.tt/GgIWjvvS83">Exploring Data</a></li>
+		<li><a href="https://db.tt/M95x34E8uk">Reproduce Work</a></li>
+		<li><a href="https://db.tt/IKgRzgD81s">Statistical Inference</a></li>
+		<li><a href="https://db.tt/ZUqZsTTbZ1">Cheat Sheet</a></li>
+	</ul></li>
+	<li><strong>Code</strong><ul>
+		<li><a href="../Machine_Learning_and_R/digit_recognizer.html">Digit Recognizer</a></li>
+		<li><a href="../Machine_Learning_and_R/ITSL_labs.html">ITSL Labs</a></li>
+	</ul></li>
+</ul>
+
+<h2><a id="itsl">Introduction to Statistical Learning</a></h2>
+
+<h3>Basics</h3>
+<ol>
+<li>Supervised, unsupervised, reinforce</li>
+<li>Matrix algebra often used due to many predictors</li>
+<li>Problem: Non-linear data, use polynomial regression</li>
+<li>Problem: correlated epsilons, recollect data</li>
+<li>Problem: Funnel shape fitted vs residuals, Log or sqrt transform</li>
+<li>Problem: outliers, consider removing if gt sd.</li>
+<li>Problem: high leverage points, Hat test, remove if too far above average of (p+)/n</li>
+<li>Problem: Collinearity, a simple form of confounding (the effect of interaction) in which two predictors are highly correlated, remove one or combine them into one predictor variable</li>
+<li>KNN for Qualititative or Quantitative response variable, Linear regression, logistic regression, LDA, and QDA</li>
+<li>Bootstrapping is when you create multiple models based on the original data set sampled with replacement</li>
+</ol>
+
+<h3>Model selection and model evaluation</h3>
+<ol>
+<li>Best subset of predictors</li>
+<li>staircase selection (forward, backwards, or hybrid)</li>
+<li>Estimate Test error with Cp, AIC, BIC, or adjusted R-squared OR use CV</li>
+<li>One standard deviation rule It is good to choose the least flexible model that is within one standard deviation from the lowest test error estimate using CV</li>
+<li>Shrinking</li>
+<li>Ridge regression and lasso</li>
+<li>Dimension Reduction M+</li>
+</ol>
+
+<h3>Nonlinear</h3>
+<ol>
+<li>Basis functions, polynomial regression</li>
+<li>Step functions</li>
+<li>Regression splines</li>
+<li>Smoothing splines, penalty term is integration of second derivative of f</li>
+<li>Local regression, bell shape</li>
+<li>GAM (Generalized additive models)</li>
+</ol>
+
+<h3>Decision Trees</h3>
+<ol>
+<li>Different levels, quantitative splits are based on minimized RSS; end condition could be five or less observations per leaf</li>
+<li>CV prunes the tree and finds the optimum lambda Builds largest tree, then removes the weakest link one at a time to get all amounts of flexibility, then CV chooses the best one</li>
+<li>Purity summation of (p)(-p) used to help split the data for qualitative response variables because RSS won&#;t work</li>
+<li>Decision trees are good for nonlinear or complicated data</li>
+<li>Bagging - uses bootstrap to get observations for  (configurable number) decision trees Average the result when predicting new data Qualitative response could generate the ratio and you can use a decision boundary Estimate test error by predicting all observations on the trees that didn&#;t have that observation.</li>
+<li>Average the variable importance of each p across the bagged decision trees to understand how much each variable plays a role The total RSS is reduced when split by one variable or total Gini index is decreased by splits for each p</li>
+<li>random forests - improved bagging by decorrelating trees by considering a random m predictors at each split where m is approximately equal to sqrt(p), when deciding the split based on a predictor</li>
+<li>Boosting decision trees - Trees grown sequentially Learning rate lambda and B trees found by CV, d splits per tree where d= works well Trees pop up based on previous trees and focuses on the residuals still in play Boosting is when model fitting learns slowly.</li>
+</ol>
+
+<h3>Support Vectors</h3>
+<ol>
+<li>Maximal margin classifier; finds the boundary line and finds the maximum margin so everything is on the right side of the margin.</li>
+<li>Support vectors The points near/on the margin that affect maximal margin classifier heavily</li>
+<li>Support vector classifiers could be on wrong side of margin or hyperplane Tune C with CV Has less sensitivity for obs far away.</li>
+<li>Support vector machines, enlargest feature space</li>
+<li>Kernals, polynomial kernals and radial kernals</li>
+<li>classes only, compare  clases or one-versus-all</li>
+<li>Hinge Loss - similar to ridge and lasso and is like SVM</li>
+<li>Support Vector Regression</li>
+</ol>
+
+<h3>Unsupervised Learning</h3>
+<ol>
+<li>PCA</li>
+<li>Biplot</li>
+<li>Scree Plot</li>
+<li>K-Means clustering and heirarchical clustering</li>
+<li>Vertical height of fusing important</li>
+<li>Complete lnking and average linking are good</li>
+<li>correlation cluster and Euclidean  distinct cluster</li>
+</ol>
+
+
+<h2><a id="tensor_flow">Tensor Flow</a></h2>
+<p>
+</p>
+
+
+</div> <!-- jumbotron -->
+
+</div> <!-- container -->
+
+<div id="footer">
+© 2017
+</div>
+
+</div>  <!-- allcontent -->
+
+
+<script type="text/javascript"
+  src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

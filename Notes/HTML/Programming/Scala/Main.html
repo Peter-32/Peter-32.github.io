@@ -1,0 +1,1117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Peter Myers - Notes">
+  <meta name="keywords" content="Blog,Programming">
+  <meta name="author" content="Peter Myers">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/main.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/r_coding.css">
+<title>Peter Myers - Notes</title>
+</head>
+
+<body>
+<div id="allcontent">
+
+<div class="container">
+
+<div class="page-header">
+<h1 id="Logo">Peter Myers - Notes</h1>
+</div>
+
+<div class="jumbotron">
+<p>
+<a href="../Java/Main.html" class="btn btn-default btn-lg" >Java</a>
+<a href="../SQL/Main.html" class="btn btn-default btn-lg" >SQL</a>
+<a href="../JavaScript/Main.html" class="btn btn-default btn-lg" >JavaScript/HTML/CSS</a>
+<a href="../Scala/Main.html" class="btn btn-default btn-lg" >Scala</a>
+<a href="../Data_Management/Main.html" class="btn btn-default btn-lg" >Data Management</a>
+<a href="../Machine_Learning_and_R/Main.html" class="btn btn-default btn-lg" >Machine Learning and R</a>
+</p>
+</div>
+<div class="jumbotron">
+
+<div class="top-nav-bar">
+<p><a href="#contents">To Contents</a></p>
+</div>
+
+<blockquote><p>Aim to make your code more readable, maintainable, and extendable with Scala.</p></blockquote>
+<blockquote><p></p></blockquote>
+<p>A large part of these notes are paraphrased from the following books and YouTube channels.</p>
+<ul>
+	<li>Programming in Scala 3rd Edition</li>
+	<li>Scala Cookbook</li>
+</ul>
+<h1>Scala</h1>
+
+<h2><a id="contents">Contents</a></h2>
+<ul>
+	<li><a href="#programming_in_scala_third_edition">Programming in Scala 3rd Edition</a><ul>
+		<li><a href="#piste_introduction">Introduction</a></li>
+		<li><a href="#piste_first_steps">First Steps in Scala</a></li>		
+		<li><a href="#piste_next_steps">Next Steps in Scala</a></li>		
+		<li><a href="#piste_classes_and_objects">Classes and Objects</a></li>	
+		<li><a href="#piste_basic_types_and_operations">Basic Types and Operations</a></li>
+		<li><a href="#piste_functional_objects">Functional Objects</a></li>
+		<li><a href="#piste_built_in_control_structures">Built-in Control Structures</a></li>
+		<li><a href="#piste_functions_and_closures">Functions and Closures</a></li>
+		<li><a href="#piste_control_abstraction">Control Abstraction</a></li>
+		<li><a href="#piste_composition_and_inheritance">Composition and Inheritance</a></li>
+		<li><a href="#piste_scala_hierarchy">Scala's Hierarchy</a></li>
+		<li><a href="#piste_traits">Traits</a></li>
+	</ul></li>
+	<li><a href="#scala_cookbook">Scala Cookbook</a></li>
+</ul>
+
+
+<h2><a id="additional">Additional Contents</a></h2>
+<ul>
+	<li><strong>Code</strong><ul>
+		<li><a href="https://github.com/Peter-32/Actors/tree/master/src/main/scala">Actors</a></li>
+		<li><a href="https://github.com/Peter-32/sudoku-solver/blob/master/src/main/scala/sudoku/sudoku.scala">Sudoku Solver</a></li>
+	</ul></li>
+</ul>
+
+<h2><a id="programming_in_scala_third_edition">Programming in Scala 3rd Edition</a></h2>
+<h3><a id="piste_introduction">Introduction</a></h3>
+<p>
+The name Scala means scalable language because it can always be extended with libraries.
+Scala allows you to define new data types and operator symbols can be programmed
+to be methods for those data types; this makes syntax look very natural for libraries.
+The period before a method is called is optional.
+Semi-colons at the end of the line are not needed like in Java.
+For concurrent programming you can use Actors, a Scala library.
+
+</p>
+<p>
+Scala is object oriented and also functional because functions are objects and some methods
+don't have side effects (Moreso than Java, immutable data structures are encouraged).
+Scala is compatible with Java, most types in Scala actually use Java types and you can mix the languages together.
+There are implicit conversions like str.toInt (converts String to Scala class StringOps).
+Scala is concise, you define a class with two fields and a constructor like this:
+</p>
+<p class="coding">
+class MyClass(index: Int, name: String)
+</p>
+<p>
+Scala might have 2x-10x less code than a Java program and runs at about the same speed.
+Scala is high level and has concise code like this to check for an upper case letter:
+</p>
+<p class="coding">
+val nameHasUpperCase = name.exists(_.isUpper)
+</p>
+<p>
+There are no primitives, all data_types are objects, which is an improvement.
+Scala has traits, which are interfaces in Java; they differ because they can have
+method implementations and even fields.  Scala is statically typed, and does type 
+inference so you don't have to say what the type is.  Statically typed is good because
+it catches some exceptions before runtime and it lets you know what data types to pass as parameters.
+</p>
+<p class="coding">
+val x = 5<br>
+val x = new HashMap[Int, String]()<br>
+val x: Map[Int, String] = new HashMap()
+</p>
+
+
+
+
+
+<h3><a id="piste_first_steps">First Steps in Scala</a></h3>
+<p>
+Practice with an Intellij Scala worksheet or the Scala interpreter.
+Define object variables (including functions) with the following:
+</p>
+<ul>
+	<li>var - a variable</li>
+	<li>val - a variable that can't be reassigned (like Java's final)</li>
+	<li>def - right side isn't evaluated until called later.  Used for functions.</li>
+</ul>
+<h4>Function Examples:</h4>
+<p class="coding">
+def max(x: Int, y: Int) = if (x &gt; y) x else y<br>
+def greet() = { println("hi") }
+</p>
+<h4>Scala Scripts</h4>
+<p>
+Save the code into a file, and run this in the command line.
+</p>
+<p class="coding">
+scala hello.scala optionalArg0 optionalArg1
+</p>
+<h4>Other Basic Expressions</h4>
+<ul>
+	<li class="coding">while(booleanStatement) {<br>}</li>
+	<li class="coding">print(" ");</li>
+	<li class="coding">println();</li>
+	<li class="coding">args.foreach(arg =&gt; println(arg))</li>
+	<li class="coding">for (arg <- args) println(arg)</li>
+</ul>
+
+
+
+
+
+<h3><a id="piste_next_steps">Next Steps in Scala</a></h3>
+<h4>Method Calling Shortcuts</h4>
+<p>
+If there is one parameter to a function, the dot and parenthese are not needed, for example:
+</p>
+<p class="coding">
+for (i <- 0.to(2)) // can be written as <br>
+for (i <- 0 to 2)
+</p>
+<h4>Use Collections</h4>
+<p>
+You have a remote controls and TVs, where a TV is an object in Scala.  All variables are remote controls programmed to a TV or null.
+The val keyword means you can't reporgram the remote.  A mutable object is a TV that can be changed.
+If you try to change an immutable TV, it will give you a new TV or possibly an error (i.e. + might be okay but += might give an error).
+val means you can't reassign the controller to a new TV, but if the TV is mutable you can still
+change the TV even though val was used instead of var.
+Arrays can be mutable or immutable and separately have mutable or immutable data types for elements.
+Scala tends to make collections default to mutable unless you use an import.
+There should always be a mutable and immutable version of all collections.
+</p>
+
+<h4>Use Arrays</h4>
+For arrays and other data types, if an assignment is made to myObject(0) it is transformed to use update() like this:
+</p>
+<p class="coding">
+myObject(0) = "Hello" // becomes<br>
+myObject.update(0, "Hello")
+</p>
+<p>
+Using parenthese after an object will transform myObject(parameters) to myObject.apply(parameters).
+++ will concatenate two arrays.
+Create an initialize an array like this:
+</p>
+<p class="coding">
+val numNames = Array("zero", "one", "two")<br>
+val numNames2 = Array.apply("zero", "one", "two") // what happens behind the scenes
+</p>
+<p class="coding">
+val collect = new Array[List[Int]](d);  // array of lists, null by default <br>
+val collect = Array.fill(d){List()}; // array of lists filled in as "List()"
+</p>
+<h4>Use Lists</h4>
+<p>
+Again, assume all default Scala collections are immutable.
+Creating a list is easy:
+</p>
+<p class="coding">
+val oneTwoThree = List(1, 2, 3)
+</p>
+<p>
+Combine two lists with three colons like :::<br>
+Add to a list with two colons like ::<br>
+Any operator that ends in a colon operates from right to left.  For two colons (::) the
+last part needs to be of data type List like Nil.  If you must append to a list
+rather than prepend, just prepend then reverse the list, otherwise a library could help.
+</p>
+<p class="coding">
+val oneTwoThree = 1 :: 2 :: 3 :: Nil<br>
+val oneTwo = List(1, 2)<br>
+val threeFour = List(3, 4)<br>
+val oneTwoThreeFour = oneTwo ::: threeFour
+</p>
+
+<table>
+	<tr><th>What it is</th><th>What it does</th></tr>
+	<tr><td>List() or Nil</td><td>An empty List</td></tr>
+	<tr><td>myListName(2)</td><td>Returns index 2 (zero based)</td></tr>
+	<tr><td>myListName.drop(2)</td><td>Returns a list without first two elements</td></tr>
+	<tr><td>myListName.dropRight(2)</td><td>Same, drops from right</td></tr>
+	<tr><td>myListName.count(s=&gt;s.length==4)</td><td>Counts</td></tr>
+	<tr><td>myListName.exists(s=&gt;s=="until")</td><td>Check if exists</td></tr>
+	<tr><td>myListName.filter(s=&gt;s.length==4)</td><td>Returns a subset of the list</td></tr>
+	<tr><td>myListName.forall(s=&gt;s.endsWith("l"))</td><td>Whether all elements end with "l"</td></tr>
+	<tr><td>myListName.foreach(s=&gt;print(s))</td><td>Executes on each element</td></tr>
+	<tr><td>myListName.foreach(print)</td><td>Same as above</td></tr>
+	<tr><td>myListName.head</td><td>Returns the first element</td></tr>
+	<tr><td>myListName.tail</td><td>Returns all but first element</td></tr>
+	<tr><td>myListName.last</td><td>The last element</td></tr>
+	<tr><td>myListName.init</td><td>Returns all but last element</td></tr>
+	<tr><td>myListName.isEmpty</td><td>Whether it is empty</td></tr>
+	<tr><td>myListName.length</td><td>Get the length</td></tr>
+	<tr><td>myListName.map(s=&gt;s+"y")</td><td>Adds "y" to each element</td></tr>
+	<tr><td>myListName.mkString(", ")</td><td>Returns a string</td></tr>
+	<tr><td>myListName.filterNot(s=&gt;s.length==4)</td><td>Returns a subset of the list</td></tr>
+	<tr><td>myListName.reverse</td><td>Returns a list in reverse order</td></tr>
+	<tr><td>myListName.sort((s,t)=&gt;s.charAt(0).toLower &lt; t.charAt(0).toLower)</td><td>Sorting</td></tr>	
+</table>
+<p class="coding">
+import scala.collection.mutable;<br>
+val collect = Array.fill(d){mutable.ListBuffer[Int]()}; // mutable list inside an array
+</p>
+<h4>Use Tuples</h4>
+<p>
+Tuples can contain many different data types, so you use code like "._1" to get the elements.
+You can have Tuples that contain many elements, not just two elements.
+</p>
+<p class="coding">
+val pair = (99, "Luftballons")<br>
+println(pair._1)<br>
+println(pair._2)
+</p>
+
+<h4>Sets and Maps</h4>
+<p>
+Again, you can have mutable sets and maps with imports, but they are immutable by default.
+Changing a immutable set or map will create a new object.
+Most times you can just use a Set or Map, but you're also able to use HashSets and HashMaps.
+Add new elements to a set with the + operator; you can use += if your variable is a var or the collection is mutable.
+</p>
+<p class="coding">
+var set = Set("Boeing", "Airbus")<br>
+set += "Lear"<br>
+println(set.contains("Cessna"))
+</p>
+<p class="coding">
+import scala.collection.mutable<br>
+<br>
+val set = mutable.Set("Boeing", "Airbus")<br>
+set += "Lear"
+</p>
+<p class="coding">
+import scala.collection.immutable.HashSet<br>
+<br>
+val hashSet = HashSet("Tomatoes", "Chilies")<br>
+println(hashSet + "Coriander")
+</p>
+<p class="coding">
+import scala.collection.mutable<br>
+<br>
+val treasureMap = mutable.Map[Int, String]()<br>
+treasureMap += (1 -> "Go to island.")<br>
+treasureMap += (2 -> "Find big X on ground.")<br>
+treasureMap += (3 -> "Dig.")<br>
+println(treasureMap(2))
+</p>
+<p class="coding">
+val romanNumeral = Map(<br>
+ 1 -> "I", 2 -> "II", 3 -> "III", 4 -> "IV", 5 -> "V"<br>
+)
+println(romanNumeral(4))
+</p>
+<h4>Functional Style</h4>
+<p>
+To do more functional programming, use "var" less, and avoid Unit functions.  A function
+that only prints something can be replaced with returning a string to be more functional.
+Some functional programming can help in several ways, but it isn't required.  
+Use functional programming where you have an opportunity because it can make your code easier to read and refactor.
+A function
+that only has side effects is known as a procedure.
+Loops can be done like this:
+</p>
+<p class="coding">
+for (arg <- args)<br>
+println(arg)
+</p>
+<p class="coding">
+args.foreach(println)
+</p>
+
+<h4>Read From File</h4>
+<p>
+Reading from files is common for scripts.
+</p>
+<p class="coding">
+import scala.io.Source<br>
+<br>
+if (args.length > 0) {<br>
+for (line <- Source.fromFile(args(0)).getLines())<br>
+println(line.length + " " + line)<br>
+}<br>
+else<br>
+Console.err.println("Please enter filename")
+</p>
+<p>
+If you want to reuse lines, you can save them to a list.
+</p>
+<p class="coding">
+val lines = Source.fromFile(args(0)).getLines().toList<br>
+for (line <- lines) {}
+</p>
+<p>
+reduceLeft will take the first two arguments, reduce them, then reduce the answer
+with the next argument.
+</p>
+<p class="coding">
+val longestLine = lines.reduceLeft(<br>
+(a, b) => if (a.length > b.length) a else b<br>
+)
+</p>
+
+
+
+
+
+
+<h3><a id="piste_classes_and_objects">Classes and Objects</a></h3>
+<h4>Classes Basics</h4>
+<p>
+Define a class and create an instance of it like this:
+</p>
+<p class="coding">
+class ChecksumAccumulator {<br>
+}<br>
+new ChecksumAccumulator
+</p>
+<p>
+Private fields mean outsiders are prevented from accessing it.  If you don't use
+the private field, the variable has the default accessor where anyone can access it
+(keyword "public" is required in Java to do the same thing).
+Methods can be displayed compactly by removing the return statement like this:
+</p>
+<p class="coding">
+class ChecksumAccumulator {<br>
+private var sum = 0<br>
+def add(b: Byte): Unit = { sum += b }<br>
+def checksum(): Int = ~(sum & 0xFF) + 1<br>
+}
+</p>
+<h3>Singleton Objects</h3>
+<p>
+Scala cannot have static members, instead you have singleton objects
+which is a home for any static methods you may have used in Java.
+A singleton object is called a companion object if there is a class with the same
+name in the file, and a standalone object otherwise.  Singletons can use traits and inherit.
+Singletons are initialized the first time some code accesses it.
+</p>
+<h3>Scala Application</h3>
+<p>
+Save your files as ".scala" files, preferrably named after the class(s) inside.
+Scripts require that the code ends in an expression to be returned.
+To compile code use this:
+</p>
+<p class="coding">
+scalac ChecksumAccumulator.scala myFileName.scala
+</p>
+<p>
+To run the code use this command:
+</p>
+<p class="coding">
+scala myFileName
+</p>
+<p>
+Your application starts with a standalone object you may define in two ways.
+This is the first way:
+</p>
+<p class="coding">
+import filesImportedHere<br>
+<br>
+object MyAppName extends App {<br>
+// my code in here<br>
+}
+</p>
+<p>
+This is the second way:
+</p>
+<p class="coding">
+import filesImportedHere<br>
+<br>
+object MyAppName {<br>
+def main(args: Array[String]) = {<br>
+// my code in here<br>
+}<br>
+}
+</p>
+
+<h3><a id="piste_basic_types_and_operations">Basic Types and Operations</a></h3>
+<h4>Basics of Types and Operations</h4>
+<p>
+The basic types are Int, Double, String, Char, Boolean.
+Operations are just methods in Scala, redefinable by libraries.
+To make the order of operations clear with many operations, use parenthese.
+</p>
+<h4>String interpolation</h4>
+<p class="coding">
+s"Hello, ${name}!"<br>
+raw"No\\\\escape!"<br>
+f"${math.Pi}%.5f
+</p>
+<h4>Using a Method Without a Period</h4>
+<p class="coding">
+val s = "Hello World"<br>
+s indexOf 'o'<br>
+s indexOf ('o', 5)<br>
+s toLowerCase<br>
+0 max 5<br>
+0 min 5<br>
+-2.7 abs<br>
+-2.7 round<br>
+(1.0 / 0) isInfinity<br>
+4 to 6<br>
+"bob" capitalize<br>
+"robert" drop 2
+</p>
+<h4>Bitwise Operations</h4>
+<p class="coding">
+1 & 2 // 0 - where bits are the same<br>
+1 | 2 // 3 - either bit is one<br>
+1 ^ 3 // 2 - xor<br>
+~1 // inverse the bits<br>
+-1 >> 31 // shift -1 represented as bits to the right 31 times, a 1 takes the place on the left after a shift.<br>
+-1 >>> 31 // shift -1 represented as bits to the right 31 times, a 0 takes the place on the left after a shift.<br>
+1 << 2 // shifts 1 represented as bits to the left 2 times, the last digit on the right is a zero after each shift.
+</p>
+<h4>Object Equality</h4>
+<p>
+Use == to compare equality, you don't need to use equals() like in Java.
+Behind the scenes of ==, Scala will check if a null is being compared so no runtime exception will occur,
+otherwise it uses the equals() method that you would use in Java.
+null == null will return true.
+</p>
+
+<h3><a id="piste_functional_objects">Functional Objects</a></h3>
+<p>
+Functional objects do not have any mutable state.  Pass parameters into the
+constructor of immutable objects to give them their initial state.
+Immutable have benefits, but making small changes can be costly, thus why you use
+StringBuilder a mutable alternative to the immutable String.
+</p>
+<p>
+The require keyword will throw IllegalArgumentException if the condition is false.
+The parameters next to the class name are for the main constructor, and you can
+define auxiliary constructors as well that must call the main constructor.  The main constructor can call the
+superclass constructor.  "this" is a keyword to refer to this object and helps to create auxiliary constructors.
+You can define methods with things like "+".
+</p>
+<p class="coding">
+class Rational(n: Int, d: Int) {<br>
+require(d != 0)<br>
+private val g = gcd(n.abs, d.abs)<br>
+val numer = n / g<br>
+val denom = d / g<br>
+def this(n: Int) = this(n, 1)<br>
+def + (that: Rational): Rational =<br>
+new Rational(<br>
+numer * that.denom + that.numer * denom,<br>
+denom * that.denom<br>
+)<br>
+def + (i: Int): Rational =<br>
+new Rational(numer + i * denom, denom)<br>
+def - (that: Rational): Rational =<br>
+new Rational(<br>
+numer * that.denom - that.numer * denom,<br>
+denom * that.denom<br>
+)<br>
+def - (i: Int): Rational =<br>
+new Rational(numer - i * denom, denom)<br>
+def * (that: Rational): Rational =<br>
+new Rational(numer * that.numer, denom * that.denom)<br>
+def * (i: Int): Rational =<br>
+new Rational(numer * i, denom)<br>
+def / (that: Rational): Rational =<br>
+new Rational(numer * that.denom, denom * that.numer)<br>
+def / (i: Int): Rational =<br>
+new Rational(numer, denom * i)<br>
+override def toString = numer + "/" + denom<br>
+private def gcd(a: Int, b: Int): Int =<br>
+if (b == 0) a else gcd(b, a % b)<br>
+}
+</p>
+<p>
+Implicit conversions allow you to write statements like r * 2 (this is r.*(2))
+as 2 * r (this is 2*.(r)).  An implicit conversion will allow you to have the parameters on the
+left side of the function and the object on the right hand side.  You define
+an implicit function like this:
+</p>
+<p class="coding">
+implicit def intToRational(x: Int) = new Rational(x)
+</p>
+
+<h3><a id="piste_built_in_control_structures">Built-in Control Structures</a></h3>
+<p>
+The only base control structures are if, while, for, try, match, and function calls.
+Others can be used by adding in libraries.
+Scala's if, for, try, and match make expressions that result in values like the ternary operator does in Java.
+Try to avoid using vars and while loops if possible, in order to make your
+code more readable.
+</p>
+<h4>If</h4>
+<p class="coding">
+val filename =<br>
+if (!args.isEmpty) args(0)<br>
+else "default.txt"<br>
+<br>
+println(if (!args.isEmpty) args(0) else "default.txt")
+</p>
+<h4>For</h4>
+<p>
+
+</p>
+<p class="coding">
+for (i <- 1 until 4)<br>
+for (i <- 0 to str.length - 1)<br>
+for (file <- filesHere if file.isFile if file.getName.endsWith(".scala"))<br>
+<br>
+def grep(pattern: String) =<br>
+for (<br>
+file <- filesHere<br>
+if file.getName.endsWith(".scala");<br>
+line <- fileLines(file)<br>
+trimmed=line.trim<br>
+if trimmed.matches(pattern)<br>
+) println(file + ": " + trimmed)<br>
+grep(".*gcd.*")
+</p>
+<p>
+You can produce a new collection while iterating on a for loop with "yield"
+</p>
+<p class="coding">
+def scalaFiles =<br>
+for {<br>
+file <- filesHere<br>
+if file.getName.endsWith(".scala")<br>
+} yield file
+</p>
+<h4>Exception Handling - try, catch, finally</h4>
+<p>
+Throw an error with:
+</p>
+<p class="coding">
+throw new IllegalArgumentException<br>
+<br>
+val half = if (n % 2 == 0) n / 2 else throw new RuntimeException("n must be even")<br>
+<br>
+try {<br>
+val f = new FileReader("input.txt")<br>
+// Use and close file<br>
+} catch {<br>
+case ex: FileNotFoundException => // Handle missing file<br>
+case ex: IOException => // Handle other I/O error<br>
+}
+</p>
+<p>
+finally is often used to make sure you closed a file, to use it add something like this
+after the try or after the catch.
+</p>
+<p class="coding">
+finally { file.close() }
+</p>
+<h4>Match</h4>
+<p>
+Use match by doing this:
+</p>
+<p class="coding">
+val output = // optional to assign to a variable<br>
+myVariableName match {<br>
+case "abc" => "1"<br>
+case "abcd" => "2"<br>
+case "abcde" => "3"<br>
+case _ => "?"<br>
+}
+</p>
+
+<p>
+Match is powerful in Scala, you can search for different classes or data types
+at each case statement.  Java keywords break and continue aren't needed because you can
+use recursion instead; if you still want to use them there is a way to use them.
+</p>
+
+<h3><a id="piste_functions_and_closures">Functions and Closures</a></h3>
+<p>
+Functions defined in functions are private (similar to a Java private method).
+Functions can be stored in variables like this:
+</p>
+<p class="coding">
+ var increase = (x: Int) => x + 1<br>
+ <br>
+increase = (x: Int) => { <br>
+println("We") <br>
+println("are") <br>
+println("here!") <br>
+x + 1 <br>
+}
+</p>
+<p>
+foreach and filter take a function as an argument:
+</p>
+<p class="coding">
+ someNumbers.foreach((x: Int) => println(x))<br>
+ someNumbers.filter((x: Int) => x > 0)
+</p>
+<p>
+Often you can keep off the function types and the type will be inferred.
+You can use an underscore for a placeholder.  Here are some other valid statements:
+</p>
+<p class="coding">
+someNumbers.filter(_ > 0)<br>
+val f = (_: Int) + (_: Int)<br>
+someNumbers.foreach(println _)<br>
+<br>
+ def sum(a: Int, b: Int, c: Int) = a + b + c<br>
+ val a = sum _<br>
+ a(1, 2, 3)<br>
+ <br>
+ val b = sum(1, _: Int, 3)<br>
+ b(2) // equals 6<br>
+ b(5) // equals 9<br>
+ <br>
+ someNumbers.foreach(println)
+</p>
+<h4>Closures</h4>
+<p>
+A function created at runtime is a Closure; the function gets its free variables.
+In this example, "sum" is a free variable and others are bound variables:
+</p>
+<p class="coding">
+val someNumbers = List(-11, -10, -5, 0, 5, 10)<br>
+var sum = 0<br>
+someNumbers.foreach(sum += _) // only works if sum exists in the scope
+</p>
+<p>
+Here is a harder example to follow of making functions are runtime:
+</p>
+<p class="coding">
+def makeIncreaser(more: Int) = (x: Int) => x + more<br>
+val inc1 = makeIncreaser(1)<br>
+val inc9999 = makeIncreaser(9999)<br>
+inc1(10) // returns 11<br>
+inc9999(10) // returns 10009
+</p>
+<h4>Special Function Calls</h4>
+<h5>Repeated Parameters</h5>
+<p class="coding">
+def echo(args: String*) =<br>
+for (arg <- args) println(arg)
+</p>
+<h5>Named Parameters</h5>
+<p class="coding">
+def speed(distance: Float, time: Float): Float =<br>
+distance / time
+</p>
+<h5>Default Parameters:</h5>
+<p class="coding">
+def printTime(out: java.io.PrintStream = Console.out) =<br>
+out.println("time = " + System.currentTimeMillis())
+</p>
+<h4>Tail Recursion</h4>
+<p>
+Scala optimizes recursion so you don't have to avoid using it.  However, you
+must use tail recursion.  When you have the function call itself, make it
+tail recursive by following this example section of code from a function boom(x: Int):
+</p>
+<p class="coding">
+else boom(x-1) // Yes, this is tail recursive.
+else boom(x-1) + 1 // NOT tail recursive, avoid doing this.
+</p>
+<p>
+One more rule to getting tail recursion is to have the recursive function only
+call itself directly; not another recursive function or intermediary function that calls
+the recursive function.
+</p>
+
+
+
+<h3><a id="piste_control_abstraction">Control Abstraction</a></h3>
+<p>
+Reduce code duplication by using higher-order functions - functions that take functions as parameters.
+_.matches(_) is a valid function that takes two strings and returns a Boolean.
+You can't write this code (valid in some dynamic languages):
+</p>
+<p class="coding">
+def filesMatching(query: String, method) =<br>
+for (file <- filesHere; if file.getName.method(query))<br>
+yield file
+</p>
+<p>
+But you can write this:
+</p>
+<p class="coding">
+private def filesHere = (new java.io.File(".")).listFiles<br>
+private def filesMatching(matcher: String => Boolean) =<br>
+for (file <- filesHere; if matcher(file.getName))<br>
+yield file<br>
+<br>
+def filesEnding(query: String) =<br>
+filesMatching(_.endsWith(query)) // fileName.endsWith(query)<br>
+def filesContaining(query: String) =<br>
+filesMatching(_.contains(query)) // takes two strings, and returns a Boolean<br>
+def filesRegex(query: String) =<br>
+filesMatching(_.matches(query))
+</p>
+<p>
+You can reduce code even more with concise functions.  Here are some examples:
+</p>
+<p class="coding">
+def containsNeg(nums: List[Int]) = nums.exists(_ < 0)<br>
+def containsOdd(nums: List[Int]) = nums.exists(_ % 2 == 1)
+</p>
+<p>
+Curry functions have multiple argument lists:
+</p>
+<p class="coding">
+def curriedSum(x: Int)(y: Int) = x + y //  (x: Int)Int => Int<br>
+<br>
+ val onePlus = curriedSum(1)_ // the underscore is waiting for more argument lists to be passed<br>
+ onePlus(2)<br>
+ <br>
+ def twice(op: Double => Double, x: Double) = op(op(x))<br>
+twice(_ + 1, 5)
+</p>
+<h4>The Loan Pattern for Opening Files</h4>
+<p>
+</p>
+<p class="coding">
+def withPrintWriter(file: File)(op: PrintWriter => Unit) = {<br>
+val writer = new PrintWriter(file)<br>
+try {<br>
+op(writer)<br>
+} finally {<br>
+writer.close()<br>
+}<br>
+}<br>
+<br>
+withPrintWriter(<br>
+new File("date.txt"),<br>
+writer => writer.println(new java.util.Date)<br>
+)
+</p>
+<p>
+A client of your code can feel like they are using a control statement when you
+only give them one parameter to pass, because you can put that one parameter
+between curly braces, just like if, for, while, try, etc.
+</p>
+<p>
+Pass in a parameter by name by using =>.  It won't evaluate it until it is needed in the function.
+</p>
+<p class="coding">
+def byNameAssert(predicate: => Boolean) =<br>
+if (assertionsEnabled && !predicate)<br>
+throw new AssertionError
+</p>
+
+<h3><a id="piste_composition_and_inheritance">Composition and Inheritance</a></h3>
+<p>
+See Java notes for more on OOP, composition, and inheritance.
+Composition is holding a reference to another object inside an object; it is better for making
+reusable code.  Inheritance can be fragile and should be avoided unless it is clearly best such as
+when there is an IS-A or IS-LIKE-A relationship.  Composition is a HAS-A relationship.
+Abstract classes have the abstract keyword and have unimplemented methods.
+Drop the () on parameterless functions if there are no side-effects.
+Use the extends keyword to inherit from a class.
+By default all classes automatically inherit from scala.AnyRef.
+</p>
+<p class="coding">
+class ArrayElement(<br>
+val contents: Array[String]<br>
+override val danger: Boolean<br>
+private var age: Int<br>
+) extends Element
+</p>
+<p>
+Using val/var/private/override in the class definition will automatically set that field.
+Override is required to override to keep your code safe from accidently override.
+To call a superclass use code like this after the extends statement:
+</p>
+<p class="coding">
+class LineElement(s: String) extends ArrayElement(Array(s)) {
+</p>
+<p>
+To prevent further overriding of a method or inheritance of a class, use the "final" keyword.
+A companion object can act as a factory object.  The factory method might use overloading or
+have a case statement.
+</p>
+
+<h3><a id="piste_scala_hierarchy">Scala's Hierarchy</a></h3>
+<p>
+The highest class in each class hierarchy is Any, and the lowest is Null and/or Nothing.
+After Any comes AnyVal or AnyRef, where AnyVal is Int, Double, Char, Boolean, Unit, and others.
+AnyRef are other classes like Strings and collections.
+Final methods eq and ne check for reference equality or inequality.
+Use return Nothing when you throw exceptions.  You can have an if/else
+expression return an Int in one branch and Nothing in the other branch which is valid.
+Null is allowed with AnyRef classes but not AnyVal.
+Define a new type of AnyVal by extending AnyVal and having a val field.
+</p>
+<p>
+It is best to define many tiny classes, here is an example:
+</p>
+<p class="coding">
+def title(text: Text, anchor: Anchor, style: Style): Html =<br>
+new Html(<br>
+s"&lt;a id='${anchor.value}'&gt;" +<br>
+s"&lt;h1 class='${style.value}'&gt;" +<br>
+text.value +<br>
+"&lt;/h1&gt;&lt;/a&gt;"<br>
+)
+</p>
+
+<h3><a id="piste_traits">Traits</a></h3>
+<p>
+Define traits similar to classes, but use the "trait" keyword instead of "class".
+You need to use the word "extends" or "with" when adding traits.
+Traits is when you have an IMPLEMENTS relationship, but in Scala, you can define
+the implementation inside the trait itself and store fields.  In Java you would create an interface,
+and create objects to implement those interfaces, and then use composition inside another class
+referencing those objects implementing the interfaces.
+</p>
+<h4>Ordering</h4>
+<p>
+If you need sorting, greater than, less than, etc, you can use a predefined trait
+called Ordered[yourDataTypeHere].  Then define one method like this, and you will get
+lots of functionality like greater than, less than, etc:
+</p>
+<p class="coding">
+def compare(that: Rational) =<br>
+(this.numer * that.denom) - (that.numer * this.denom)<br>
+}
+</p>
+<p>
+If compare returns positive, this is greater.
+</p>
+
+
+<h2><a id="scala_cookbook">Scala Cookbook</a></h2>
+<p>
+</p>
+
+<h2><a id="hackerrank">Some HackerRank Challenges</a></h2>
+<h3>Easy: Count the 3-number sequences that are d apart (d is between 1 and 20) given a list of numbers.
+</h3>
+<p>Strategy: Split numbers into d arrays based on modulus to simplify the problem.</p>
+<p class="coding">
+import io.Source;<br />
+import scala.collection.mutable;<br />
+<br />
+object Solution {<br />
+<br />
+ def main(args: Array[String]) {<br />
+ val lines = Source.stdin.getLines().take(2).toList;<br />
+ val line1 = lines(0).split(&quot; &quot;);<br />
+ val n = line1(0).toInt;<br />
+ val d = line1(1).toInt;<br />
+ val longListOfNumbersGiven = lines(1).split(&quot; &quot;).map(_.toInt).toList;<br />
+ <br />
+ val myLists = Array.fill(d){mutable.ListBuffer[Int]()}; // create an array of size d, fill the array with empty lists<br />
+ longListOfNumbersGiven.foreach(number => myLists(number%d) += number); // add numbers to my lists based on modulus<br />
+ var count = 0;<br />
+ var sequenceStreakSize = 0; // this is<br />
+ var previousNumber = -100;<br />
+ <br />
+ for (i <- 0 until myLists.length) { // 0 1 2<br />
+ if (myLists(i).length < 3) { // too small of a list<br />
+ // do nothing<br />
+ } else {<br />
+ for (j <- 0 until myLists(i).length) {<br />
+ //println(myLists(i)(j));<br />
+ if (myLists(i)(j) - d == previousNumber) {<br />
+ if (sequenceStreakSize == 0) { // no sequence found yet<br />
+ sequenceStreakSize+=1;<br />
+ } else { // success, count gets one more<br />
+ count+=1;<br />
+ }<br />
+ } else { // didn't make a sequence with previous number<br />
+ sequenceStreakSize = 0; <br />
+ }<br />
+ previousNumber = myLists(i)(j);<br />
+ }<br />
+ }<br />
+ }<br />
+ <br />
+ println(count);<br />
+ <br />
+ }<br />
+ <br />
+}
+</p>
+<h3>Hard: Transform m by n matrix</h3>
+<p>The matrix can have sides as long as 300 elements.  The elemnts have to be shifted counter-clockwise r times, where r can be large.
+The strategy was to create the circular paths around the matrix, then count along each path and create a mapping between each index and
+the length along the path.  The rotations needed are made much lower by doing the modulus of the length of the path.
+The code isn't written very well at the end, because I just wanted to finish the problem.
+</p>
+<p class="coding">
+import io.Source;<br>
+import scala.collection.mutable;<br>
+<br>
+object AllDone extends Exception { }<br>
+<br>
+object Solution {<br>
+<br>
+    def main(args: Array[String]) {<br>
+        <br>
+        def addToMaps(map1: mutable.Map[(Int, Int), Int], map2: mutable.Map[Int, (Int, Int)], i: Int, j: Int, steps: Int) = {<br>
+            map1 += ((i, j) -> steps);<br>
+            map2 += (steps -> (i, j));<br>
+        }        <br>
+        val lines = Source.stdin.getLines().toList;<br>
+        //println(lines);<br>
+        val row1 = lines(0).split(" ");<br>
+        val rows = row1(0).toInt;<br>
+        val cols = row1(1).toInt;<br>
+        val rot = row1(2).toInt;<br>
+        var line = "";<br>
+        val matrix = Array.ofDim[Int](rows,cols);<br>
+        val matrixStreams = Array.ofDim[Int](rows,cols);<br>
+        <br>
+        var j = 0<br>
+        for (i <- 1 until lines.length) {<br>
+            j = 0;<br>
+            lines(i).split(" ").map(_.toInt).foreach(num => {<br>
+                matrix(i-1)(j) = num;<br>
+                j+=1;<br>
+            });<br>
+            <br>
+        }<br>
+        <br>
+        var iteration = 1;    <br>
+        val minSideLength = if (rows > cols) cols else rows;<br>
+        val numIterations = minSideLength/2;<br>
+        var count = 0;<br>
+        val matrixStreamsLengths = Array.fill(numIterations){0};<br>
+        <br>
+        for (iteration <- 1 to numIterations)<br>
+        {<br>
+            count = 0;<br>
+            // fill tops and bottoms with stream number<br>
+            for (j <- 0 until cols) {<br>
+                if (matrixStreams(iteration-1)(j) == 0) {<br>
+                    matrixStreams(iteration-1)(j) = iteration;<br>
+                    count+=1;<br>
+                }                    <br>
+                if (matrixStreams(rows-iteration)(j) == 0) {<br>
+                    matrixStreams(rows-iteration)(j) = iteration;<br>
+                    count+=1;<br>
+                }                    <br>
+            }<br>
+            <br>
+            // fill left and right with stream number<br>
+            for (i <- 0 until rows) {<br>
+                if (matrixStreams(i)(iteration-1) == 0) {<br>
+                    matrixStreams(i)(iteration-1) = iteration;<br>
+                    count+=1;                    <br>
+                }                    <br>
+                if (matrixStreams(i)(cols-iteration) == 0) {<br>
+                    matrixStreams(i)(cols-iteration) = iteration;<br>
+                    count+=1;                    <br>
+                }                    <br>
+            }<br>
+            matrixStreamsLengths(iteration-1) = count; // keeps track of the size of each stream<br>
+        }<br>
+        <br>
+        var i = 0;<br>
+        j = 0;<br>
+        var currentStream = 1;<br>
+        val locationToPosition = mutable.Map[(Int, Int), Int]();<br>
+        val positiontoLocation = mutable.Map[Int, (Int, Int)]();<br>
+        var direction = 1;<br>
+        <br>
+            for (stream <- 1 to numIterations) {<br>
+                for (stepsInStream <- 0 until matrixStreamsLengths(stream-1)) {<br>
+                    if (stepsInStream == 0) {<br>
+                        i = stream-1;<br>
+                        j = stream-1;<br>
+                        direction = 1;<br>
+                    }<br>
+                    direction match {<br>
+                        case 4 => {<br>
+                            addToMaps(locationToPosition, positiontoLocation, i, j, (10000*stream) + stepsInStream);<br>
+                            j -= 1;<br>
+                        }<br>
+                        case 3 => {<br>
+                            if (i == 0 || matrixStreams(i-1)(j) != stream) {<br>
+                                addToMaps(locationToPosition, positiontoLocation, i, j, (10000*stream) + stepsInStream);<br>
+                                direction = 4;<br>
+                                j -= 1;<br>
+                            } else {<br>
+                                addToMaps(locationToPosition, positiontoLocation, i, j, (10000*stream) + stepsInStream);                              <br>
+                                i -= 1;<br>
+                            }<br>
+                        }<br>
+                        case 2 => {<br>
+                            if (j == cols - 1 || matrixStreams(i)(j+1) != stream) {<br>
+                                addToMaps(locationToPosition, positiontoLocation, i, j, (10000*stream) + stepsInStream);<br>
+                                direction = 3;<br>
+                                i -= 1;<br>
+                            } else {<br>
+                                addToMaps(locationToPosition, positiontoLocation, i, j, (10000*stream) + stepsInStream);                           <br>
+                                j += 1;<br>
+                            }  <br>
+                        }<br>
+                        case 1 => {<br>
+                            if (i == rows - 1 || matrixStreams(i+1)(j) != stream) {<br>
+                                addToMaps(locationToPosition, positiontoLocation, i, j, (10000*stream) + stepsInStream);<br>
+                                direction = 2;<br>
+                                j += 1;<br>
+                            } else {<br>
+                                addToMaps(locationToPosition, positiontoLocation, i, j, (10000*stream) + stepsInStream);<br>
+                                i += 1;<br>
+                            }<br>
+                        }                            <br>
+                    }<br>
+                      <br>
+                }<br>
+            }<br>
+        <br>
+        <br>
+        //for ((k,v) <- locationToPosition) printf("key: %s, value: %s\n", k, v)<br>
+        <br>
+        //for ((k,v) <- positiontoLocation) printf("key: %s, value: %s\n", k, v)<br>
+        <br>
+         val finalOutput = Array.ofDim[Int](rows,cols);   <br>
+            <br>
+         val shiftsRequiredPerStream = Array.fill(numIterations){0};<br>
+        <br>
+        for (i <- 0 until shiftsRequiredPerStream.length) {<br>
+            shiftsRequiredPerStream(i) = rot % matrixStreamsLengths(i);            <br>
+        }<br>
+            <br>
+        var currPosition = 0;<br>
+        var currPositionKey = 0;<br>
+        var currStream = 0;<br>
+        var newPosition = 0;<br>
+        var newPositionKey = 0;<br>
+        var newLocationX = 0;<br>
+        var newLocationY = 0;<br>
+<br>
+<br>
+        for (i <- 0 until rows) {<br>
+            for (j <- 0 until cols) {<br>
+                currPositionKey = locationToPosition(i, j);<br>
+                currStream = currPositionKey/10000;<br>
+                currPosition = currPositionKey%10000;<br>
+                newPosition = (currPosition + shiftsRequiredPerStream(currStream-1)) % matrixStreamsLengths(currStream-1); // if too high start over at 0<br>
+                newPositionKey = (10000*currStream) + newPosition;<br>
+                var (newLocationX, newLocationY) = positiontoLocation(newPositionKey);<br>
+                finalOutput(newLocationX)(newLocationY) = matrix(i)(j);<br>
+            }<br>
+        }    <br>
+        <br>
+        printMatrix(finalOutput);<br>
+    }<br>
+    <br>
+    def printMatrix(matrix: Array[Array[Int]]) = {<br>
+        for (i <- 0 until matrix.length) {<br>
+            for (j <- 0 until matrix(0).length) {<br>
+                print(matrix(i)(j) + " ");<br>
+            }<br>
+            println()<br>
+        }<br>
+    }<br>
+}<br>
+</p>
+</div> <!-- jumbotron -->
+
+</div> <!-- container -->
+
+<div id="footer">
+© 2017
+</div>
+
+</div>  <!-- allcontent -->
+
+
+<script type="text/javascript"
+  src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

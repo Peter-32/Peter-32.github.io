@@ -1,0 +1,525 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Peter Myers - Notes">
+  <meta name="keywords" content="Blog,Programming">
+  <meta name="author" content="Peter Myers">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/main.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/r_coding.css">
+<title>Peter Myers - Notes</title>
+</head>
+
+<body>
+<div id="allcontent">
+
+<div class="container">
+
+<div class="page-header">
+<h1 id="Logo">Peter Myers - Notes</h1>
+</div>
+
+<div class="jumbotron">
+<p>
+	<a href="../Java/Main.html" class="btn btn-default btn-lg" >Java</a>
+	<a href="../SQL/Main.html" class="btn btn-default btn-lg" >SQL</a>
+	<a href="../JavaScript/Main.html" class="btn btn-default btn-lg" >JavaScript/HTML/CSS</a>
+	<a href="../Scala/Main.html" class="btn btn-default btn-lg" >Scala</a>
+	<a href="../Data_Management/Main.html" class="btn btn-default btn-lg" >Data Management</a>
+	<a href="../Machine_Learning_and_R/Main.html" class="btn btn-default btn-lg" >Machine Learning and R</a>
+</p>
+</div>
+<div class="jumbotron">
+
+<div class="top-nav-bar">
+<p><a href="#contents">To Contents</a></p>
+</div>
+
+<blockquote><p>The database knows everything, you just have to speak the language of SQL.</p></blockquote>
+<blockquote><p></p></blockquote>
+<p>A large part of these notes are from notes taken from online in the past or from experience on the job.</p>
+<!--
+<ul>
+	<li><a href=""></a></li>
+</ul>
+-->
+<h1>SQL</h1>
+
+<h2><a id="contents">Contents</a></h2>
+<ul>
+	<li><a href="#basics_sql">Basics of SQL</a></li>
+	<li><a href="#four_steps">Four steps to writing SQL</a></li>
+	<li><a href="#impala_analytic_functions">Impala Analytic Functions</a></li>
+	<li><a href="#tips_for_writing_sql">Tips for Writing SQL</a></li>
+	<li><a href="#common_methods_solve_problems">Common Methods to Solve Problems</a></li>
+	<li><a href="#common_methods_solve_problems">MySQL</a></li>
+	<li><a href="#common_methods_solve_problems">NoSQL</a></li>
+</ul>
+
+<h2><a id="additional">Additional Contents</a></h2>
+<ul>
+	<li><strong>Code</strong><ul>
+		<li><a href=""></a></li>
+	</ul></li>
+</ul>
+
+<h2><a id="basics_sql">Basics of SQL</a></h2>
+<h3>Intro</h3>
+<h4>Essential Basics and Definitions</h4>
+<ul>
+	
+	<li>Table - Has records and fields (rows/columns) similar to an Excel worksheet.</li>
+	<li>Field - A column in a table, similar to a field in an object in an OO language like Java.</li>
+	<li>Record - A row in a table, similar to an instance of an object in an OO language like Java.</li>
+	<li>A database can have many tables.</li>
+	<li>Query - A question you ask the database that will return records and fields (rows/columns).</li>
+	<li>Filter - Used to determine the subset of the records (rows) you'd like to use.</li>
+	<li>Alias - The new name you give a field (column).</li>
+	<li>Raw data - The form the data is in when it reaches you.</li>
+</ul>
+<h4>Common Data Types</h4>
+<ul>
+	<li>String</li>
+	<li>Integer</li>
+	<li>Boolean</li>
+	<li>Date</li>
+	<li>Timestamp</li>
+</ul>
+<h3>Getting Data</h3>
+<blockquote><p>Create, read, update, and delete are four basic functions of persistent storage (Wikipedia)</p></blockquote>
+<p>
+To read data from the database, you decide the subset of records and fields you want to use in one or many tables.
+The subset of records might be all records within a date range where one field has a certain value.
+To get a subset of records you use a filter, as previously mentioned.
+The subset of fields you want can be found by first exploring the tables available to you.
+To explore data, these two commands are both useful:
+</p>
+<p class="coding">
+SELECT * FROM yourTableNameHere;<br>
+DESCRIBE yourTableNameHere;
+</p>
+<p>
+To read from a table you type the table name after the FROM reserved keyword.
+To read certain columns you type the column names after the SELECT reserved keyword.
+All columns selected must be separated by a comma.
+To read all columns use the * symbol instead of column names.
+To give a column an alias (renaming a column), type the new alias after the column selected.
+You can apply operations on columns within records like "+" to do addition.
+</p>
+<p class="coding">
+SELECT order_id, item_name, price+tax total_price<br>
+FROM orders
+</p>
+<h3>Filtering</h3>
+<p>
+The code above selects from the "orders" table, reads columns order_id, item_name, and price plus tax, and renames the last selection as total_price.
+The next concept to learn is the WHERE keyword, which applies filtering.
+</p>
+<p class="coding">
+SELECT * FROM contacts WHERE last_name = 'Johnson' and first_name = 'Mark'
+</p>
+<p>
+This filters for records where the last name is Johnson and first name is Mark.
+</p>
+<table>
+<tr>
+	<th>Name</th>
+	<th>Description</th>
+</tr>
+<tr>
+	<td>AND</td>
+	<td>allows another boolean.  Both statements must be true.</td>
+</tr>
+<tr>
+	<td>OR</td>
+	<td>allows another boolean.  Only one of the statements must be true.</td>
+</tr>
+<tr>
+	<td>=</td>
+	<td>equal to</td>
+</tr>
+<tr>
+	<td>&gt;</td>
+	<td>greater than</td>
+</tr>
+<tr>
+	<td>&gt;=</td>
+	<td>greater than or equal to</td>
+</tr>
+<tr>
+	<td>&lt;</td>
+	<td>less than</td>
+</tr>
+<tr>
+	<td>&lt;=</td>
+	<td>less than or equal to</td>
+</tr>
+<tr>
+	<td>!=</td>
+	<td>not equal to</td>
+</tr>
+<tr>
+	<td>between _ and _</td>
+	<td>between a range (replace the _)</td>
+</tr>
+<tr>
+	<td>is null</td>
+	<td>the column is an empty null value</td>
+</tr>
+<tr>
+	<td>is not null</td>
+	<td>the column is not an empty null value</td>
+</tr>
+</table>
+<p class="coding">
+SELECT supplier_id FROM suppliers WHERE supplier_name != 'Apple' OR supplier_id BETWEEN 250 and 1000;<br>
+SELECT * FROM spupliers WHERE (state = 'Florida' AND supplier_name = 'IBM') OR supplier_id > 5000;<br>
+SELECT supplier_id FROM suppliers WHERE supplier_name is not null;
+</p>
+<h3>Segmenting Data</h3>
+<p>
+The GROUP BY reserved keyword will allow us to segment out our data.
+Using all the data in the student table, we want to calculate the average scores of each student.
+</p>
+<p class="coding">
+SELECT student_name, AVG(test_score) GPA FROM student GROUP BY student_name;
+</p>
+<ul>
+	<li>SUM - Used to add the values together to get a total</li>
+	<li>COUNT(*) - Used to get the record count</li>
+	<li>AVG - Used to get the SUM divided by the COUNT(*)</li>
+	<li>MAX - maximum value</li>
+	<li>MIN - minimum value</li>
+</ul>
+<p>
+You can limit the results returned with the LIMIT keyword.  Many keywords are optional, but you
+must use them in the correct order: SELECT / FROM / WHERE / GROUP BY / ORDER BY / LIMIT.
+</p>
+<h3>INNER JOINS</h3>
+<p>
+The INNER JOIN keyword lets you use two tables at once.
+You use this keyword after the FROM keyword, but before the WHERE keyword.
+You are joining the two tables together, usually where two values match up.
+</p>
+<h3>IF, CASE, and Other Functions</h3>
+<p>
+SQL has IF/ELSE IF/ELSE or switch statements using the CASE and IF keywords.  Here are some examples:
+</p>
+<p class="coding">
+  CASE<br>
+    WHEN grade = 100 THEN 'A+'<br>
+    WHEN grade > 90 THEN 'A'<br>
+    WHEN grade > 80 THEN 'B'<br>
+    WHEN grade > 70 THEN 'C'<br>
+    WHEN grade > 60 THEN 'D'<br>
+    ELSE 'F' END<br>
+   <br>
+SELECT IF(1>2,2,3);<br>
+        -> 3    <br>
+</p>
+        
+<p>
+These are some date and string functions
+</p>
+<p class="coding">
+		
+MONTH(date1)<br>
+Returns the month of date1<br>
+ <br>
+YEAR(date1)<br>
+Returns the year of date1<br>
+ <br>
+now()<br>
+Returns the current time in timestamp format<br>
+ <br>
+curdate()<br>
+Returns the current time in date format<br>
+ <br>
+date(date1) or to_date(date1)<br>
+Converts a timestamp format to a date format        <br>
+
+
+<br>
+mysql> SELECT CONCAT('My', 'S', 'QL');<br>
+        -> 'MySQL'<br>
+mysql> SELECT CONCAT('My', NULL, 'QL');<br>
+        -> NULL<br>
+mysql> SELECT CONCAT(14.3);<br>
+        -> '14.3'<br>
+ 
+ 
+ 
+ <br>
+mysql> SELECT SUBSTRING('Quadratically',5);<br>
+        -> 'ratically'<br>
+mysql> SELECT SUBSTRING('Quadratically',5,6);<br>
+        -> 'ratica'<br>
+ 
+ 
+ 
+ 
+ <br>
+mysql> SELECT LPAD('9',2,'0');<br>
+        -> '09'   
+</p>
+<p>
+Other important topics are:
+</p>
+<ul>
+	<li>UNION ALL joins records from one query with records from a second query</li>
+	<li>Subqueries	Queries within queries, like inception        </li>
+	<li>LEFT JOINS</li>
+</ul>
+
+
+<h2><a id="four_steps">Four steps to writing SQL</a></h2>
+<ol>
+	<li>Aggregate - Return a single value per unique value.</li>
+	<li>Join - Combine rows from two or more tables.</li>
+	<li>Filter - Using the WHERE reserved keyword</li>
+	<li>Specifics - fine tune your SQL</li>
+</ol>
+<p>
+<strong>Step one</strong>, aggregate, is deciding what you want to be grouped together, you don't even have to type anything yet.
+</p>
+<p>
+<strong>Step two</strong>, join, collects your data together and can be done with an INNER, LEFT, RIGHT, or FULL JOIN.
+At this point, you should do the following:
+</p>
+<ol>
+	<li>Ask yourself <strong>which</strong> tables contain the data I need?</li>
+	<li>Ask yourself <strong>how</strong> do I join these tables together?</li>
+	<li>Then type it out.</li>
+</ol>
+<p>
+<strong>Step three</strong>, filter, involves using the WHERE clause.  Just chain together boolean statements
+to get the subset of records you want.  You chain these together with the AND and OR reserved keywords.
+</p>
+<p>
+The <strong>last step</strong>, specifics, puts it all together.  Do these things:
+</p>
+<ol>
+	<li>Type out the columns you want to grab, with or without functions applied to them</li>
+	<li>Optionally add the GROUP BY reserved keyword now in the right spot.</li>
+	<li>Optionally add the HAVING statement.</li>
+	<li>Optionally add the ORDER BY statement and LIMIT statement.</li>
+</ol>
+<p>
+You can apply functions to data.
+Some important ones are:
+</p>
+<ul>
+	<li>DATE - get the date of a timestamp.</li>
+	<li>CONCAT - join two strings together.</li>
+	<li>CAST - change the data type.</li>
+	<li>MAX, MIN, SUM, COUNT - used to carry out aggregation (Step 1 above).</li>
+	<li>SUBSTRING - get a substring.</li>
+	<li>TRIM - remove white space.</li>
+	<li>TIMESTAMPDIFF - get the difference between two timestamps.</li>
+</ul>
+
+<h2><a id="impala_analytic_functions">Impala Analytic Functions</a></h2>
+<h3>Problem with regular MySQL</h3>
+<ul>
+<li>Obtaining aggregated data in a query involves losing the granular data.</li>
+<li>You may have to ask the database multiple times to regain the granular data.</li>
+<li>Difficult to mix aggregations with granular data</li>
+<li>Only one group by statement is allowed per result</li>
+<li>Getting running totals or running averages</li>
+<li>Difficult to obtain chronological data or row count.  ie. Stock prices: Current value, LAG(1), LAG(2), LAG(3), ....</li>
+<li>Windowing can be used, but may require 3 calls against a temporary table</li>
+</ul>
+
+<h3>Solution</h3>
+<ul>
+<li>Mix aggregated and granular data without losing granular data</li>
+<li>Call many GROUP BY statements in each result</li>
+<li>Impala queries can interact with other rows without losing granularity</li>
+<li>Customize your partition and ordering and grab data from a row adjacent +/- n rows away</li>
+<li>Customize your partition and ordering and grab all adjacent +/- n rows</li>
+<li>Rankings and row count built in</li>
+<li>Fraud detection: Multiple purchases in window from IP and click/action performance spikes</li>
+</ul>
+
+<h3>Syntax</h3>
+<ul>
+<li>OVER(partition by column1 order by column2 rows between [n preceding|current row|unbounded preceding] and  [n following|current row |unbounded following])</li>
+<li>Compatible with standard aggregate functions: MAX(), SUM(), and COUNT()</li>
+<li>Compatible with new Impala analytic functions</li>
+<li>All Impala analytic functions allow grandular data to appear with aggregated data</li>
+<li>ROW_NUMBER, DENSE_RANK(), RANK()</li>
+<li>All perform counting and are similar</li>
+<li>FIRST_VALUE(), LAST_VALUE()</li>
+<li>Unsure of the value added over using MAX()</li>
+<li>LEAD(), LAG()</li>
+<li>Used to look ahead or behind at one row at a time</li>
+<li>GROUP BY keyword doesn’t work in the subquery using these functions</li>
+</ul>
+
+<h3>Examples</h3>
+<h4>
+Month to Date Cumulative Sum
+</h4>
+<p class="coding">
+  SUM(revenue) OVER(partition by MONTH(date_) order by date_<br>
+    rows between unbounded preceding and current row) AS MTD_revenue
+</p>
+<h4>    
+    
+Revenue Up or Down From Yesterday
+</h4>
+<p class="coding">
+  CASE<br>
+  LAG(revenue) OVER(order by date_) > revenue<br>
+  WHEN false THEN "Up"<br>
+  WHEN true THEN "Down" END AS change_from_yesterday
+</p>
+<h4>  
+  
+Revenue Up or Down for Many Days
+</h4>
+<p class="coding">
+
+  CASE LAG(revenue,1) OVER(order by date_) > revenue<br>
+  WHEN false THEN "Up"<br>
+  WHEN true THEN "Down" END AS change_from_yesterday,<br>
+  CASE LAG(revenue,2) OVER(order by date_) > revenue<br>
+  WHEN false THEN "Up"<br>
+  WHEN true THEN "Down" END AS change_from_2ago,<br>
+  CASE LAG(revenue,3) OVER(order by date_) > revenue<br>
+  WHEN false THEN "Up"<br>
+  WHEN true THEN "Down" END AS change_from_3ago,<br>
+  CASE LAG(revenue,4) OVER(order by date_) > revenue<br>
+  WHEN false THEN "Up"<br>
+  WHEN true THEN "Down" END AS change_from_4ago,<br>
+  CASE LEAD(revenue,1) OVER(order by date_) > revenue<br>
+  WHEN false THEN "Up"<br>
+  WHEN true THEN "Down" END AS change_from_next_day,<br>
+  CASE LEAD(revenue,2) OVER(order by date_) > revenue<br>
+  WHEN false THEN "Up"<br>
+  WHEN true THEN "Down" END AS change_from_next_2after,<br>
+  CASE LEAD(revenue,3) OVER(order by date_) > revenue<br>
+  WHEN false THEN "Up"<br>
+  WHEN true THEN "Down" END AS change_from_next_3after,<br>
+  CASE LEAD(revenue,4) OVER(order by date_) > revenue<br>
+  WHEN false THEN "Up"<br>
+  WHEN true THEN "Down" END AS change_from_next_4after
+  
+</p>
+<h4>  
+% Revenue Up or Down for Many Days
+</h4>
+<p class="coding">
+
+  (revenue - LAG(revenue,1) OVER(order by date_)) / LAG(revenue,1) OVER(order by date_) AS pct_change_from_yesterday,<br>
+  (revenue - LAG(revenue,2) OVER(order by date_)) / LAG(revenue,2) OVER(order by date_) AS pct_change_from_2ago,<br>
+  (revenue - LAG(revenue,3) OVER(order by date_)) / LAG(revenue,3) OVER(order by date_) AS pct_change_from_3ago,<br>
+  (revenue - LAG(revenue,4) OVER(order by date_)) / LAG(revenue,4) OVER(order by date_) AS pct_change_from_4ago,<br>
+  (revenue - LEAD(revenue,1) OVER(order by date_)) / LEAD(revenue,1) OVER(order by date_) AS pct_change_from_next_day,<br>
+  (revenue - LEAD(revenue,2) OVER(order by date_)) / LEAD(revenue,2) OVER(order by date_) AS pct_change_from_2after,<br>
+  (revenue - LEAD(revenue,3) OVER(order by date_)) / LEAD(revenue,3) OVER(order by date_) AS pct_change_from_3after,<br>
+  (revenue - LEAD(revenue,4) OVER(order by date_)) / LEAD(revenue,4) OVER(order by date_) AS pct_change_from_4after
+
+</p>
+<h4>
+Window
+</h4>
+<p class="coding">
+
+  AVG(revenue) OVER(order by date_ rows between 3 preceding and 3 following) AS seven_day_running_average,<br>
+  revenue - AVG(revenue) OVER(order by date_ rows between 3 preceding and 3 following) AS seven_day_running_average_delta,<br>
+  (revenue - AVG(revenue) OVER(order by date_ rows between 3 preceding and 3 following)) / AVG(revenue) OVER(order by date_ rows between 3 preceding and 3 following) AS seven_day_running_average_pct_delta,<br>
+  SUM(revenue) OVER(order by date_ rows between 3 preceding and 3 following) AS seven_day_total_revenue,<br>
+  MAX(revenue) OVER(order by date_ rows between UNBOUNDED  preceding and current row) AS highest_revenue_MTD,<br>
+  MIN(revenue) OVER(order by date_ rows between UNBOUNDED  preceding and current row) AS lowest_revenue_MTD,<br>
+  MAX(revenue) OVER(order by date_ rows between UNBOUNDED preceding and current row) - MIN(revenue) OVER(order by date_ rows between UNBOUNDED preceding and current row) AS delta_highest_and_lowest_revenue_MTD,<br>
+  ( MIN(revenue) OVER(order by date_ rows between UNBOUNDED  preceding and current row) - MAX(revenue) OVER(order by date_ rows between UNBOUNDED  preceding and current row) ) /<br>
+    MAX(revenue) OVER(order by date_ rows between UNBOUNDED  preceding and current row) AS pct_dropoff_from_highest_to_lowest_revenue_MTD
+
+</p>
+
+<h2><a id="tips_for_writing_sql">Tips for Writing SQL</a></h2>
+<ul>
+	<li>When joining subqueries, group by the columns used in the ON clause and only those columns, otherwise you may duplicate data from the first subquery
+if you use a LEFT JOIN.</li>
+	<li>A LEFT JOIN can be used similar to a VLOOKUP in Excel.</li>
+	<li>Many errors involve omission of a comma or an extra comma.</li>
+	<li>Break problems down into smaller problems.</li>
+	<li>For optimal performance, filter the data using the columns from the largest table and apply as many filters as possible in the joins to help find the data.
+	Do function operations after most of the aggregation has occurred by using a subquery.</li>
+</ul>
+
+<h2><a id="common_methods_solve_problems">Common Methods to Solve Problems</a></h2>
+<p>
+There are two methods to try if you start to feel overwhelmed with a problem.
+</p>
+<ol>
+	<li>Get all the data and return a result set, then write a query against that result set, repeat as many times as necessary.  The final query has many nested subqueries.</li>
+	<li>Many different subqueries joined together with LEFT JOINS or FULL OUTER JOINS.</li>
+</ol>
+<p>
+Below is an example of the second method, which can also be done with FULL OUTER JOINS:
+</p>
+<p class="coding">
+SELECT<br>
+a.col1,<br>
+a.col2,<br>
+a.col3,<br>
+a.clicks,<br>
+b.revenue<br>
+FROM<br>
+(<br>
+col1,<br>
+col2,<br>
+col3,<br>
+SUM(clicks) AS clicks<br>
+FROM table1<br>
+GROUP BY 1,2,3<br>
+) a<br>
+LEFT JOIN<br>
+(<br>
+select<br>
+col1,<br>
+col2,<br>
+col3,<br>
+SUM(revenue) AS revenue<br>
+FROM table2<br>
+GROUP BY 1,2,3<br>
+) b ON<br>
+a.col1=b.col1<br>
+and a.col2=b.col2<br>
+and a.col3=b.col3
+</p>
+
+<h2><a id="mysql">MySQL</a></h2>
+<p>
+
+</p>
+
+<h2><a id="nosql">NoSQL</a></h2>
+<p>
+
+</p>
+
+</div> <!-- jumbotron -->
+
+</div> <!-- container -->
+
+<div id="footer">
+© 2017
+</div>
+
+</div>  <!-- allcontent -->
+
+
+<script type="text/javascript"
+  src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

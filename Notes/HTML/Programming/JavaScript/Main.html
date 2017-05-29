@@ -1,0 +1,474 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Peter Myers - Notes">
+  <meta name="keywords" content="Blog,Programming">
+  <meta name="author" content="Peter Myers">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/main.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/r_coding.css">
+<title>Peter Myers - Notes</title>
+</head>
+
+<body>
+<div id="allcontent">
+
+<div class="container">
+
+<div class="page-header">
+<h1 id="Logo">Peter Myers - Notes</h1>
+</div>
+
+<div class="jumbotron">
+<p>
+	<a href="../Java/Main.html" class="btn btn-default btn-lg" >Java</a>
+	<a href="../SQL/Main.html" class="btn btn-default btn-lg" >SQL</a>
+	<a href="../JavaScript/Main.html" class="btn btn-default btn-lg" >JavaScript/HTML/CSS</a>
+	<a href="../Scala/Main.html" class="btn btn-default btn-lg" >Scala</a>
+	<a href="../Data_Management/Main.html" class="btn btn-default btn-lg" >Data Management</a>
+	<a href="../Machine_Learning_and_R/Main.html" class="btn btn-default btn-lg" >Machine Learning and R</a>
+</p>
+</div>
+<div class="jumbotron">
+
+<div class="top-nav-bar">
+<p><a href="#contents">To Contents</a></p>
+</div>
+
+<blockquote><p></p></blockquote>
+<blockquote><p></p></blockquote>
+<p>A large part of these notes are paraphrased from the following books and YouTube channels.</p>
+<ul>
+	<li>Head First HTML/CSS</li>
+	<li><a href="https://www.youtube.com/watch?v=gqOEoUR5RHg">Bootstrap Tutorial</a></li>
+	<li>Beginning JavaScript</li>
+</ul>
+<h1>JavaScript/HTML/CSS</h1>
+
+<h2><a id="contents">Contents</a></h2>
+<ul>
+	<li><a href="#html_css_basics">HTML/CSS Basics</a></li>
+	<li><a href="#javascript_basics">JavaScript Basics</a></li>
+	<li><a href="#jquery">jQuery</a></li>
+	<li><a href="#ractive_js">RActive.js</a></li>
+	<li><a href="#bootstrap">Bootstrap</a></li>
+</ul>
+
+<h2><a id="additional">Additional Contents</a></h2>
+<ul>
+	<li><strong>Code</strong><ul>
+		<li><a href="http://codepen.io/peterm/pen/KzeygV">Quiz Application</a></li>
+		<li><a href="http://codepen.io/peterm/pen/JXZOKM">Survey Builder</a></li>
+		<li><a href="http://codepen.io/peterm/pen/pyKvya">To Do List</a> (the CSS isn't very good here)</li>
+		<li><a href="http://codepen.io/peterm/pen/JKmVLg">Codify</a></li>
+	</ul></li>
+</ul>
+
+<h2><a id="html_css_basics">HTML/CSS Basics</a></h2>
+
+<blockquote><p>Understand HT and ML of HTML</p></blockquote>
+<h3>Designing a website</h3>
+<ol>
+	<li>draw it out</li>
+	<li>decide on folder structure</li>
+	<li>use markup (ML) to make an HTML page like the drawing.  Starting with an outline of tags before content.</li>
+	<li>add content</li>
+	<li>add enhancements</li>
+</ol>
+
+<h3>Some Main Hypertext Elements</h3>
+	
+<ul>
+<li>&#x3C;q&#x3E; and &#x3C;blockquote&#x3E; are quote tags</li>
+<li>&#x3C;a&#x3E; hyperlink</li>
+<li>&#x3C;br&#x3E;&#x3C;hr&#x3E; line break, horizontal line break</li>
+<li>&#x3C;h1&#x3E;&#x3C;p&#x3E; headers and paragraphs</li>
+<li>&#x3C;img&#x3E; images</li>
+<li>&#x3C;li&#x3E;&#x3C;ol&#x3E;&#x3C;ul&#x3E; list items, ordered, and unordered</li>
+<li>&#x3C;dl&#x3E;&#x3C;dt&#x3E;&#x3C;dd&#x3E; another list type</li>
+<li>&#x3C;em&#x3E;&#x3C;strong&#x3E; emphasize, stronger em</li>
+<li>&#x3C;address&#x3E; like you&#x27;re house</li>
+<li>&#x3C;code&#x3E; programming code</li>
+<li>&#x3C;target&#x3E; tooltips and screen readers</li>
+<li>&#x3C;del&#x3E;&#x3C;ins&#x3E; specify will delete it will insert</li>
+<li>&#x26;amp; &#x26;gt; &#x26;lt; displays some special chars</li>
+<li>In HTML, &#x3C;div&#x3E; blocks group your blocks in a logical way.  Keep structure as simple as possible.</li>
+</ul>
+
+<h3>Getting on the web</h3>
+<ol>
+<li>find yourself a hosting company</li>
+<li>choose a domain name (usually through them/</li>
+<li>send files to hosting company</li>
+<li>tell others</li>
+</ol>
+
+<h3>Shop for a hosting company</h3>
+<ol>
+<li>Get your own domain name, and a host that allows PHP or Java (Most hosting companies support PHP and Java.)</li>
+<li>How much data transfer is allowed?</li>
+<li>backups</li>
+<li>domain name included in pricing?</li>
+</ol>
+
+
+<h3>FTP - file transfer</h3>
+<p>
+Store files in directories like when it was local.  How do you incorporate a Java program?
+FTP applications: command line, Fetch, Transmit, and Cyberduck. (Might prefer command line)
+Easier to make updates go live quicker: Dreamweaver or GoLive
+</p>
+
+<p>
+Link to a location on the page is possible, it involves wrapping that location in &#x3C;a&#x3E;.  Give it an id attribute and put #myIdName11 on the href that goes to it.
+&#x3C;a&#x3E; are like portals that you set up to go into or come out of them.  You can open a page in a new window, but rarely used.
+</p>
+
+<h3>Images</h3>
+<p>
+Images: JPEG for complex graphics
+GIF for simpler images like logos and allows transparency.
+
+Go for 72 pixels per inch of an image.  The max width of an image or browser can be assumed to be 800px as a rule of thumb
+Logos are 100 to 200 pixels wide.
+Use a photo editing application, change the image size and save it (save for web might be an option).  Cropping images is an option to fit a certain size.
+</p>
+<h4>Examples of Good Widths and Heights for Images (72px is about an inch)</h4>
+<table>
+<tr>
+	<th>Width</th>
+	<th>Height</th>
+</tr>
+<tr>
+	<td>600</td>
+	<td>400</td>
+</tr>
+<tr>
+	<td>Thin</td>
+	<td>Tall</td>
+</tr>
+<tr>
+	<td>150</td>
+	<td>100</td>
+</tr>
+<tr>
+	<td>100</td>
+	<td>150</td>
+</tr>
+</table>
+<h3>Ideas on Images</h3>
+<ul>
+	<li>You may want images clickable and go to a larger version of the image on a new page.  Thumbnail folder and large image folder.  Good form to not link directly to the photo file but HTML instead.</li>
+	<li>A logo has a checkered transparent background.  Set matte to the background color in the photo edit application to get a good blend</li>
+</ul>
+
+<p>
+For the strict version use this if HTML 4.
+&#x3C;!DOCTYPE html PUBLIC &#x22;-//W3C//DTD HTML 4.01//EN&#x22; &#x22;http://www.w3.org/TR/html4/strict.dtd&#x22;&#x3E;</li>
+</p>
+<h3>Some Rules when using HTML4</h3>
+<ul>
+	<li>HTML tag with head and body inside only.</li>
+	<li>Title is required in the head.</li>
+	<li>Blocks only in the body.</li>
+	<li>No blocks inside inline tags.</li>
+	<li>no blocks in &#x3C;p&#x3E; tag.  Only &#x3C;li&#x3E; in &#x3C;ol&#x3E; and &#x3C;ul&#x3E;.</li>
+	<li>Anything is allowed in &#x3C;li&#x3E; including blocks.</li>
+	<li>Blocks only in &#x3C;blockquote&#x3E;.</li>
+	<li>Be careful of some double nesting of inline tags like &#x3C;a&#x3E; nested in &#x3C;a&#x3E;, but usually nesting is fine.</li>
+</ul>
+
+<p>At some time in the future, it might be required to use XML for a project.  To use XML, there are a few more rules</p>
+<h3>Some Rules when using HTML4</h3>
+<ul>
+	<li>Use a new doctype.  &#x3C;!DOCTYPE html PUBLIC &#x22;-//W3C//DTD XHTML 1.0 Strict//EN&#x22; &#x22;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&#x22;&#x3E;</li>
+	<li>add xmins, lang, and xml:lang attributes to &#x3C;html&#x3E; tag.</li>
+	<li>All elements in lowercase.</li>
+	<li>All opening tags &#x3C; must also have a space and \&#x3E; at the end of the element.</li>
+	<li>All attribute values are enclosed with double quotes.</li>
+	<li>Convert special characters like &#x26; to use something like &#x26;amp;</li>
+</ul>
+
+<p>
+w3 validation site can find errors in your HTML 4.01 Strict and XML code.
+Avoid using XHTML because some lack of browser support, unless there is a good reason to use the XHTML.
+XHTML can be good when translating XML to HTML and might be better for mobile devices.
+</p>
+
+<h3>Style in HTML and Validator</h3>
+<p>
+Style tag is used if CSS is in the HTML.  To put CSS in another file use:
+&#x3C;link type=&#x22;text/css&#x22; rel=&#x22;stylesheet&#x22; href=&#x22;lounge.css&#x22; &#x3E;
+CSS overriding uses the most specific rule, if a tie, it uses the last rule in the css file.  Some css inherits to nested elements, others do not; consult a reference book.
+Validate your CSS with
+http://jigsaw.w3.org/css-validator/
+</p>
+<h3>CSS</h3>
+<h4>Some common styling attributes</h4>
+<ul>
+<li>Color</li>
+<li>top</li>
+<li>text-align</li>
+<li>letter-spacing</li>
+<li>background-color</li>
+<li>font-style</li>
+<li>border</li>
+<li>list-style</li>
+<li>background-color</li>
+<li>font-style</li>
+<li>margin</li>
+<li>line-height</li>
+<li>left</li>
+<li>fony-weight</li>
+</ul>
+
+<h4>font-family is for fonts (5 main types)</h4>
+<ul>
+<li>Serif is elegant, traditional, and like a newspaper&#x27;s text.</li>
+<li>Sans-serif is the best one, it is clean and readable especially on computers.</li>
+<li>Monospace is for code.</li>
+<li>Cursive is for some headers.</li>
+<li>Fantasy is rarely used.</li>
+</ul>
+
+<p>
+List out several types of one font-family, in case a client's computer doesn't have the first fonts.<br>
+Example: Veranda, Geneva, Arial, sans-serif<br>
+sans-serif is a way to tell the computer to use any sans-serif type font they have, it is a default last choice.
+</p>
+
+<h4>Font-size</h4>
+<p>
+Use px for pixels, % for relative size, em seems the same as percent, also there are keywords.  You'll have success if you follow these three steps.
+</p>
+
+<ol>
+<li>use a keyword (usually small or medium) and place it in your body rule</li>
+<li>use em or % for all other font-size rules</li>
+<li>make headers smaller 200% and 150% are default for &#x3C;h1&#x3E; and &#x3C;h2&#x3E; but 170% and 130% work better.</li>
+</ol>
+
+<h4>Color</h4>
+<p>
+Hex codes are the most common.  There is also rgb.<br>
+Example 1: rgb(80%, 40%, 0%)<br>
+Example 2: RGB(204, 102, 0)<br>
+Text and background should have a high contrast for readability, like black and white.
+</p>
+
+<h4>Some Other CSS Properties</h4>
+<ul>
+<li>For font-weight, only use bold or normal, others aren&#39;t supported well.  You can update headers to be normal, they are bold by default.</li>
+<li>font-style can be italic (curly) or oblique (letters slanted to the right), something to add to quotes and block quotes.</li>
+<li>font-decorations draw lines near text like underline.  Bottom border is often better than underline because underlines look clickable on the Web.</li>
+<li>line-height is spacing between lines.</li>
+<li>Box model: content, padding, border, margin.</li>
+<li>Background-image is used for styling images.  Background-repeat: no-repeat is useful.  Other options repeat horizontally or vertically or inherit behavior.</li>
+<li>Background-position: top left    helps with positioning of the image inside the padding and content area.</li>
+<li>Border-style: groove or solid or dotted or dashed or inset or double or outset or ridges.  One style is to use a dashed border of the background color.</li>
+<li>Border width in pixels, border color.  Can specify a subset of border sides for each border property too.</li>
+</ul>
+
+<h4>Precedence</h4>
+<p>
+The id attribute is similar to class.  To select an id use # instead of a period.  CSS stands for cascading style sheets because the rules override each other in a 
+cascading way.  If two rules update the same attribute, the most specific selector will override; if there is a tie, the last rule defined in the stylesheet(s) overrides it.
+So you may want to put a certain stylesheet last in the HTML link tags to take advantage of this tie rule.  The &#x3C;link&#x3E; 
+attribute can specify if a stylesheet should be used based on the device viewing it.  The attribute is called media.  
+Place device specific stylesheets lower so they take precedence for ties.
+Typing !Important might help override also.
+Each matching id improves thr level that something is specific, if tied for the count it looks for a count of classes, then the if tied the count of elements mentioned.
+</p>
+<h4>Basic Pseudo-classes</h4>
+<p>
+Styling links based on unvisited, visited, and hover.  These are pseudo-classes
+</p>
+<ul>
+<li>a:link</li>
+<li>a:visited</li>
+<li>a:hover</li>
+<li>p:first-child</li>
+</ul>
+
+<h4>Basic Positioning</h4>
+<ul>
+<li>Width and height.  Saying a div is 200px means the content part is 200px inside, padding and margin are added so the total could be higher than 200px.  You can use percentages with width and 50% is 50% of the width of the container of the content (the content &#x3C;p&#x3E; might inherit this)</li>
+<li>Text-align center. Will center text</li>
+<li>Div are good because you can style them and it will pass those styles by inheritance to those elements it contains.</li>
+<li>Line-height: 1 is better than 1em when working with divs due to how inheritance works.</li>
+<li>There are shortcuts to defining many CSS properties on one line.</li>
+<li>&#x3C;span&#x3E; is usually used to give a class or id to inline text.</li>
+<li>Margin of two inline elements above each other act differently.  The largest margin is used only for the space dividing them top/bottom.  Images are usually the only inline element with margins.</li>
+<li>Try negative margins.  Negative margins can nudge elements in the right direction, make tables, make columns, make 3D text by overlaying black and blue text 1 or 2,,px apart</li>
+</ul>
+
+<h4>Float</h4>
+<p>
+Float is considered most flexible and good for web layout.  It allows for multiple columns of content on a screen.  
+To Implement, give the block a width and set it as float right or left.
+The blocks ignore it and the inline elements avoid it.  Float right will put this section on the right.  Margin is good to force the block to avoid touching the floating block.
+"Clear: right" Can be useful for a footer so it won't overlap.  It means it will allow anything flowing right to finish before it appears below it.
+
+<h4>Frozen Layout</h4>
+<p>Implement the frozen layout by surrounding everything in body with a div and give that a width of 800px.
+<h4>Jello Layout</h4>
+<p>Similar to frozen layout, but centers the content if the page gets too large.  To get this, set margin left: auto; and margin-right: auto;
+It is more popular to use jello layout over frozen layout
+
+<h4>Absolute Positioning</h4>
+<p>In contrast to float, absolute positioning has both blocks and inline elements avoid it.  The z-index is useful to determine which element is on top.
+
+<h4>Positions</h4>
+<ul>
+<li>Fixed: stays there even when page scrolls</li>
+<li>Absolute: the absolute location in its (z-indrx matters) container (other content and blocks ignore it)</li>
+<li>Static: default.  Normal flow.</li>
+<li>Relative: static but offset from the normal position.</li>
+</ul>
+
+<h3>More HTML and CSS with Tables and Forms</h3>
+<h4>Tables</h4>
+<p>It is recommended today not to use the table HTML element, but instead to <a href="https://css-tricks.com/responsive-data-tables/">implement tables by using CSS</a></p>
+
+<p>
+Table uses &#x3C;table&#x3E;&#x3C;tr&#x3E;&#x3C;th&#x3E;&#x3C;td&#x3E; the is header, td is data, and tr is a row.
+Place a summary attribute on &#x3C;table&#x3E; and put &#x3C;caption&#x3E; as the first thing in the &#x3C;table&#x3E;
+caption-side is used in CSS for title placement.
+
+Tables have padding, a border, and border spacing (which you may want to collapse with botdrr-collapse) 
+Give a color to &#x3C;th&#x3E; in CSS
+Give alternating color rows by coloring a class and giving even counted rows that class.
+These pictures show how to merge cells to span two rows.  It works the same way for columns by using colspan
+
+You can place a table within a table by putting the nested table in a &#x3C;td&#x3E; element.
+
+Place headers on the left-hand by placing a &#x3C;th&#x3E; first in each row element.
+</p>
+<h4>List Styles</h4>
+<p>
+Lists have styles too
+</p>
+<ul>
+<li>list-style-type has disc, circle, square, none, and possibly others.</li>
+<li>list-style-image allows the bullets to be images.</li>
+</ul>
+
+<h4>Forms</h4>
+<ul>
+<li>Form HTML tag</li>
+<li>Text input (input type)</li>
+<li>Submit (input type)</li>
+<li>Radio (input type)</li>
+<li>Checkbox (input type)</li>
+<li>Textarea (input type)</li>
+<li>Select and option (input type)</li>
+<li>Multi-select (input type)</li>
+<li>Passwords (input type)</li>
+</ul>
+<h4>More on Forms</h4>
+<p>
+Attribute "checked" helps with defaults on radio, checkbox, option, and multi-select.
+POST and GET are mostly the same but post hides some variables before you send it and get appends it to the URL.
+Avoid GET with private data and purchases.  Get is good with the user being able to bookmark the resulting page and not have to redo the form.  Post is good when a lot of data is being sent like if you use a textarea.
+Tables can be good with forms, this book says it can be easier than CSS, online they said it is bad form and CSS is best here.
+Use fieldset and legend in your HTML with checkbox or anything you want to group together.
+Use labels like on radio buttons, it is easier to style if you use labels rather than regular text.
+</p>
+<p>
+
+<h4>Important Topics not Covered in Head First HTML/CSS</h4>
+
+<ol>
+	<li>There are more selectors.  pseudo elements have first letter and first line.  There are attribute selectors based on attributes used and optionally their values.  By siblings, direct descendants, combining selectors.</li>
+	<li>Frames can let you have multiple websites on one page but it has become bad form, I think it is used on the codependent website</li>
+	<li>Multimedia and flash</li>
+	<li>to get higher google rankings use alt and title a lot.  In the meta tag set a name=&#x22;description&#x22; and content=&#x22;your description&#x22;.  Define a meta name=&#x22;keywords&#x22; content=&#x22;keyword phrase 1, phrase 2, etc.
+You can keep your site unlisted on search engines too.</li>
+	<li>style sheets for printing
+media=&#x22;print&#x22; to point to a stylesheet in the link tag.
+Set background to white
+Specify font size in pts like 12pt
+Use Eric for printed copies.
+You can hide navigation bars (display properly none)
+Remove positioning properties for the printer
+Use flexible widths not a set width
+Test it out</li>
+	<li>mobile devices and PDAs
+media=&#x22;handheld&#x22; to point to a stylesheet in the link tag
+Keep it simple since people are charged for data usage.
+Keep navigation obvious, use text links instead of scripting effects,
+Scale down you page as much as you can, reduce your font sizes, margins, and padding as much as possible.
+Multi-column layouts will be ignored often, so careful with the ordering the the HTML (I.e. less important thing was first and floated)
+Pop up windows and frames usually aren&#x27;t supported.
+Test on many devices!
+Get into the habit of writing these alternative style sheets for handhelds.</li>
+</ol>
+
+<h2><a id="javascript_basics">JavaScript Basics</a></h2>
+<p>
+
+</p>
+
+<h2><a id="jquery">jQuery</a></h2>
+<p>
+</p>
+<h2><a id="ractive_js">RActive.js</a></h2>
+<p>
+</p>
+
+<h2><a id="bootstrap">Bootstrap</a></h2>
+
+<h3><a href="https://www.youtube.com/watch?v=gqOEoUR5RHg">Bootstrap Tutorial</a> YouTube</h3>
+<ul>
+<li>00:53 Setup</li>
+<li>02:59 Container</li>
+<li>03:37 Page Header</li>
+<li>04:09 Jumbotron</li>
+<li>05:31 Button Styling</li>
+<li>09:40 Grid Layouts / Responsive Layouts</li>
+<li>17:02 Responsively Hiding Elements</li>
+<li>18:54 Offset</li>
+<li>20:04 Table Styling</li>
+<li>21:17 CSS Styling with Bootstrap</li>
+<li>24:34 Carousel / Slide Shows</li>
+<li>28:32 Icons</li>
+<li>31:33 Well</li>
+<li>32:16 Image Styling</li>
+<li>33:27 Contextual Colors</li>
+<li>34:28 Dropdown Menus</li>
+<li>38:07 Input Groups</li>
+<li>42:51 Horizontal Menus</li>
+<li>44:56 Vertical Menus</li>
+<li>47:00 Tabbed Panels</li>
+<li>51:05 Responsive Navigation Bar</li>
+<li>54:38 Pagination</li>
+<li>56:16 Responsive Blog Layout</li>
+<li>58:02 Progress Bars</li>
+<li>59:30 Responsive Blog Layout 2</li>
+<li>1:01:30 List Groups</li>
+</ul>
+
+
+
+</div> <!-- jumbotron -->
+
+</div> <!-- container -->
+
+<div id="footer">
+© 2017
+</div>
+
+</div>  <!-- allcontent -->
+
+
+<script type="text/javascript"
+  src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

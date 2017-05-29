@@ -1,0 +1,1195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Peter Myers - Notes">
+  <meta name="keywords" content="Blog,Programming">
+  <meta name="author" content="Peter Myers">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/main.css">
+  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/r_coding.css">
+<title>Peter Myers - Notes</title>
+</head>
+
+<body>
+<div id="allcontent">
+
+<div class="container">
+
+<div class="page-header">
+<h1 id="Logo">Peter Myers - Notes</h1>
+</div>
+
+<div class="jumbotron">
+<p>
+	<a href="../Java/Main.html" class="btn btn-default btn-lg" >Java</a>
+	<a href="../SQL/Main.html" class="btn btn-default btn-lg" >SQL</a>
+	<a href="../JavaScript/Main.html" class="btn btn-default btn-lg" >JavaScript/HTML/CSS</a>
+	<a href="../Scala/Main.html" class="btn btn-default btn-lg" >Scala</a>
+	<a href="../Data_Management/Main.html" class="btn btn-default btn-lg" >Data Management</a>
+	<a href="../Machine_Learning_and_R/Main.html" class="btn btn-default btn-lg" >Machine Learning and R</a>
+</p>
+</div>
+<div class="jumbotron">
+
+<div class="top-nav-bar">
+<p><a href="#contents">To Contents</a></p>
+</div>
+
+<blockquote><p></p></blockquote>
+<blockquote><p></p></blockquote>
+<p>A large part of these notes are paraphrased from the following books and YouTube channels.</p>
+<ul>
+	<li>Kafka the Definitive Guide</li>
+	<li>Beginning Pentaho (Is this title correct)?</li>
+	<li>What is the beginning Spark book called?</li>
+	<li>Architecting HBase Applications</li>
+	<li>GraphX Spark Book</li>
+</ul>
+<h1>Data Management</h1>
+
+<h2><a id="contents">Contents</a></h2>
+<ul>
+	<li><a href="#kafka">Kafka</a></li>
+	<li><a href="#pentaho">Pentaho</a></li>
+	<li><a href="#hbase">HBase</a></li>
+	<li><a href="#spark">Spark</a></li>
+	<li><a href="#graphx_spark">GraphX Spark Book</a></li>
+	<li><a href="#elastic_search">ElasticSearch</a></li>
+	<li><a href="#hdfs">HDFS</a></li>
+	<li><a href="#using_kafka">Using Kafka</a></li>
+	<li><a href="#using_cloudera">Using Cloudera</a></li>
+</ul>
+
+<h2><a id="additional">Additional Contents</a></h2>
+<ul>
+	<li><strong>Code</strong><ul>
+		<li><a href="https://github.com/Peter-32/PentahoTransformExercises">Pentaho - Transform Exercises</a></li>
+		<li><a href="https://github.com/Peter-32/spark-sort-by-word-length/blob/master/spark_sort_by_word_length.scala">Spark - Sort by Word Length</a></li>
+		<li><a href="https://github.com/Peter-32/FindHighestScrabbleWordValues/blob/master/spark_scrabble_word_values.scala">Spark - Find Highest Scrabble Word Values</a></li>
+	</ul></li>
+</ul>
+
+<h2><a id="kafka">Kafka</a></h2>
+<h3>Kafka the Definitive Guide Shorter Notes</h3>
+<h4>Introduction</h4>
+<p>
+Create a data lake using Kafka, where users can produce or query for data sent to it.
+You need Java, Zookeeper, Kafka, and Avro serializers/schema registry.  Kafka is written in
+Java, Zookeeper keeps metadata about Kafka brokers, and Avro serializers/schema registry
+will serialize messages and store the schema used at that time.  If you have a strategy for partitioning
+the data you can customize the partition strategy, otherwise use the default settings.
+Kafka writes batches of messages to partitions stored on a topic.  Messages are sent to Kafka brokers
+which can handle millions of messages a second, and work together as broker clusters.  Broker clusers
+work in isolation and have one broker as their leader.  To avoid running out of disk space, old data is often
+deleted.  Each broker in a cluster is configured to know the ids of other brokers in their cluster.
+</p>
+<h4>Writing Messages</h4>
+<p>A message has a "value" which is the message, and a "key" which is extra info about the message
+and also allows you to pick the partition.  There are four required settings: the identifier to the brokers,
+the serializer used for the messages, the serializer used for the key, and the schema registry.
+The schema registry and serializers are all created for you with Apache Avro.
+</p>
+<p>
+Do you need messages stored in a particular order?  Do you need to guarentee no messages get lost?
+These are questions to ask yourself when determining the additional settings when writing messages, and there are usually trade offs.
+There are two primary ways to send messages, synchronously or asynchronously.
+Synchronous means after sending the message, a Future object will be returned soon, and it gives you a chance to call a get() method to verify that the
+message made it there successfully.  Asynchronously means the broker will send back a packet after it receives each message, which might include an exception.
+An exception tells you that something went wrong and you have a chance to run code to account for the error.
+Having a schema registry means having a new schema is easy, so you can horizontally scale your topics.
+</p>
+<h4>Reading Messages</h4>
+<p>
+You want to start with a lot of partitions on your topic, and scale by increasing the number of consumers in the consumer groups that read the data (optionally scale by increasing partitions).
+The five main properties of a KafkaConsumer to configure are bootstrap.servers,
+key.serializer, value.serializer, schema registry, and group.id for the consumer group.
+poll() pulls some messages as a packet (optionally one message), and when finished reading the packet a commit is sent to the leader.
+Kafka offers "at-least once delivery" if you need "exactly once delivery" you will need an external data store that has a transaction model.
+</p>
+<h4>Reliable Data Delivery</h4>
+<p>
+Use replication factor of 3.  Kafka is built reliable, but works faster when you make it less reliable.
+Set unclean.leader.election.enable to false if data quality and consistency is critical, it will wait until the leader comes back online.
+</p>
+<h4>Building Data Pipelines</h4>
+<p>
+Use Kafka Connect in most situations, otherwise use "producer and consumer".  The former doesn't require that the user is a developer, but the latter does.
+Kafka is good at reading in and outputing different data formats.
+Some configurations usually depend on how important the following factors are:
+timeliness of dataflow, reliability, throughput, and security.
+Configure Kafka Connect with a Schema Registry and check if the cluster is up.
+The book has more details on Kafka Connect.
+</p>
+
+<h3>Kafka the Definitive Guide Longer Notes (All notes and pictures are from this book)</h3>
+<p>
+The observer pattern idea is important.  The publisher creates a defined class of message, and subscribers subscribe to certain classes of messages.
+It seems like all the messages are sent/picked up in one server that stores/queries for the data when requested.
+</p>
+<blockquote><p> What you would like to have is a single centralized system that allows for publishing of generic types of data, and that will grow as your business grows. (Kafka the Definitive Guide)</p></blockquote>
+<h4>Introducing Kafka</h4>
+<p>
+Kafka is a publisher/subscribe messaging system.  There are producers and consumers of messages.
+Use schemas to decouple the publishers and subscribers.
+The basic unit in Kafka is a message and it has no required data type or format (a message is like a row in a DB table).
+Kafka writes in batches.  Messages are stored in the topics you tell it to go into and is usually automatically partitioned (a topic is like a DB table).
+There is an optional key to each message which is used to group some messages into the same partition.
+A consumer remembers the message offset, so if it has to stop and start, it doesn't lose its place.
+Consumers are placed in groups and consume a topic together, each reading different partitions.  If one fails, the work is rebalanced to the other consumers in the group.
+</p>
+<h4>Brokers and Clusters</h4>
+<p>
+One broker can easily handle thousands of partitions and millions of messages per second.
+The broker's task is to
+</p>
+<ul>
+	<li>Receive messages from producers and assigning offsets and commit messages to disk</li>
+	<li>Service consumers by fetching requests that are saved on disk</li>
+</ul>
+<p>
+A broker is intended to work as a cluster of brokers.  One broker will be the cluster controller, which
+assigns partitions to brokers and monitors for broker failures.
+Each partition has one leader broker, but is also replicated on other brokers.
+</p>
+<h4>Retention</h4>
+<p>
+This setting can be configured to delete old data after a certain age of the message (e.g. 7 days)
+or unit the topic reaches a size (i.g. 1 gigabyte).  Data is stored on disk so it doesn't have to be used in real-time.
+</p>
+<h4>Multiple Clusters</h4>
+<p>
+It can be beneficial to have multiple clusters.  Reasons include:
+</p>
+<ul>
+	<li>different types of data</li>
+	<li>security</li>
+	<li>disaster recovery</li>
+</ul>
+<h4>Clusters work in Isolation</h4>
+<p>
+Since they don't talk to each other, you may decide to keep multiple sites of data in one cluster.
+Also you might decide to duplicate data on multiple clusters for use.
+The tool Mirror Maker can consume multiple Kafka clusters, aggregate the data,
+and again consume the aggregated Kafka cluster to place it in another Kafka cluster.
+</p>
+<p>
+Ecosystem of producting and consuming data.
+</p>
+<p>
+<img src="../../../resources/Medium_Images/big_data.jpg" class="center">
+</p>
+<h4>Use Cases</h4>
+<ul>
+	<li>Record user activity for ML or improving search engines</li>
+	<li>Messages and data pipeline</li>
+	<li>Logging</li>
+	<li>Commit log like database changes</li>
+	<li>Stream processing similar to map reduce real time</li>
+</ul>
+<blockquote><p>
+Try to let data power everything that is done.
+</p></blockquote>
+<h4>Primary Goals for Creation of Kafka</h4>
+<ul>
+	<li>Decouple the producers and consumers by using a push-pull model</li>
+	<li>Provide persistence for message data</li>
+	<li>Allow multiple consumers</li>
+	<li>High throughput (throughput is the measure of how close it is to real time)</li>
+	<li>Allow for horizontal scaling</li>
+</ul>
+<p>
+Kafka is an open source Java application and has become the first chioce for big data pipelines.
+</p>
+<h4>Installing Kafka</h4>
+<p>
+You need Apache Kafka for brokers and Apache Zookeeper for storing metadata for brokers.
+Download Java.  
+<a href=" http://mirror.cc.columbia.edu/pub/ software/apache/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz.">Download Zookeeper</a> with this link and here are some commands to install zookeeper.
+</p>
+<p>
+<img src="../../../resources/Large_Images/install_zookeeper.jpg" class="center">
+</p>
+<p>
+Run Zookeeper with a 5-node ensemble, otherwise use 3-nodes, 7-nodes, or 1-node.  Have a common configuration for each server that includes
+the list of all servers.  Configurations are set up in terms of tickTime units, a tickTime of 2000 is 2 seconds.
+initLimit is the amount of time to allow followers to connect to the leader and syncLimit limits how far
+out of sync followers can be with the leader.  The format for server configuration setting is
+server.X=hostname:peerPort:leaderPort
+</p>
+<p>
+You need to <a href="http://kafka.apache.org/down loads.html">download Apache Kafka</a>.
+This example installs Kafka
+</p>
+<p class="coding">
+tar -zaxf kafka_2.11-0.9.0.1.tgz<br>
+mv kafka_2.11-0.9.0.1 /usr/local/kafka<br>
+mkdir /tmp/kafka-logs<br>
+export JAVA_HOME /usr/java/jdk1.8.0_51<br>
+/usr/local/kafka/bin/kafka-server-start.sh -daemon<br>
+Then verify it is working with simple commands<br>
+/usr/local/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181<br>
+--replication-factor 1 --partitions 1 --topic test<br>
+/usr/local/kafka/bin/kafka-topics.sh --zookeeper localhost:2181<br>
+--describe --topic test
+</p>
+<p>
+This will produce messages:
+</p>
+<p class="coding">
+/usr/local/kafka/bin/kafka-console-producer.sh --broker-list<br>
+localhost:9092 --topic test<br>
+Test Message 1<br>
+Test Message 2<br>
+^D
+</p>
+<p>
+This will consume messages:
+</p>
+<p class="coding">
+/usr/local/kafka/bin/kafka-console-consumer.sh --zookeeper<br>
+localhost:2181 --topic test --from-beginning<br>
+Test Message 1<br>
+Test Message 2<br>
+^C
+</p>
+<h4>Broker Configuration</h4>
+<p>
+It may be required to change default configurations when running on a cluster of brokers.
+</p>
+<ul>
+	<li>broker.id - integer identifer that must be unique within a single Kafka cluster. (any number)</li>
+	<li>port - Avoid numbers lower than1 1024.  The TCP port Kafka listens to.</li>
+	<li>zookeeper.connect - location of the Zookeeper.  semicolon separated list of hostname:port/path.</li>
+	<li>log.dirs - Where log segements are stored in directories.  comma separated list of paths.</li>
+	<li>num.recovery.threads.per.data.dir - Number of threads per log.dirs.  These threads are used for starting up, shutting down, and failures.</li>
+	<li>auto.create.topics.enable - set this to false if you want to avoid topics being created automatically which happens under certain conditions.</li>
+</ul>
+<h4>Topic Configuration</h4>
+<p>
+Options set per topic
+</p>
+<ul>
+	<li>num.partitions - partitions that a new topic is created with (default is 1).  Later on you can add more partitions, but never can you have less partitions than the number configured here.  High message volume will require a large number of partitions.</li>
+	<li>log.retention.ms, log.retention.btyes - retain messages for a certain amount of time or until a certain amount of bytes (it is recommended to use the .ms configuration which is milliseconds).</li>
+	<li>log.segment.ms, log.segment.bytes - has to do with when the log segment will be closed.  Messages are stored in segments.</li>
+	<li>message.max.bytes - sets the largest size of a message allowed.</li>
+</ul>
+<h4>Hardware Selection</h4>
+<p>
+Disk storage, SSD, memory, and networking can be the most important factors.
+Lots of hardware can work, SSD is preferred, high disk capacity is good, and memory is very important.
+It is best if no other significant application is running because memory is important.
+Networking is a governing factor; the more consumers there are, the more this can become a bottleneck.
+CPU is often not a primary factory in selecting hardware for Kafka.
+</p>
+<p>
+AWS has cheaper options that have high throughput or high storage, and also more expensive options that have both.
+</p>
+<h4>Kafka Clusters</h4>
+<p>
+One Kafka broker for a proof of concept.  Many brokers allows scaling the load and replication.
+Reasons for higher number of brokers includes how much data you're trying to store,
+and allowing more requests to be handled at once.  All brokers must be mentioned in the Zookeeper configuration and
+the broker.id must be unique for each broker.
+</p>
+<p>
+vm.swappiness should be set to 1.  Servers with brokers should be separated so a power outage to one doesn't affect the others.
+</p>
+
+<h4>Writing Messages to Kafka</h4>
+<p>
+Is every message critical, or can we tolerate loss of messages?  Is it okay to accidently delete messages?
+Throughput is how quickly we want the message to be writen to Kafka.  You may choose to tolerate latencies up to a certain amount.
+</p>
+<p>
+<img src="../../../resources/Medium_Images/kafka_producer.jpg" class="center">
+</p>
+<p>
+We start with a ProducerRecord with an optional key and partition.  We serialize the objects to ByteArrays so they can be sent over the network.
+The partitioner chooses a partition if we didn't specify one.  The broker may retry if it failed.  If successful, it returns the topic, partition, and offset.
+The producer object has three mandatoiry properties to set.
+</p>
+<ul>
+	<li>bootstrap.servers - host:port pairs of Kafka brokers.  Include at least two of the brokers.</li>
+	<li>key.serializer - Byte arrays are expected as key and values of messages.
+	You're allowed to parameterize the types to any Java object.
+	Set to the name of a class that implements org.apache.kafka.common.serialization.Serializer.
+	The Kafka client package includes StringSerializer and IntegerSerializer.
+	The key.serializer is required even if you don't send keys.
+	</li>
+	<li>value.serializer - Same as the key.serializer.</li>
+</ul>
+<p>
+Here is an example.
+</p>
+<p class="coding">
+private Properties kafkaProps = new Properties();<br>
+kafkaProps.put("bootstrap.servers", "broker1:9092,broker2:9092");<br>
+kafkaProps.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");<br>
+kafkaProps.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");<br>
+producer = new KafkaProducer<String, String>(kafkaProps);
+</p>
+<p>
+A producer is created.  There are three primary ways to send messages.
+</p>
+<ol>
+	<li>Fire-and-forget - Highly likely the message will arrive successfully, some messages will be lost</li>
+	<li>Synchronous send - A Future object will use get() to see if the send() was successful.</li>
+	<li>Asynchronous send - The Kafka broker sends back a response.  A callback function is involved.</li>
+</ol>
+<h5>Fire-and-forget</h5>
+<p>
+The simplest way to send a message is:
+</p>
+<p class="coding">
+ProducerRecord<String, String> record =<br>
+	new ProducerRecord<>("CustomerCountry", "Precision Products","France");<br>
+try {<br>
+producer.send(record);<br>
+} catch (Exception e) {<br>
+e.printStackTrace();<br>
+}
+</p>
+<p>
+producer takes a ProducerRecord.  One parameter in this ProducerRecord constructor is the topic name.
+</p>
+<h5>Synchronous Messaging</h5>
+<p>
+The code previously was a synchronous send, but the Future object isn't used.  To use the Future object, write code like this:
+</p>
+<p class="coding">
+producer.send(record).get();
+</p>
+<p>
+The good response to some errors is to resend the data (connect or no leader errors).
+Other errors must throw an exception like "message size too large" errors, because resending won't help.
+</p>
+<h5>Asynchronous Messaging</h5>
+<p class="coding">
+private class DemoProducerCallback implements Callback {<br>
+@Override<br>
+public void onCompletion(RecordMetadata recordMetadata, Exception e) {<br>
+if (e != null) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+ProducerRecord<String, String> record =<br>
+new ProducerRecord<>("CustomerCountry", "Biomedical Materials", "USA");<br>
+producer.send(record, new DemoProducerCallback());
+</p>
+<p>
+Callback is from the org.apache.kafka.clients.producer.Callback interface.  The code in the callback
+function will probably be more robust in production code.
+</p>
+<h4>Serializers</h4>
+<p>
+Serialize means making it an array of bytes.
+when you need to serialize something other than Integers, Strings, or Bytes, you can use a library or create your own serializer.
+Some generic serialization liraries are Avro, Thrift, and Protobuf.
+Use these libraries, but it is also beneficial to have the knowledge of how a serializer works.
+As an example, imagine you have a customer class with a customerId and customerName.
+The serializer can be storing 4 byte int for customerId, 4 byte int for length of customerName in UTF-8 bytes (0 if name is null),
+N bytes representing customerName in UTF-8.
+
+</p>
+<p class="coding">
+data.getName().getBytes("UTF-8"); // getName() returns a string.
+</p>
+<p>
+<img src="../../../resources/Medium_Images/serializer_java_code.jpg" class="center">
+</p>
+<p>Due to debugging and maintainance concerns, <strong>NEVER</strong> implement your own serializer.  Use
+existing libraries like Apache Avro, Thrift, or Protobuf.
+</p>
+<h4>Using Apache Avro</h4>
+<p>
+Avro is a language neutral data serialization format that usually uses JSON.
+There is a schema usually described in JSON and usually embedded in the files.
+The schema can change and you can continue to process messages without requiring any update or change.
+If the fields didn't exist in the schema at a point in time, the getter method will simply return null.
+The reader will need access to the schema(s) used; this is in the file itself, or Kafka offers a better way.
+</p>
+<h4>Schema Registry</h4>
+<p>
+Schema Registry is required for Avro when working with Kafka.  This stores the schema,
+so we will know the right schema for each record.  The idea is to store all the schemas used to write data to Kafka in the registry.
+We simply store the identifer for the schema in the record we produce to Kafka.  The key tells what schema to use in the
+Schema Registry.
+</p>
+<p>
+The producer serializes the data and gives it to the Kafka broker, also passing in the key for the schema registry.
+The consumer deserializes the data and gets help from the schema registry, using the key to get the right schema.
+Here is an example of how to produce Avro objects to Kafka
+</p>
+<p class="coding">
+Properties props = new Properties();<br>
+props.put("bootstrap.servers", "localhost:9092");<br>
+props.put("key.serializer", "io.confluent.kafka.serializers.KafkaAvroSerializer");<br>
+props.put("value.serializer", "io.confluent.kafka.serializers.KafkaAvroSerializer");<br>
+props.put("schema.registry.url", schemaUrl); // points to where the schemas are stored.<br>
+String topic = "customerContacts";<br>
+int wait 500;<br>
+Producer<String, Customer> producer = new KafkaProducer<String, Customer>(props);<br>
+while (true) {<br>
+Customer customer = CustomerGenerator.getNext();<br>
+System.out.println("Generated customer " + customer.toString());<br>
+ProducerRecord<String, Customer> record = new ProducerRecord<>(topic, customer.getID(), customer);<br>
+producer.send(record);
+</p>
+<p>
+Here is an example using generic Avro objects
+</p>
+<p class="coding">
+Properties props = new Properties();<br>
+props.put("bootstrap.servers", "localhost:9092");<br>
+props.put("key.serializer", "io.confluent.kafka.serializers.KafkaAvroSerializer");<br>
+props.put("value.serializer", "io.confluent.kafka.serializers.KafkaAvroSerializer");<br>
+props.put("schema.registry.url", schemaUrl);<br>
+String schemaString = "{\"namespace\": \"customerManagement.avro\", // we need to begin to create the Avro schema<br>
+\"type\": \"record\", " + <br>
+"\"name\": \"Customer\"," +<br>
+"\"fields\": [" +<br>
+"{\"name\": \"id\", \"type\": \"int\"}," +<br>
+"{\"name\": \"name\", \"type\": \"String\"}," +<br>
+"{\"name\": \"email\", \"type\": \"null\",\"string\"], \"default\":\"null\" }" +<br>
+"]}";<br>
+Producer<String, GenericRecord> producer = new KafkaProducer<String, GenericRecord>(props);<br>
+Schema.Parser parser = new Schema.Parser();<br>
+Schema schema = parser.parse(schemaString);<br>
+for (int nCustomers = 0; nCustomers < customers; nCustomers++) {<br>
+String name = "exampleCustomer" + nCustomers;<br>
+String email = "example " + nCustomers + "@example.com"<br>
+GenericRecord customer = new GenericData.Record(schema); // note: this is a generic record<br>
+customer.put("id", nCustomer);<br>
+customer.put("name", name);<br>
+customer.put("email", email);<br>
+ProducerRecord<String, GenericRecord> data = <br>
+new ProducerRecord<String, GenericRecord>("customerContacts", name, customer);<br>
+producer.send(data);<br>
+}<br>
+}
+</p>
+<h4>Partitions</h4>
+<p>
+Keys are additional information, and also determine the partition.  This example uses a key.
+</p>
+<p class="coding">
+ProducerRecord<Integer, String> record =<br>
+new ProducerRecord<>("CustomerCountry", "Laboratory Equipment", "USA");
+</p>
+<p>
+This example doesn't use the key (automatically set to null).
+</p>
+<p class="coding">
+ProducerRecord<Integer, String> record =<br>
+new ProducerRecord<>("CustomerCountry", "USA");
+</p>
+<p>
+If you increase the number of partitions in the topic later on, the same key previously used will probably go to a new partition.
+Default partitioner is the most common.  Sometimes you might want one large account to get its own partition
+and other accounts to be hashed into the other partitions.  Not sure why you want one partition to have a lot of data, except for 
+keeping the other partitions small.
+</p>
+<p>
+<img src="../../../resources/Medium_Images/partitioner_code.jpg" class="center">
+</p>
+<h4>Configuring Producers</h4>
+<p>
+<a href="http://kafka.apache.org/documentation.html#produ cerconfigs">Apache Kafka documentation</a> is available.  
+Most optional producer configurations don't need to be changed, but some have significant impact on memory, performance, and reliability.
+</p>
+<ul>
+	<li>acks value "0" assumes all messages are sent successfully, acks value "all" is better at avoiding messages being lost.</li>
+	<li>buffer.memory sets the amount of memory the producer will use to buffer messages.</li>
+	<li>compression.type is uncompressed by default.  Snappy or gzip are other options.  gzip is best when
+	network bandwidth is more restricted but takes more CPU, snappy is good for both performance and bandwidth.</li>
+	<li>There are settings for number of retries before failing and time between retries.</li>
+	<li>batch.size sets the amount of memory per batch.  A batch is multiple messages sent to the same partition.</li>
+	<li>linger.ms controls the amount of time we wait for additional messages before sending the current batch.  Zero by default, but there can be greater throughput by waiting.</li>
+	<li>client.id identifies the client who sent the message.</li>
+	<li>max.in.flight.requests.per.connection controls how many messages the producer will send to the server without receiving responses.
+	Setting this to 1 will guarentee that messages will be written to the broker in the order they were sent, even when retries occur.</li>
+	<li>timeout.ms and metadata.fetch.timeout.ms can error happens if these expire.  Metadata refers to things like who the current leaders are for partitions.
+	An error occurring means an exception is thrown or your callback function for errors is run.</li>
+</ul>
+<h4>Kafka Consumers - Reading Data from Kafka</h4>
+<p>
+One use case is reading messages in a Kafka topic, running validations, and writing the results somewhere else.
+You have consumers in consumer groups subscribe to topics.  A partition can only be read by one consumer at a time, 
+so having too few partitions can become a bottleneck.  You want lots of partitions and consumers.  Two consumer groups
+can read the same topic at the same time, and Kafka scales well with many consumers/consumer groups.
+Some reasons partitions may be reassigned include if new partitions are created, new consumers are added, or a consumer errors out.
+Consumers poll for messages and sends out a heartbeat, if no heartbeat is heard for long enough, the consumer is assumed dead.
+You create a KafkaConsumer similar to a producer, with the five main properties, bootstrap.servers, key.serializer, value.serializer, schema registry, and group.id for the consumer group.
+Next you can subscribe to a topic with code like this:
+</p>
+<p class="coding">
+consumer.subscribe(Collections.singletonList("customerCountries"));<br>
+// subscribe to topics with this code:<br>
+consumer.subscribe("test.*");
+</p>
+<p>
+Consumers keep calling poll() to show that they still have a heartbeat.  Poll() gives them ConsumerRecords.
+Consumers should be closed when done.  One consumer per thread.
+When a consumer is done with records from a poll() it commits that it is done.
+There are safe ways of processing records only once, this would involve committing after every message and simultaneously processing and committing at the same time.
+Kafka offers "at-least once delivery" if you need "exactly once delivery" you will need an external data store that has a transaction model.
+Another concern is closing the consumer when done.
+</p>
+
+<h4>Reliable Data Delivery</h4>
+<p>
+Every producer/consumer of Kafka must think about reliable data delivery; systems that integrate
+with Kafka are as important to consider as Kafka itself.  Reliability is built into Kafka.
+You must throughly test that the system is reliable.
+Kafka has configurations for high throughput, low latency, and low hardware costs, but with the tradeoff of being less reliable.
+Replication factor of 3 is recommended (Data is stored three times total).
+Each replication is in a different broker, but you can be safer by considering rack level misfortune.
+Use broker.rack configuration and Kafka will try to replicate more across different racks.
+If a leader is no longer available, election for a new leader is done without loss of data.
+Set unclean.leader.election.enable to false if data quality and consistency is critical, it will wait until the leader
+comes back online when replicas of the leader are out of sync (they can't replace the leader without loss of data).
+</p>
+
+<h4>Building Data Pipelines</h4>
+<p>
+Kafka acts as an interface between producers and consumers.
+There are generally two types of pipelines:
+</p>
+<ol>
+	<li>Kafka is one of two endpoints: Kafka to S3 or MongoDB into Kafka</li>
+	<li>Kafka is an intermediate step: Twitter to Kafka, Kafka to ElasticSearch</li>
+</ol>
+<p>
+Generally the most important considerations when making a pipeline are:
+</p>
+<ul>
+	<li>Timeliness - Time from event to arrival of data.</li>
+	<li>Reliability - unimportant, at-least once delivery, or only once delivery.</li>
+	<li>Throughput - High vs varying; adapting if throughput suddenly increases.  You can scale with more producers or consumers.</li>
+	<li>Security - Encrypted data that leaves the datacenter, who is allowed to modify the pipeline, authentication at read/write access at controlled locations.</li>
+</ul>
+<p>
+You should either use "producer and consumer" or Kafka Connect.
+"producer and consumer" is used by developers as seen earlier.  Kafka Connect
+can be used by non-developers, it pulls data in from a source and it pushes data out to a source.  
+Kafka Connect is recommended and comes with Kafka.
+</p>
+<p>
+It is recommended to run Kafka Connect on separate servers from Kafka brokers.
+start script:
+</p>
+<p class="coding">
+bin/connect-distributed.sh config/connect-distributed.properties
+</p>
+<p>
+Configurations include bootstrap.servers - brokers Connect will work with (Try to list at least three brokers in the cluster),
+group.id - all workers with the same group id are part of the same Connect cluster,
+key.converter and value.converter (set the converter that will be stored in Kafka) can be set as AvroConverter for Schema Registry and are JSON by default.
+To use a schema you need to configure the schema registry location with 
+key.converter.schema.registry.url and value.converter.schema.registry.url.
+To check if workers and the cluster are up, use this command:
+</p>
+<p class="coding">
+gwen$ curl http://localhost:8083
+</p>
+<p>
+To check what connector plugins are available:
+</p>
+<p class="coding">
+gwen$ curl http://localhost:8083/connector-plugins
+</p>
+<p>
+The book explains in more depth how to use Kafka Connect.
+</p>
+<p>
+
+</p>
+
+
+
+<h2><a id="pentaho">Pentaho</a></h2>
+<h3>Beginning Pentaho (Is this title correct)?</h3>
+
+
+
+
+<h2><a id="hbase">HBase</a></h2>
+<blockquote><p>HBase is a key value store.</p></blockquote>
+<h3>Architecting HBase Applications</h3>
+<h4>What is HBase?</h4>
+<p>
+HBase "is the Hadoop database, a distributed, scalable, big data store".
+</p>
+<p>
+HBase requires Zookeeper to monitor the health of its servers
+and a filesystem like HDFS or Amazon S3.
+</p>
+<p>Features of HBase</p>
+<ul>
+<li>It has near real-time random reads and random writes.</li>
+<li>It has automatic sharding</li>
+<li>You can use Avro (serialization/schema registry)</li>
+<li>Uses replication</li>
+<li>Compression</li>
+<li>Load balancing</li>
+<li>Flexible data model (I think this means schema)</li>
+</ul>
+<p>Some limitations are</p>
+<ul>
+<li>HBase does not replace RDBMS</li>
+<li>HBase is not a transactional database</li>
+<li>HBase doesn&#39;t have a SQL API</li>
+</ul>
+<p>
+HBase is column oriented (RDBMS are row oriented), which allows quick deployment and iteration on
+datasets.  To create a table, specify only the table name and column families.
+</p>
+<h4>HBase Principles</h4>
+<p>
+HBase has two types of tables, systems tables which hold meta information (never need to worry about these), and
+user tables.  User tables are stored in namespaces.  A row is found because the key is the same for all values in the
+column families.  A cell is a column and a key.  
+You're allowed to have multiple versions of a cell, which includes a timestamp.
+</p>
+<blockquote></p>It is possible to have millions of columns with dynamically created names, where columns names are different between all the rows.</p></blockquote>
+<p>
+I think of databases as a collection of rows, and HBase as a collection of cells, making it more flexible.
+A table is made up of region(s), and a region is made up of column families,
+and a column family is made up of a store, and a store has HFiles and one Memstore.
+</p>
+<p>
+Regions are used for scalability; it allows HBase to distribute data over multiple servers.
+The loadbalancer helps move the load evenly in the cluster.  Separate frequently changing information
+from rarely changed information into different column families.  You can group similar format information into
+the same column family.  Almost always use one column family, otherwise use two column families (most cases cap it at 2).
+For example, all text information could be stored in column family one, and images in column family two.
+HFiles are created when memstores are full and must be flushed to disk, and these are compacted over time.
+HFiles are stored in HDFS, so they can benefit from Hadoop persistence and replication.
+Keep the default block size, blocks are inside HFiles and are 64 KB by default.
+The same column can be stored in different files in HDFS.  This is an HBase cell (Tags are optional):
+</p>
+<p>
+<img src="../../../resources/Medium_Images/hbase_cell.jpg" class="center">
+</p>
+<p>
+It is recommended to turn off automatic major compaction and to run it yourself using a cron job to avoid peak hours.
+Spread the compactions over the whole week, not during one day.
+Set it so you only compact files if the number of files exceeds X or if the age of the files
+are too old.  A split is the opposite of a compaction and could cause problems and is something to keep in mind.
+Every five minutes HBase Master will run a load balancer to ensure that all RegionServers are
+managing and serving a similar number of regions.
+</p>
+<h4>HBase Roles</h4>
+<p>
+Master: HMaster, NameNode, and ZooKeeper<br>
+Worker: RegionServer and DataNode
+</p>
+<p>
+There is one active master on a single cluster.  A master is responsible for
+region assignment, load balancing, RegionServer recovery, region split completion monitoring,
+and tracking active and dead servers.  A RegionServer is the application
+hosting and serving the HBase regions.  You should run this at most once on a computer.
+</p>
+<p>
+There is a REST server API.  Used with HTTP calls like curl.  Formats are:
+</p>
+<ul>
+<li>text/plain</li>
+<li>text/xml</li>
+<li>application/octet-stream</li>
+<li>application/x-protobuf</li>
+<li>application/protobuf</li>
+<li>application/json</li>
+</ul>
+<p>
+We can create a simple table like this:
+</p>
+<p class="coding">
+create 't1', 'f1'<br>
+put 't1', 'r1', 'f1:c1', 'val1'
+</p>
+<p>
+We can request XML now:
+</p>
+<p class="coding">
+curl -H "Accept: text/xml" http://localhost:8080/t1/r1/f1:c1
+</p>
+<p>
+That command might return dmFsMQ==.
+The results are base64 encoded and can be decoded with:
+</p>
+<p class="coding">
+$ echo "dmFsMQ==" | base64 -d.<br>
+val1
+</p>
+<p>
+If you don't want to decode the base64 values, you can use this:
+</p>
+<p class="coding">
+curl -H "Accept: application/octet-stream" http://localhost:8080/t1/r1/f1:c1
+</p>
+
+<h3>HBase Ecosystem</h3>
+<p>
+Use Cloudera Manager or Apache Ambari to deploy, monitor, and manage the full Hadoop suite.
+Monitoring is extremely important with distributed systems without support help.
+Cloudera Manager (CM) makes it trivial to set up a Hadoop cluster.
+There are impressive charts and graphs built into CM, and you can also run SQL-like
+language called Tsquery to make custom graphs, charts, and dashboards.
+Distributed log search is a useful CM tool that will look at numerous nodes and return logs.
+SQL on Hadoop plays an important role in Big Data and modern Business Intelligence.
+SQL on Hadoop choices: Apache Pheonix, Apache Trafodion, Splice Machine, Kylin, Themis, Tephra, Hive, and Impala.
+Impala and Hive have slow queries.
+Pheonix leverages HBase coprocessors, range scans, custom filters, and secondary indexes.  
+Pheonix has an index for you whether you have a read heavy or write heavy workload.
+</p>
+<p>
+Hannibal is for visualization of internals of HBase such as information about regions; Hannibal
+is no longer developed and works for HBase 0.98 and earlier.
+</p>
+<p>
+One framework is OpenTSDB which handles time series data with a cool UI out of the box.
+Kite is a framework to optimize storage and performance efficiency.  Kite offers an easy
+way to load data into a cluster.  It can save code writing for writing data into Hadoop.
+HappyBase makes HBase work for Python.  AsyncHBase is the last framework which
+gives better throughput and performance if your data can be processed asynchronously 
+(asynchronous means a process runs after something else flags that it is completed).
+I don't quite understand other aspects, and it handles time series data like OpenTSDB.
+</p>
+
+<h3>HBase Sizing and Tuning Overview</h3>
+<p>
+Consider how much strain and how much memory you will need when deciding
+cluster size and hardware.  Get lots of cheap computers.
+Get 25 to 50 GB of memory per node (8-16 for OS, 2-4 for DataNode, 12-24 for HBase, rest for YARN)
+Having 256 GB or more RAM is good for read heavy needs.  Mid-range speed and low core count.
+Don't use SSD storage, it is too expensive.  I think it recommends getting low end
+dual dodeca core (dual 12 core) processors.  Need 1 to 10 Gigabit Ethernet for networking.
+Must set OS Kernal swappiness to 0 or 1 depending on OS (to turn it off; ore partition size to 0 could turn it off).
+Newer versions of Hadoop require YARN.  There are settings you must use or consider.
+Tune HBase based on which you think are most important: reads, writes, or mixed.
+Use the hardware available at the time, use Ethernet for networking, use basic math for a guess, and then do tests and tuning to get started.
+Afterwards, Hadoop and HBase scale linearly, so it becomes more predictable what is required once you get started.
+</p>
+
+<h3>Using HBase</h3>
+<p>
+The easiest way to get started with HBase is to use VirtualBox for a virtual machine and the Cloudera-quickstart-vm.
+You first check if HBase is running with the commands "hbase shell" and "status".  It should appear working, if not it has
+started to work after shutting down and restarting the VM.
+To use the code examples in the book, install Intellij (README included in the Intellij download).  Be sure to install the Scala plugin as it starts up.
+Then download the GitHub page to a folder with the command "git clone https:..." where this url is given on GitHub.
+Then go to Help > Import Projects and import the folder as a Maven project.  The pom.xml comes with the project and handles dependencies.  You may need
+to add it as a Maven project, which is done by the "Maven Projects" button on the right edge of Intellij (add the pom.xml).
+</p>
+<p>
+Go to the Cloudera Manager site (bookmarked on the Cloudera Quickstart VM).  Login with username cloudera and password cloudera.  Start up or restart
+Zookeeper, HDFS, and HBase.  Visit the HBase tab and go to Actions (top right corner) > Download config files.  Send them to your computer out of the VM.
+The configuration files point to the VM, so you can program locally and use the VM for the HBase server.
+</p>
+
+<h3>Use Cases</h3>
+<h4>An Example</h4>
+<p>
+Applications are often drastically different from one another, but here is one example.  The end senario is having an application able to query
+from Impala, HBase, and Solr all which are within HDFS.  HDFS is the primary storage system for Hadoop applications.  Impala is for SQL and aggregations,
+HBase is for viewing the raw records, and Solr is useful for allowing the user to use English to find information from the data.  Impala and Solr and
+built using the HBase data.  Data is fed into HBase from Avro Schemas.  Before that, an ETL job moves data from HDFS to Avro.  Data originally got into 
+HDFS by loading in XML and flat files using the HDFS API.
+</p>
+<p>
+Impala allows the user to look at key performance indicators (KPIs).  The user can select the KPIs they want split out in different ways.
+The application should have a date range, filter choices, facet choices, and options for scheduling the KPI or adding it to a dashboard.
+The default facet should be a time series, with other charts available.
+</p>
+
+<h2><a id="spark">Spark</a></h2>
+
+
+
+
+
+<h2><a id="elastic_search">ElasticSearch</a></h2>
+<h3>Getting Started</h3>
+<p>
+<a href="https://www.youtube.com/watch?v=XQrvYqcg4Uw">install</a> <br>
+<a href="https://www.youtube.com/watch?v=ksTTlXNLick">tutorial</a>
+</p>
+<p>This command might help install ElasticSearch</p>
+<p class="coding">
+brew info elasticsearch
+</p>
+
+
+<h3>Use <a href="https://www.elastic.co/guide/en/elasticsearch/guide/current/running-elasticsearch.html">Kibana Sense:</a></h3>
+<p>
+You can start one or many ElasticSearch instances, so they will work as a cluster with the first command below.
+Start ElasticSearch, Kibana, and open Kibana with these three commands:
+</p>
+<p class="coding">
+./elasticsearch<br>
+./bin/kibana while in kibana folder
+put this in the browser http://localhost:5601/app/sense<br>
+</p>
+
+<h3>Elasticsearch: The Definitive Guide (Notes from the Guide)</h3>
+<h4>Basics</h4>
+<blockquote><p>ElasticSearch is text analysis beyond just sentiment analysis.</p></blockquote>
+<p>All of these notes and topics are covered in greater detail in the documentation.</p>
+
+<p>
+Like most persistant storage technologies, the primary commands are CRUD (Create, Read, Update, and Delete).
+Other commands are bulk create and multi-search.
+When reading from ElasticSearch, all replicas are equally able to service your request.  Commands that create, update, or delete will have to
+go through the primary shard first and make the change, then the changes are propogated to replicas as a single transaction.  Updates won't occur until enough of the shards are ready for the replication.  To avoid data integrity issues
+from two updates interfering with each other, the version is checked to make sure the version hasn't changed.
+
+<h4>Curl to do a bulk upload</h4>
+<p class="coding">
+curl -XPOST 'http://localhost:9200/_bulk?pretty' --data-binary @./example_bulk.json
+</p>
+<p>
+Bulk uploads are parsed by new lines. The master node will group the requests to each shard together and send them to the primary shards. A multi-get will be sent to any replica or primary shard once requests are grouped by shard; the main idea for these is to spread the work to nodes in a round-robin type of way (equal share of work in turn).</p>
+</p>
+<p>Auto generation of _id is good. Sometimes you want your own _ids, for instance if you want to keep track of what makes a document unique.</p>
+
+<h4>Simple Searches</h4>
+<p>
+The most basic search is:
+</p>
+<p class="coding">
+GET /_search<br>
+</p>
+<p>You can specify a maximum time before returning the results gathered so far; if speed is important. This doesn&rsquo;t abort long running queries</p
+<p class="coding">
+GET /_search/timeout=10ms</p>
+
+<p>Two searches, the URL one and the JSON DSL. The query-string parameters searched for are optional and results are sorted by relevance. Using a + or - prefix makes a query-string parameter required or not allowed. There is a way to see how each field is treated, to see if it is a String, date, long, etc.<br>
+Rules:</p>
+
+<ul>
+<li>use _search?q=</li>
+<li>use field:value if you want to search a field. If this isn&rsquo;t a string it might use exact value search.</li>
+<li>use value if you want to search _all text. _all is always a string and use full-text search.</li>
+<li>use +field:value OR +value to require something</li>
+<li>use -field:value OR -value to exclude something</li>
+<li>the query-string can use + to replace space. The symbols +,-, :, and > are replaced with +, -, :, and ></li>
+<li>Use parentheses and a space to specify &ldquo;OR&rdquo; for the value. (i.e. (aggregation+geo))</li>
+<li>Greater than a date is date:>2015-05-05, using the > symbol; don&rsquo;t replace the dashes with - here.</li>
+<li>It is not advised to use the query-string parameters in production to users</li>
+</ul>
+<h1>Need to clean up notes below; preferably when ElasticSearch is needed and it can be a review while formatting</h1>
+<h4>Mapping and Analysis</h4>
+<p>
+Some fields are indexed as full text, others are different data types. This affects matching in queries.<br>
+Inverted index: very fast searched by listing unique words<br>
+We probably want to treat synonyms, plural/singular/same root word, and capitalization differences as the same word.<br>
+So we index it as if Quick is quick, foxes is fox, and jumped/leaped are indexed as jump.<br>
+We call this normalization. We must apply the same rules to the search parameters for this to work.<br>
+This is called analysis</p>
+
+<p>Analysis<br>
+1) clean up text 2) tokenize them by whitespace or punctuation 3) clean up the tokens with token filters which change the tokens (i.e. Quick to quick). <br>
+This is built in and customizable.<br>
+Maybe spell-check will want to be used for #3 too.</p>
+
+<p>Analyzers<br>
+Language Analyzers look really good. They remove common words like &ldquo;the&rdquo;, keeps the root of words, and uses lowercase. Here is a list of languages we can have this work for.</p>
+
+<p>When you query a full-text field, the query will apply the same analyzer to the query string to produce the correct list of terms to search for.<br>
+When you query an exact-value field, the query will not analyze the query string, but instead search for the exact value that you have specified.</p>
+
+<p>Testing Analyzers<br>
+Use the _analyze API to learn how the text is tokenized and stored.</p>
+
+<p>The standard analyzer is used by default for Strings, and they will be searched with full-text. Sometimes you want a string to be exact match.</p>
+
+<p>For fields other than string fields, you will seldom need to map anything other thantype:</p>
+
+<p>Fields of type string are, by default, considered to contain full text. That is, their value will be passed through an analyzer before being indexed, and a full-text query on the field will pass the query string through an analyzer before searching.</p>
+
+<p>The two most important mapping attributes for string fields are index and analyzer.</p>
+
+<p>You can specify the mapping for a type when you first create an index. Alternatively, you can add the mapping for a new type (or update the mapping for an existing type) later, using the /_mapping endpoint.</p>
+
+<p>View the mapping with<br>
+GET gb/_mapping/tweet (where gb is index and tweet is type)<br>
+Anything but String, you just need to specify the type in most cases<br>
+Strings have type, index, and analyzer;<br>
+ type is string<br>
+ index is analyzed, not_analyzed, or no (analyzed by default)<br>
+ analyzer is the type of analyzer (For analyzed chosen as index)<br>
+Can&rsquo;t go from analyzed to not analyzed without dropping the index</p>
+
+<p>The goal of filtering is to reduce the number of documents that have to be examined by the scoring queries.</p>
+
+<p>Filter is yes/no keep or remove. Scoring takes longer to run; scoring is related to how many matches, how close the words are together, uses analysis to map similar words as the same word.</p>
+
+<p>Query clauses are for full text searches and filters are used for everything else</p>
+
+<p>Some important words<br>
+bool; must, must_not, should, filter.</p>
+
+<p>
+Important things to configure:<br>
+shards, replicas, analyzer in that order</p>
+
+<p>
+All of these notes and topics are covered in greater detail in the documentation.<br>
+Elasticsearch: The Definitive Guide<br>
+Intuition<br>
+Some commands are: Create, Search, Update, Delete, multi-search, bulk create/update/delete</p>
+
+<p>Searches don&rsquo;t have to be done by the primary shard. Other commands are sent to the primary shard and then sent to replicas. To avoid threading type errors, the update statements will check the version, and when updating it will make sure this version hasn&rsquo;t changed; if it has it will retry a certain number of times. Updates are processed when enough of that shard are free on enough nodes, it will wait by default 1 minute to see if that shard is free on enough nodes before failing.</p>
+
+<p>Curl to do a bulk upload<br>
+curl -XPOST 'http://localhost:9200/_bulk?pretty' --data-binary @./example_bulk.json<br>
+Bulk uploads are parsed by new lines. The master node will group the requests to each shard together and send them to the primary shards. A multi-get will be sent to any replica or primary shard once requests are grouped by shard; the main idea for these is to spread the work to nodes in a round-robin type of way (equal share of work in turn).</p>
+
+<p>Auto generation of _id is good. Sometimes you want your own _ids, for instance if you want to keep track of what makes a document unique.</p>
+
+<p>Searches<br>
+The most basic search<br>
+GET /_search<br>
+You can specify a maximum time before returning the results gathered so far; if speed is important. This doesn&rsquo;t abort long running queries<br>
+GET /_search/timeout=10ms</p>
+
+<p>Simple Searches</p>
+
+<p>Two searches, the URL one and the JSON DSL. The query-string parameters searched for are optional and results are sorted by relevance. Using a + or - prefix makes a query-string parameter required or not allowed. There is a way to see how each field is treated, to see if it is a String, date, long, etc.<br>
+Rules:<br>
+1) use _search?q=<br>
+2) use field:value if you want to search a field. If this isn&rsquo;t a string it might use exact value search.<br>
+3) use value if you want to search _all text. _all is always a string and use full-text search.<br>
+4) use +field:value OR +value to require something<br>
+5) use -field:value OR -value to exclude something<br>
+6) the query-string can use + to replace space. The symbols +,-, :, and > are replaced with %2B, %2D, %3A, and %3E<br>
+7) Use parentheses and a space to specify &ldquo;OR&rdquo; for the value. (i.e. (aggregation+geo))<br>
+8) Greater than a date is date:>2015-05-05, using the > symbol; don&rsquo;t replace the dashes with %2D here.<br>
+9) It is not advised to use the query-string parameters in production to users</p>
+
+
+<p>Mapping and Analysis<br>
+Exact values vs full text<br>
+Some fields are indexed as full text, others are different data types. This affects matching in queries.<br>
+Inverted index: very fast searched by listing unique words<br>
+We probably want to treat synonyms, plural/singular/same root word, and capitalization differences as the same word.<br>
+So we index it as if Quick is quick, foxes is fox, and jumped/leaped are indexed as jump.<br>
+We call this normalization. We must apply the same rules to the search parameters for this to work.<br>
+This is called analysis</p>
+
+<p>Analysis<br>
+1) clean up text 2) tokenize them by whitespace or punctuation 3) clean up the tokens with token filters which change the tokens (i.e. Quick to quick). <br>
+This is built in and customizable.<br>
+Maybe spell-check will want to be used for #3 too.</p>
+
+<p>Analyzers<br>
+Language Analyzers look really good. They remove common words like &ldquo;the&rdquo;, keeps the root of words, and uses lowercase. Here is a list of languages we can have this work for.</p>
+
+<p>When you query a full-text field, the query will apply the same analyzer to the query string to produce the correct list of terms to search for.<br>
+When you query an exact-value field, the query will not analyze the query string, but instead search for the exact value that you have specified.</p>
+
+<p>Testing Analyzers<br>
+Use the _analyze API to learn how the text is tokenized and stored.</p>
+
+<p>The standard analyzer is used by default for Strings, and they will be searched with full-text. Sometimes you want a string to be exact match.</p>
+
+<p>For fields other than string fields, you will seldom need to map anything other thantype:</p>
+
+<p>Fields of type string are, by default, considered to contain full text. That is, their value will be passed through an analyzer before being indexed, and a full-text query on the field will pass the query string through an analyzer before searching.</p>
+
+<p>The two most important mapping attributes for string fields are index and analyzer.</p>
+
+<p>You can specify the mapping for a type when you first create an index. Alternatively, you can add the mapping for a new type (or update the mapping for an existing type) later, using the /_mapping endpoint.</p>
+
+<p>View the mapping with<br>
+GET gb/_mapping/tweet (where gb is index and tweet is type)<br>
+Anything but String, you just need to specify the type in most cases<br>
+Strings have type, index, and analyzer;<br>
+ type is string<br>
+ index is analyzed, not_analyzed, or no (analyzed by default)<br>
+ analyzer is the type of analyzer (For analyzed chosen as index)<br>
+Can&rsquo;t go from analyzed to not analyzed without dropping the index</p>
+
+<p>The goal of filtering is to reduce the number of documents that have to be examined by the scoring queries.</p>
+
+<p>Filter is yes/no keep or remove. Scoring takes longer to run; scoring is related to how many matches, how close the words are together, uses analysis to map similar words as the same word.</p>
+
+<p>Query clauses are for full text searches and filters are used for everything else</p>
+
+<p>Some important words<br>
+bool; must, must_not, should, filter.</p>
+
+<p>
+Important things to configure:<br>
+shards, replicas, analyzer in that order</p>
+
+<p></p>
+
+<p>Do a bulk with this<br>
+curl -XPOST http://127.0.0.1:9200/myindexname/type/_bulk?pretty=true --data-binary @myjsonfile.json</p>
+
+<p>Format data with search/replace OR see the comment about JQ here http://stackoverflow.com/questions/20646836/is-there-any-way-to-import-a-json-filecontains-100-documents-in-elasticsearch</p>
+
+<p>Use this code to do a bulk upload<br>
+curl -XPOST http://127.0.0.1:9200/myindexname/type/_bulk?pretty=true --data-binary @myjsonfile.json</p>
+
+<p>Use this Java code to format CSV to ElasticSearch</p>
+
+<p>package ElasticSearch.ElasticSearch;</p>
+
+<p>import java.io.BufferedReader;<br>
+import java.io.BufferedWriter;<br>
+import java.io.File;<br>
+import java.io.FileNotFoundException;<br>
+import java.io.FileReader;<br>
+import java.io.FileWriter;<br>
+import java.io.IOException;<br>
+import java.io.PrintWriter;</p>
+
+<p>import org.apache.commons.lang3.StringUtils;</p>
+
+<p>public class App {</p>
+
+<p>public static void main(String[] args) {</p>
+
+<p>File inputFile = new File(&quot;/Users/peterjmyers/Documents/No_Backup_Needed/elasticsearch-2.4.1/Projects/Media Partners/media_partners.csv&quot;);<br>
+File outputFile = new File(&quot;/Users/peterjmyers/Documents/No_Backup_Needed/elasticsearch-2.4.1/Projects/Media Partners/media_partners_output.json&quot;);</p>
+
+<p>String[] headerArray = new String[30];</p>
+
+<p>try {<br>
+PrintWriter setOutput = new PrintWriter(new BufferedWriter(new FileWriter(outputFile)));</p>
+
+<p>BufferedReader getInput = new BufferedReader(<br>
+new FileReader(inputFile));</p>
+
+<p>String header = getInput.readLine();</p>
+
+<p>headerArray = header.split(&quot;,&quot;);</p>
+
+<p>for (String element : headerArray) {<br>
+System.out.println(element);<br>
+}</p>
+
+<p>String line = getInput.readLine();<br>
+String wholeLine = &quot;&quot;; // this is the whole line, which might span different lines in the document<br>
+String[] columnValues;<br>
+int commasOnLine = 0;<br>
+// int j=0;</p>
+
+<p>while(line != null){<br>
+while (true) { // this loop is meant to build the whole line<br>
+wholeLine = wholeLine + line; // build the whole line<br>
+commasOnLine += StringUtils.countMatches(line,&quot;,&quot;); // check commas so far<br>
+if (commasOnLine < headerArray.length - 1) { // if more commas need to be found<br>
+line = getInput.readLine();<br>
+} else { // else we're done with the line<br>
+break;<br>
+}<br>
+}<br>
+columnValues = wholeLine.split(&quot;,&quot;);<br>
+// Update output<br>
+setOutput.println(&quot;{ \&quot;create\&quot;: { \&quot;_index\&quot;: \&quot;ir\&quot;, \&quot;_type\&quot;: \&quot;media_partners\&quot; }}&quot;);<br>
+setOutput.print(&quot;{&quot;);</p>
+
+<p>for (int i=0; i<headerArray.length; i++) {<br>
+if(i!=0) {<br>
+// Update output<br>
+setOutput.print(&quot;, &quot;);<br>
+}<br>
+// Update output<br>
+setOutput.print(&quot;\&quot;&quot; + headerArray[i] + &quot;\&quot;: &quot;);<br>
+setOutput.print(&quot;\&quot;&quot; + columnValues[i] + &quot;\&quot;&quot;);<br>
+//System.out.println(&quot;i = &quot; + i);<br>
+}</p>
+
+<p>// Update output<br>
+setOutput.println(&quot;}&quot;);<br>
+line = getInput.readLine();<br>
+//System.out.println(j++);<br>
+commasOnLine = 0; // reset the comma count for the next iteration<br>
+wholeLine = &quot;&quot;; // reset the whole line for the next iteration<br>
+}</p>
+
+<p>
+} catch (FileNotFoundException e) {<br>
+System.out.println(&quot;File was not found&quot;);<br>
+e.printStackTrace();<br>
+} catch (IOException e) {<br>
+System.out.println(&quot;An I/O Error Occurred&quot;);<br>
+e.printStackTrace();<br>
+}</p>
+
+<p>System.out.println(&quot;done&quot;);<br>
+}</p>
+
+<p>}</p>
+
+<p>
+GET /_analyze<br>
+{<br>
+ &quot;analyzer&quot;: &quot;english&quot;,<br>
+ &quot;text&quot;: &quot;All these are the beginning of sorrows.&quot;<br>
+}</p>
+
+<p>#Check all mappings<br>
+GET /_mapping</p>
+
+<p>
+GET /bible/_search<br>
+{<br>
+ &quot;size&quot;: 0,<br>
+ &quot;aggs&quot;: {<br>
+ &quot;popular_words&quot;: {<br>
+ &quot;terms&quot;: {<br>
+ &quot;field&quot;: &quot;verse&quot;<br>
+ }<br>
+ }<br>
+ }<br>
+}</p>
+
+
+<h2 id="#hdfs">HDFS</h2>
+<p>
+
+</p>
+
+
+<h2 id="#using_kafka">Using Kafka</h2>
+<h2 id="#using_cloudera">Using Cloudera</h2>
+
+
+
+
+
+
+
+
+
+
+
+</div> <!-- jumbotron -->
+
+</div> <!-- container -->
+
+<div id="footer">
+© 2017
+</div>
+
+</div>  <!-- allcontent -->
+
+
+<script type="text/javascript"
+  src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
