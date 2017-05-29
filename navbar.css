@@ -1,5 +1,5 @@
 .navbar-brand {
-    float: none;
+    float: right;
     padding: 5px;
 }
 .navbar-center {
@@ -14,7 +14,7 @@
 
 #logo {
 position: absolute;
-top: -50px;
+top: -20px;
 }
 
 h2 {
