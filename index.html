@@ -67,59 +67,60 @@ Solve a problem, then work on a new problem.</p>
 
 
 <h2>Useful Skills to Learn</h2>
-<p>novice, competence, proficiency, expertise, and mastery</p>
-<p>Don't bother with expertise or mastery, you will soon forget it if it isn't used.  There is more utility in becoming competent or proficient with the essentials.</p>
-<h4>Current Goal: Become proficient in all green topics</h4>
+<p>Rank 1 to 10, where 10 is knowing enough to use it competently.  Green text seem to be the most important topics.</p>
+<h4>Current Goal: Have rank 10 on the ones I want to use</h4>
 <h3>Common</h3>
 <p class="text-warning">
 <span class="text-success">
-SQL - proficiency<br>
-Python - novice<br>
-Data Pipelines - novice<br>
-Data Warehouse - competence<br>
-Hadoop - novice<br>
-ETL - novice<br>
-Java - competence<br>
-Scala - competence<br>
-Statistics - competence<br>
+SQL - 10<br>
+Python - 4<br>
+Data Pipelines - 4<br>
+Data Warehouse - 5<br>
+Hadoop - 2<br>
+ETL - 5<br>
+Java - 6<br>
+Scala - 6<br>
+Statistics - 4<br>
 </span>
-R - competence<br>
-MapReduce - novice<br>
-Ruby - novice<br>
-Data Quality - novice<br>
-JavaScript - novice<br>
-UNIX Scripts - novice<br>
-Visio Diagrams - novice<br>
+R - 5<br>
+MapReduce - 3<br>
+Ruby - 1<br>
+Data Quality - 5<br>
+JavaScript - 4<br>
+UNIX Scripts - 1<br>
+Visio Diagrams - 1<br>
 </p>
 <h3>Producers</h3>
 <p class="text-success">
-Kafka - novice<br>
+Kafka - 3<br>
 </p>
 <h3>Storage Topics</h3>
 <p class="text-warning">
 <span class="text-success">
-AWS - novice<br>
-NoSQL - novice<br>
-MySQL - competence<br>
+AWS - 1<br>
+MySQL and SQLite (Python API) - 7<br>
+Elasticsearch (Python API) - 5<br>
+Redis (Python API) - 2<br>
+Memcached (Python API) - 2<br>
+MongoDB (Python API) - 1<br>
+Cassandra (Python API) - 1<br>
 </span>
-Redshift  - novice<br>
-Vertica - novice<br>
-MongoDB<br>
-Cassandra<br>
-Elasticsearch<br>
-Bigquery<br>
-Snowflake<br>
+HBASE - 1<br>
+Redshift  - 1<br>
+Vertica - 1<br>
+Bigquery - 1<br>
+Snowflake - 1<br>
 </p>
 <h3>Consumers</h3>
 <span class="text-success">
-Hive - novice<br>
-Spark - novice<br>
-</<span>
+Hive - 1<br>
+Spark - 3<br>
+</span>
 <h3>Orchestration Tools</h3>
 <p class="text-warning">
-<span class="text-success">Luigi - novice<br></span>
-Celery - novice<br>
-Airflow - novice<br>
+<span class="text-success">Luigi - 2<br></span>
+Celery - 1<br>
+Airflow - 1<br>
 </p>
 
 <h2>Repeatable Project Steps</h2>
@@ -138,6 +139,18 @@ Airflow - novice<br>
 <li>	Monitor Scheduled ETL Jobs</li>
 <li>	Documentation in README (Title, executive summary, example, features, installation, support, FAQ)</li>
 </ol>
+
+
+<h2>Using MySQL Instead of NoSQL With Lots of Data</h2>
+<p>
+Based on advice from the <a href="https://www.wix.engineering/single-post/scaling-to-100m-mysql-is-a-better-nosql">Wix</a> site.
+</p>
+<ul>
+	<li>Use simple queries</li>
+	<li>Keep redundant data</li>
+	<li>Fields are either text blobs or indexed</li>		
+	<li>Don't use transactions</li>			
+</ul>
 
 <h2>Nice to Know about Data Store</h2>
 <ol class="text-warning">
