@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- 
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Peter Myers - Notes">
   <meta name="keywords" content="Blog,Programming">
@@ -47,6 +47,7 @@
 	<li>Head First HTML/CSS</li>
 	<li><a href="https://www.youtube.com/watch?v=gqOEoUR5RHg">Bootstrap Tutorial</a></li>
 	<li>Beginning JavaScript</li>
+  <li>Treehouse Website Lectures</li>
 </ul>
 <h1>JavaScript/HTML/CSS</h1>
 
@@ -82,7 +83,7 @@
 </ol>
 
 <h3>Some Main Hypertext Elements</h3>
-	
+
 <ul>
 <li>&#x3C;q&#x3E; and &#x3C;blockquote&#x3E; are quote tags</li>
 <li>&#x3C;a&#x3E; hyperlink</li>
@@ -276,10 +277,10 @@ Text and background should have a high contrast for readability, like black and 
 
 <h4>Precedence</h4>
 <p>
-The id attribute is similar to class.  To select an id use # instead of a period.  CSS stands for cascading style sheets because the rules override each other in a 
+The id attribute is similar to class.  To select an id use # instead of a period.  CSS stands for cascading style sheets because the rules override each other in a
 cascading way.  If two rules update the same attribute, the most specific selector will override; if there is a tie, the last rule defined in the stylesheet(s) overrides it.
-So you may want to put a certain stylesheet last in the HTML link tags to take advantage of this tie rule.  The &#x3C;link&#x3E; 
-attribute can specify if a stylesheet should be used based on the device viewing it.  The attribute is called media.  
+So you may want to put a certain stylesheet last in the HTML link tags to take advantage of this tie rule.  The &#x3C;link&#x3E;
+attribute can specify if a stylesheet should be used based on the device viewing it.  The attribute is called media.
 Place device specific stylesheets lower so they take precedence for ties.
 Typing !Important might help override also.
 Each matching id improves thr level that something is specific, if tied for the count it looks for a count of classes, then the if tied the count of elements mentioned.
@@ -309,7 +310,7 @@ Styling links based on unvisited, visited, and hover.  These are pseudo-classes
 
 <h4>Float</h4>
 <p>
-Float is considered most flexible and good for web layout.  It allows for multiple columns of content on a screen.  
+Float is considered most flexible and good for web layout.  It allows for multiple columns of content on a screen.
 To Implement, give the block a width and set it as float right or left.
 The blocks ignore it and the inline elements avoid it.  Float right will put this section on the right.  Margin is good to force the block to avoid touching the floating block.
 "Clear: right" Can be useful for a footer so it won't overlap.  It means it will allow anything flowing right to finish before it appears below it.
@@ -340,7 +341,7 @@ Table uses &#x3C;table&#x3E;&#x3C;tr&#x3E;&#x3C;th&#x3E;&#x3C;td&#x3E; the is he
 Place a summary attribute on &#x3C;table&#x3E; and put &#x3C;caption&#x3E; as the first thing in the &#x3C;table&#x3E;
 caption-side is used in CSS for title placement.
 
-Tables have padding, a border, and border spacing (which you may want to collapse with botdrr-collapse) 
+Tables have padding, a border, and border spacing (which you may want to collapse with botdrr-collapse)
 Give a color to &#x3C;th&#x3E; in CSS
 Give alternating color rows by coloring a class and giving even counted rows that class.
 These pictures show how to merge cells to span two rows.  It works the same way for columns by using colspan
@@ -410,6 +411,30 @@ Get into the habit of writing these alternative style sheets for handhelds.</li>
 </ol>
 
 <h2><a id="javascript_basics">JavaScript Basics</a></h2>
+<h3>Things to Learn</h3>
+<ul>
+  <li>Display output and console usage</li>
+  <li>Variables and Math object</li>
+  <li>"If"</li>
+  <li>Loops and Functions to follow the DRY principle (Don't repeat yourself)</li>
+  <li>Arrays and object literal CRUD and iteration</li>
+  <li>Let and Const</li>
+  <li>Shorthand arrow function syntax</li>
+  <li>DOM<ol>
+      <li>Select - Get one or many by id, tags, classes, attributes with a value, nth even/odd child, etc.</li>
+      <li>CRUD - Creating is two steps, creation and insertion into the DOM.  Set the text/HTML, attribute,
+        class, input values, properties like style.</li>
+      <li>Event Listeners - Events bubble up the DOM tree to parents.  You can put a listener on a parent and the event.target
+        references the original element.  Events include clicks, mouse movement, touchpad touches, keys pressed, load, etc.</li>
+    </ol></li>
+  <li>Traversing the DOM</li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
 <p>
 
 </p>
