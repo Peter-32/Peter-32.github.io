@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- 
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Peter Myers - Notes">
   <meta name="keywords" content="Blog,Programming">
@@ -72,7 +72,7 @@
 <h3>Intro</h3>
 <h4>Essential Basics and Definitions</h4>
 <ul>
-	
+
 	<li>Table - Has records and fields (rows/columns) similar to an Excel worksheet.</li>
 	<li>Field - A column in a table, similar to a field in an object in an OO language like Java.</li>
 	<li>Record - A row in a table, similar to an instance of an object in an OO language like Java.</li>
@@ -222,12 +222,12 @@ SQL has IF/ELSE IF/ELSE or switch statements using the CASE and IF keywords.  He
 SELECT IF(1>2,2,3);<br>
         -> 3    <br>
 </p>
-        
+
 <p>
 These are some date and string functions
 </p>
 <p class="coding">
-		
+
 MONTH(date1)<br>
 Returns the month of date1<br>
  <br>
@@ -251,21 +251,21 @@ mysql> SELECT CONCAT('My', NULL, 'QL');<br>
         -> NULL<br>
 mysql> SELECT CONCAT(14.3);<br>
         -> '14.3'<br>
- 
- 
- 
+
+
+
  <br>
 mysql> SELECT SUBSTRING('Quadratically',5);<br>
         -> 'ratically'<br>
 mysql> SELECT SUBSTRING('Quadratically',5,6);<br>
         -> 'ratica'<br>
- 
- 
- 
- 
+
+
+
+
  <br>
 mysql> SELECT LPAD('9',2,'0');<br>
-        -> '09'   
+        -> '09'
 </p>
 <p>
 Other important topics are:
@@ -369,8 +369,8 @@ Month to Date Cumulative Sum
   SUM(revenue) OVER(partition by MONTH(date_) order by date_<br>
     rows between unbounded preceding and current row) AS MTD_revenue
 </p>
-<h4>    
-    
+<h4>
+
 Revenue Up or Down From Yesterday
 </h4>
 <p class="coding">
@@ -379,8 +379,8 @@ Revenue Up or Down From Yesterday
   WHEN false THEN "Up"<br>
   WHEN true THEN "Down" END AS change_from_yesterday
 </p>
-<h4>  
-  
+<h4>
+
 Revenue Up or Down for Many Days
 </h4>
 <p class="coding">
@@ -409,9 +409,9 @@ Revenue Up or Down for Many Days
   CASE LEAD(revenue,4) OVER(order by date_) > revenue<br>
   WHEN false THEN "Up"<br>
   WHEN true THEN "Down" END AS change_from_next_4after
-  
+
 </p>
-<h4>  
+<h4>
 % Revenue Up or Down for Many Days
 </h4>
 <p class="coding">
