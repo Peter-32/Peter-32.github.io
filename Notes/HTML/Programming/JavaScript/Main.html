@@ -413,6 +413,29 @@ Get into the habit of writing these alternative style sheets for handhelds.</li>
 
 <h2><a id="treehouse_html_css">Treehouse HTML CSS</a></h2>
 <p>Use header, main, and footer tags to organize the html body.</p>
+<ul>
+<li>Import stylesheet</li>
+<li>Selectors (class, id, tag, descendant, and pseudo-class).  <ul>
+  <li>p.red: paragraph with class red</li>
+  <li>p .red: class red inside paragraph</li>
+  <li>p > .red: class red and direct parent (1 generation) is paragraph</li>
+  <li>p, .red: class red or paragraph</li></ul></li>
+<li>Value data types and basic styles</li>
+<li>Box model and display</li>
+<li>Width and height: relative to parent.  Width/height Padding, and border part of the total
+  width/height, so defining width/height doesn't set the total width/height.
+  To make width/height the total amount you can use: * {box-sizing: border-box;}.
+  Max and min width are available.  Maxwidth 100% on images make them rescale in size.</li>
+<li>Background images and size.  Size is the percent of the background area available.  Cover gives it a size that scales great.
+You can have it repeat horizontally, vertically, and/or no repeat.  Background color in case it doesn't load.
+Position of the image: center/top/left/percentage/etc.  Background style can define all these in one rule.</li>
+<li>Float and clear.  To make something clear give it the group class: ".group:after { content: ""; display: table; clear: both;}"
+Clear can make sure your div continues to contain a floated child.</li>
+<li>List styles</li>
+<li>Shadow, border radius, and gradient (One color to the other).  A cool affect is transitioning to the page's background color for an image.</li>
+<li>Web fonts (import new fonts from your fonts directory), letter spacing, and media queries</li>
+<li></li>
+</ul>
 
 
 <h2><a id="treehouse_javascript">Treehouse JavaScript</a></h2>
@@ -432,7 +455,7 @@ Get into the habit of writing these alternative style sheets for handhelds.</li>
       <li>Event Listeners - Events bubble up the DOM tree to parents.  You can put a listener on a parent and the event.target
         references the original element.  Events include clicks, mouse movement, touchpad touches, keys pressed, load, etc.</li>
     </ol></li>
-  <li>Traversing the DOM</li>
+  <li>Traversing the DOM - parent, children/"first/last element" child, and "next/previous element" sibling.</li>
   <li>jQuery and jQuery Plugins</li>
   <li>DOM Scripting</li>
   <li>Object Oriented and This</li>
