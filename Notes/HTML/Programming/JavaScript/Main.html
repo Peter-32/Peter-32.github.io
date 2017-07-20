@@ -438,7 +438,9 @@ Clear can make sure your div continues to contain a floated child.</li>
    You can use an if statement based on max-width if condition and the CSS to change is mainly width, padding, border (none), max-height,
    display (none), float (none), font-size, and maybe margin.  You need a meta tag to tell the device how to handle viewport sizes.
    The Chrome browser console allows you to preview simulations of different devices viewing the page. </li>
-<li></li>
+<li>Browsers and users can define rules that are most important.  After those,
+  the most specific rule is used (inline style has very high importance).  If a tie, the last rule wins.
+  Style values are inherited from parents.</li>
 </ul>
 
 
@@ -460,7 +462,13 @@ Clear can make sure your div continues to contain a floated child.</li>
         references the original element.  Events include clicks, mouse movement, touchpad touches, keys pressed, load, etc.</li>
     </ol></li>
   <li>Traversing the DOM - parent, children/"first/last element" child, and "next/previous element" sibling.</li>
-  <li>jQuery and jQuery Plugins</li>
+  <li>jQuery and jQuery Plugins.  jQuery will work consistantly across browsers with less effort.
+    jQuery code can run right away or wait for events.  The main naming convention for selected jQuery objects
+    saved as variables is to start with a $ like "$name".  You even use the dollar sign method to create a
+     new element.  There are effects like fadeIn().  Traversing - parent(), find(), prev(), next(), and siblings().
+     Traversing is very useful with "this" in events.  jQuery Plugins allows you to do things like showing videos with
+     little code.
+  </li>
   <li>DOM Scripting</li>
   <li>Object Oriented and This</li>
   <li>HTTP and AJAX</li>

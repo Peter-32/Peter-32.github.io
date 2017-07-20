@@ -1,0 +1,21 @@
+SELECT
+  account_id,
+  account_name,
+  SaaS_Paid_This_Month,
+  EXP(exponent_value_) / ( 1 + EXP(exponent_value_) ) AS estimated_probability_of_churn_in_next_three_months,
+      time_in_our_system,
+      payout_gt_10000_lm,
+      yield_rate,
+      saas_decreased_lm,
+      negative_balance_under_three_saas_payments,
+      has_a_custom_report,
+      has_5plus_custom_reports,
+      has_4plus_users,
+      has_gt_5_report_runs_30_days,
+      has_gt_300_actions_30_days,
+      has_mobile_at,
+      doe
+FROM
+  churn_alerts
+where DATE(doe) = DATE([[snapshot_date]])
+order by 4 desc,1
