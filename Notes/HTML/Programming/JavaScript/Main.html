@@ -447,7 +447,7 @@ Clear can make sure your div continues to contain a floated child.</li>
 <h2><a id="treehouse_javascript">Treehouse JavaScript</a></h2>
 <h3>Things to Learn</h3>
 <ul>
-  <li>Display output and console usage</li>
+  <li>Display output and console usage.  Put 'use strict' at the top of JS files.</li>
   <li>Variables and Math object</li>
   <li>"If"</li>
   <li>Loops and Functions to follow the DRY principle (Don't repeat yourself)</li>
@@ -472,7 +472,6 @@ Clear can make sure your div continues to contain a floated child.</li>
      Plugins will include css, javascript, and often photos.  A plugin called Sticky keeps certain elements stuck to the page even if you scroll the page; for example you can use this on
      a top navigation bar.  Carousel is good for a main page; "slick" is one of these.
   </li>
-  <li>DOM Scripting</li>
   <li>Object Oriented and This Keyword.  This: 1) The object, 2) The object literal, 3) Used in a constructor.  To make a constructor
   just make a function that sets properties or methods; The parameters are optional, and you can set defaults.
   Example object creation: "var dice = new Dice(6);"
@@ -495,9 +494,27 @@ Clear can make sure your div continues to contain a floated child.</li>
   Parse the JSON and save it as a JSON Object.  Then loop through the result objects and usually you build HTML.
   You can use jQuery for AJAX abilities with many less lines of code.  Use $.ajax().fail() and you can do everything.  The fail() is optional
   and will do something if the AJAX fails.  APIs are what you can get from a web server.  Flickr (Photos), Twitter, and Facebook are examples of sites with APIs.
-
 </li>
-  <li>ES2015</li>
+  <li>Module Pattern and Loose Modification.  The module pattern helps to avoid cluttering the global namespace.  All you do is make a self executing anonymous function.
+  This seems to be the same as packages in Java.  The loose modification is extending or creating the module, based on if it has already been loaded or not (one module on multiple files).
+  Be careful not to overwrite variables within the same module.  Sub-Module Pattern is that you can namespace a module within a module.  A sub-module is like a package directory within a
+  package and they use a period.  Modules also have import statements (code at the very end).</li>
+  <li>ES2015.  This is the largest updated to JavaScript in a while.  Use ` for multi-line strings.  Use ${} to insert variables
+  into strings.  Console.log can take multiple arguments and put it together as one string.  startsWith/endsWith methods are new and will start at an index.
+  "Includes" method checks if a string exists in a string.  You can have default parameters in constructors and methods.
+  Three dot syntax is added; this is like unlimited arguments allowed in other languages.
+  Additionally you can pass array values as separate arguments with "let args = []; myFunc(...args);".
+  Destructuring objects is assigning multiple variables at once by putting the keys on the left side of an assignment and the object on the right side; you can also rename the variables.
+  Destructuring arrays is assigning multiple variables at once from an array.  Assign remaining elements into an array with ... syntax.
+  When an object is created without values assigned, the variable name itself is the key and the value of the variable is the value in the object.
+  A better for loop: "for (let teacher of teachers)" is like the syntax in Java; there is a different syntax when looping over object properties.
+  Sets: use these by "new Set()".  Maps: use these by "new Map()" is like a set with key/values.
+  "class" keyword is new and it makes it easier to read your classes and constructors.
+  You can now "extend" classes; it is an easy to read syntax for inheritance.
+  Static functions are available with the "static" keyword.  Getters and setters is better with "get" and "set" keywords.
+  A simple way to make something private is to prefix the property with an underscore to express your intent.
+</li>
+  <li>DOM Scripting</li>
   <li>Node.js</li>
   <li>npm</li>
   <li>Gulp</li>
