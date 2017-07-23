@@ -467,11 +467,31 @@ Clear can make sure your div continues to contain a floated child.</li>
     saved as variables is to start with a $ like "$name".  You even use the dollar sign method to create a
      new element.  There are effects like fadeIn().  Traversing - parent(), find(), prev(), next(), and siblings().
      Traversing is very useful with "this" in events.  jQuery Plugins allows you to do things like showing videos with
-     little code.
+     little code.  Find them and add them to your website.  Modal dialoge boxes, listnav alphabetical navigation, video backgrounds "Vide",
+     lightboxes, jQuery user interface (UI, widgets, effects, interactions, drag/drop, tabbed panels, date picker, dialog boxes), animated transition is a good one called "animsition".
+     Plugins will include css, javascript, and often photos.  A plugin called Sticky keeps certain elements stuck to the page even if you scroll the page; for example you can use this on
+     a top navigation bar.  Carousel is good for a main page; "slick" is one of these.
+
   </li>
   <li>DOM Scripting</li>
-  <li>Object Oriented and This</li>
-  <li>HTTP and AJAX</li>
+  <li>Object Oriented and This Keyword.  This: 1) The object, 2) The object literal, 3) Used in a constructor.  To make a constructor
+  just make a function that sets properties or methods; The parameters are optional, and you can set defaults.</li>
+  <li>HTTP and AJAX.  AJAX: JavaScript makes a request to a web server, and then does something with the response.
+    Ruby on Rails, PHP, Java, or Python can be used to handle the server side part.  There are four steps to AJAX.
+  1) Create an XMLHTTP Request object. 2) Define a callback function. 3) Open a request with a) method (Usually get or post) b) URL it is sent.
+  4) Send the request.  You can right click on the console and choose log XMLHTTP Requests.  Use a POST when saving data, large amounts of data, or sending sensitive information.
+  A query string appears after the question mark in the URL and a GET sends the data in the URL.  POST additionally requires a header that gives instructions.
+  JSON is the most popular way to exchange data using AJAX.  When the client makes a request: You must stay on the same port, use the same host, use the same domain, and you can't switch between http and https (client and server).
+  1) However, you are allowed to make requests server to server (called web proxy)
+  2) another option is CDNs (called JSONP) like jQuery hosted sites.
+  3) Another option is the new CORS (cross-Origin Resource Sharing), allows a server to accept requests from other domains.
+  A local development environment with mamp for Mac allows you to use AJAX locally because AJAX requires a server.
+  Check for readyState and successful status.  Responses are usually in JSON or XML, but sometimes in HTML or plain text.
+  Parse the JSON and save it as a JSON Object.  Then loop through the result objects and usually you build HTML.
+  You can use jQuery for AJAX abilities with many less lines of code.  Use $.ajax().fail() and you can do everything.  The fail() is optional
+  and will do something if the AJAX fails.  APIs are what you can get from a web server.  Flickr (Photos), Twitter, and Facebook are examples of sites with APIs.
+
+</li>
   <li>ES2015</li>
   <li>Node.js</li>
   <li>npm</li>
