@@ -471,11 +471,16 @@ Clear can make sure your div continues to contain a floated child.</li>
      lightboxes, jQuery user interface (UI, widgets, effects, interactions, drag/drop, tabbed panels, date picker, dialog boxes), animated transition is a good one called "animsition".
      Plugins will include css, javascript, and often photos.  A plugin called Sticky keeps certain elements stuck to the page even if you scroll the page; for example you can use this on
      a top navigation bar.  Carousel is good for a main page; "slick" is one of these.
-
   </li>
   <li>DOM Scripting</li>
   <li>Object Oriented and This Keyword.  This: 1) The object, 2) The object literal, 3) Used in a constructor.  To make a constructor
-  just make a function that sets properties or methods; The parameters are optional, and you can set defaults.</li>
+  just make a function that sets properties or methods; The parameters are optional, and you can set defaults.
+  Example object creation: "var dice = new Dice(6);"
+  Prototypes: "Dice.prototype.roll = () => {...})
+  Prototype is about sharing something to all of the objects, and only running the code/method once.
+  Prototype will allow you to add properties and methods to existing prototypes (prototypes are like a Java Class blueprint).
+  It appears to be good practice to define all the functions added using the prototype property.
+  You can do object inheritance in JavaScript too.</li>
   <li>HTTP and AJAX.  AJAX: JavaScript makes a request to a web server, and then does something with the response.
     Ruby on Rails, PHP, Java, or Python can be used to handle the server side part.  There are four steps to AJAX.
   1) Create an XMLHTTP Request object. 2) Define a callback function. 3) Open a request with a) method (Usually get or post) b) URL it is sent.
