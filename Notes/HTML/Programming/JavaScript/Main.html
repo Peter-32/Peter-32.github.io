@@ -56,6 +56,7 @@
 	<li><a href="#html_css_basics">HTML/CSS Basics</a></li>
 	<li><a href="#treehouse_html_css">Treehouse HTML CSS</a></li>
 	<li><a href="#treehouse_javascript">Treehouse JavaScript</a></li>
+  <li><a href="#treehouse_ruby_on_rails">Treehouse Ruby on Rails</a></li>
 	<li><a href="#jquery">jQuery</a></li>
 	<li><a href="#ractive_js">RActive.js</a></li>
 	<li><a href="#bootstrap">Bootstrap</a></li>
@@ -441,7 +442,11 @@ Clear can make sure your div continues to contain a floated child.</li>
 <li>Browsers and users can define rules that are most important.  After those,
   the most specific rule is used (inline style has very high importance).  If a tie, the last rule wins.
   Style values are inherited from parents.</li>
+<li>Forms and Tables.  "for" attribute can associate a label to an input.  Wrap sets in a "fieldset" tag to group them.  Put legends at the top of a fieldset.
+You can add a title to a table with the caption tag.</li>
+
 </ul>
+
 
 
 <h2><a id="treehouse_javascript">Treehouse JavaScript</a></h2>
@@ -494,6 +499,7 @@ Clear can make sure your div continues to contain a floated child.</li>
   Parse the JSON and save it as a JSON Object.  Then loop through the result objects and usually you build HTML.
   You can use jQuery for AJAX abilities with many less lines of code.  Use $.ajax().fail() and you can do everything.  The fail() is optional
   and will do something if the AJAX fails.  APIs are what you can get from a web server.  Flickr (Photos), Twitter, and Facebook are examples of sites with APIs.
+  It's good to add error handling when using AJAX.  There is an error event, and also you should use a try catch block.
 </li>
   <li>Module Pattern and Loose Modification.  The module pattern helps to avoid cluttering the global namespace.  All you do is make a self executing anonymous function.
   This seems to be the same as packages in Java.  The loose modification is extending or creating the module, based on if it has already been loaded or not (one module on multiple files).
@@ -515,29 +521,60 @@ Clear can make sure your div continues to contain a floated child.</li>
   A simple way to make something private is to prefix the property with an underscore to express your intent.
 </li>
 
-  <li>Node.js.  Node.js is really fast.  It is JavaScript programming without objects like document and window.</li>
-  <li>npm</li>
-  <li>Gulp</li>
-  <li>Express</li>
-  <li>DOM Scripting</li>
-  <li>Bootstrap and Angular JS</li>
-  <li>Node.js with MySQL or MongoDB</li>
-  <li>REST API</li>
-  <li>MEAN Application</li>
-  <li>Making a Personal Website</li>
-  <li>Unit Testing</li>
-</ul>
-<h3>Next Steps</h3>
-<p>
-  Learn more about Ruby, Ruby on Rails, PHP, Angular JS, Java, Python, Python Django, MongoDB, MySQL, 1 MVC Framework in Java, and D3.
-</p>
+  <li>Node.js.  Node.js is really fast.  It is JavaScript programming without objects like document and window.  Try and catch
+  around parsing is a good idea.  Make print error a function.  There are different error codes to consider.  You can create new Error instances.
+  Use modules (like a package) by separating code into different files and using the require() to use it.
+  To make certain methods available when used, use module.exports.methodName.
+  Protocol is the way the browser and web server agree to communicate; HTTP is Hypertext Transfer Protocol (HTTP server and HTTP client).
 
-<h2><a id="jquery">jQuery</a></h2>
-<p>
-</p>
-<h2><a id="ractive_js">RActive.js</a></h2>
-<p>
-</p>
+</li>
+  <li>Gulp - A task runner.  Concatenate JS files, minify JS files, compile Saas into CSS, use watch task, scaffold tasks into multiple files.  gulpfile.js lives at your project's root directory and defines the tasks.
+  When you change a file, Gulp will automatically reload the page with the changes saving seconds.
+  "gulp serve" is used for the gulp development server.
+  "gulp" is a command that gets the project production ready, minifying files among other things.  It puts the production code in a 'dist/' folder.
+  Gulp is very useful, learn how to use it using the documentation or tutorials online.
+  </li>
+  <li>Unit Testing using Mocha.  Skipped this, use Mocha or another unit test framework.</li>
+</ul>
+
+<h2><a id="treehouse_ruby_on_rails">Treehouse Ruby on Rails</a></h2>
+<h3>Things to Learn</h3>
+
+<ul>
+  <li>Ruby Basics.  Print to the screen.  String interpolation.  String methods.  Comments.  Methods, parameters, return.</li>
+  <li>Control Structures.  Not equal.  If.  Equal to.</li>
+  <li>Collections.  Arrays CRUD.  Interpolate element in an array.  Hash CRUD.  A hash is like a dictionary.</li>
+  <li>Loops.  Break.  While.  Until, runs while it is false.  Iterate with "each".  X times is like a for loop.  "For in" loop works with ranges and arrays; avoid this one due to scoping.</li>
+  <li>Objects and Classes.   Use dot new and dot class.  Objects have methods.  Objects have properties by using the @ symbol.
+      method "initialize" (with optional arguments) is run when the class is initialized.  There is a shortcut to generating getters and setters.
+    You can "load" in files like importing.  To string is available.</li>
+  <li>Sinatra Framework.  Below is most of what you can do and it is simple.
+    Focuses on request and responses and is much simpler than Ruby on Rails which uses MVC.
+  All you need to do is generate the HTML and Sinatra makes that easier too.  ERB files are HTML files that can have Ruby code evaluated inside it.
+  Define a wildcard url resource and it saves as a parameter; put wildcards last.  You can use variables from Ruby and use them in the ERB; most likely
+    by saving them in the params hash.  You can open text files and write text files.  You can repeat HTML elements with an ERB loop, among other things.  The form HTML tag has an attribution for POST and GET.
+  POST parameters are also saved in the params hash.  You can redirect the URL; useful after POSTs.
+  You often should encode the URL before you redirect; to do this use uri.
+  In order to do a PUT request, put this line at the start of the form:<br>
+  &lt;input type="hidden" name="_method" value="put"&gt;<br>
+  &lt;input type="hidden" name="_method" value="delete"&gt;<br>
+  You can create a file with a head, embedded files like CSS, footer and apply it to all ERB files; this is called a Layout.
+  You create the layout file and put a variable "yield" inside it, then give a second parameter to the erb method indicating the layout file.
+  The default layout used is "layout.erb", so if you only have one layout, call it that.
+
+  For security use this code:<br>
+  def escape(string)<br>
+    Rack::Utils.escape_html(string)<br>
+  end<br>
+  &lt;p&gt;&lt;%= escape @content %&gt;&lt;/p&gt;<br>
+  </li>
+  <li>Ruby on Rails 5 Framework</li>
+  <li>Rails Routes and Resources</li>
+  <li>Ruby Gems</li>
+  <li>Troubleshooting Rails Application</li>
+</ul>
+
+
 
 <h2><a id="bootstrap">Bootstrap</a></h2>
 
