@@ -57,9 +57,9 @@
 	<li><a href="#treehouse_html_css">Treehouse HTML CSS</a></li>
 	<li><a href="#treehouse_javascript">Treehouse JavaScript</a></li>
   <li><a href="#treehouse_ruby_on_rails">Treehouse Ruby on Rails</a></li>
-	<li><a href="#jquery">jQuery</a></li>
-	<li><a href="#ractive_js">RActive.js</a></li>
-	<li><a href="#bootstrap">Bootstrap</a></li>
+  <li><a href="#treehouse_php">Treehouse PHP</a></li>
+  <li><a href="#treehouse_bootstrap">Treehouse Bootstrap</a></li>
+  <li><a href="#treehouse_angular_and_react">Angular and React</a></li>
 </ul>
 
 <h2><a id="additional">Additional Contents</a></h2>
@@ -561,54 +561,78 @@ You can add a title to a table with the caption tag.</li>
   You can create a file with a head, embedded files like CSS, footer and apply it to all ERB files; this is called a Layout.
   You create the layout file and put a variable "yield" inside it, then give a second parameter to the erb method indicating the layout file.
   The default layout used is "layout.erb", so if you only have one layout, call it that.
-
   For security use this code:<br>
   def escape(string)<br>
     Rack::Utils.escape_html(string)<br>
   end<br>
   &lt;p&gt;&lt;%= escape @content %&gt;&lt;/p&gt;<br>
   </li>
-  <li>Ruby on Rails 5 Framework</li>
-  <li>Rails Routes and Resources</li>
-  <li>Ruby Gems</li>
-  <li>Troubleshooting Rails Application</li>
+  <li>Ruby on Rails 5 Framework.  Uses model view controller.  You set up routes, controllers, views.  Pages are made up of layouts,
+    pages, and partials.  Statements like bin/ruby generate ....... are used to generate models/etc.  Use bin/ruby db:migrate for updating
+    the database schema.
+  </li>
+  <li>Rails Routes and Resources.  No notes taken.</li>
+  <li>Ruby Gems and Troubleshooting Rails Application.  No notes taken.</li>
 </ul>
 
+<h2><a id="treehouse_php">Treehouse PHP</a></h2>
+<h3>Things to Learn</h3>
 
-
-<h2><a id="bootstrap">Bootstrap</a></h2>
-
-<h3><a href="https://www.youtube.com/watch?v=gqOEoUR5RHg">Bootstrap Tutorial</a> YouTube</h3>
 <ul>
-<li>00:53 Setup</li>
-<li>02:59 Container</li>
-<li>03:37 Page Header</li>
-<li>04:09 Jumbotron</li>
-<li>05:31 Button Styling</li>
-<li>09:40 Grid Layouts / Responsive Layouts</li>
-<li>17:02 Responsively Hiding Elements</li>
-<li>18:54 Offset</li>
-<li>20:04 Table Styling</li>
-<li>21:17 CSS Styling with Bootstrap</li>
-<li>24:34 Carousel / Slide Shows</li>
-<li>28:32 Icons</li>
-<li>31:33 Well</li>
-<li>32:16 Image Styling</li>
-<li>33:27 Contextual Colors</li>
-<li>34:28 Dropdown Menus</li>
-<li>38:07 Input Groups</li>
-<li>42:51 Horizontal Menus</li>
-<li>44:56 Vertical Menus</li>
-<li>47:00 Tabbed Panels</li>
-<li>51:05 Responsive Navigation Bar</li>
-<li>54:38 Pagination</li>
-<li>56:16 Responsive Blog Layout</li>
-<li>58:02 Progress Bars</li>
-<li>59:30 Responsive Blog Layout 2</li>
-<li>1:01:30 List Groups</li>
+  <li>PHP Basics.  PHP is automatically installed in browsers already.
+    Write the PHP in the HTML, and the server will process it before it sends the response.
+    Work on HTML like normal, but put the PHP code in code blocks in the HTML; the file should be .php not .html.
+  Setting variables.  Concat.  Equals.  If elseif else.  Call PHP files from within PHP (makes it look clean) </li>
+  <li>PHP Arrays and Control Structures.  Comparison operators, "and/or", switch.  Arrays, associated arrays, CRUD, sort, multi-dimensional.
+  PHP loops; while, for, foreach.</li>
+  <li>Functions.  Using global variables.  Parameters and default parameters.
+  Return values, closures.  This code will run the answer function: function answer(){...} $func = 'answer'; echo $func()</li>
+  <li>Basic Error Handling.  Don't show the PHP error to users in production.</li>
+  <li>PHP with Databases.  Connect to SQLite.  Use try/catch with databases. (Skipped through this)</li>
+  <li>Persistent Data. (Skipping)  Sessions - Users time at the site.</li>
+  <li>CRUD in PHP. (Skipping)</li>
+  <li>File Handling in PHP. (Skipping)</li>
+</ul>
+
+<h2><a id="treehouse_bootstrap">Treehouse Bootstrap</a></h2>
+<h3>Things to Learn</h3>
+<ul>
+  <li>Why?  Rapid deployment, reusable HTML, CSS, Javascript.  Cross-browser compatibility.
+  Most popular framework in the world for responsive HTML, CSS, and JavaScript on the web.
+  It is a front-end framework.  Instead of testing on different devices and size screens, we can
+just browse the documentation and copy the code we need for the HTML, CSS, and JavaScript.
+On a project you will most likely use the grid and some other components.  CDNs are a good way to
+get started.  Be sure to use the meta tags on Bootsrap's website when starting a project!
+</li>
+  <li>Create a simple page and enhance it.  It is very important to check out:
+  CDN, basic template, Typography for headers and paragraphs, layout (containers), utilities for some positions (and padding),
+input groups for forms (copy and paste what you want), layout->grid, utilities->colors</li>
+  <li>Layout, grid, styling, column size, ordering and offset.  Grid: Container holds rows which hold columns.  Images can be responsive and there are
+  border shapes to choose from.  The column sizes are based on mobile device sizes, and the size you choose means it will work for that size device and larger devices.
+  Example: You can set the size for medium and up, and then override the behavior for extra large.
+  You may want the most important content in the middle columns on large screens, but first on small.  Then use push/pull setting for set large devices and up.
+  Offsetting is good.  You may want to show and hide content for certain screen sizes; it's good to hide images in xs so it loads faster.
+</li>
+  <li>Building a navbar, jumbotron, buttons and button groups, horizontal navs, dropdown buttons, cards, list group, model window, scrollspy.  Find the navbar you want and copy/paste it in.  You may want to use Boostrap's floating by using "pull right" with no margin.
+  If your navbar is two lines on xs devices you may want to hide things at that size.  Putting a container in your nav bar is important.  You can stick the nav bar to the page.  Dropup/dropdown, footer.
+Put cards inside columns.  Instead of lists use the list group and list group item blocks.
+Modal windows are interactive popups (You can make them forms).  Scrollspy automatically updates the nav bar based on
+the scroll position.</li>
+  <li>Form groups, form controls, cross-browser consistency</li>
+  <li>Structured form layouts with the grid</li>
+  <li>Add validation styles</li>
+  <li>Custom CSS</li>
 </ul>
 
 
+<h2><a id="treehouse_angular_and_react">Angular and React</a></h2>
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+
+</ul>
 
 </div> <!-- jumbotron -->
 
