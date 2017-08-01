@@ -59,7 +59,8 @@
   <li><a href="#treehouse_ruby_on_rails">Treehouse Ruby on Rails</a></li>
   <li><a href="#treehouse_php">Treehouse PHP</a></li>
   <li><a href="#treehouse_bootstrap">Treehouse Bootstrap</a></li>
-  <li><a href="#treehouse_angular_and_react">Treehouse Angular and React</a></li>
+  <li><a href="#treehouse_angular_1">Treehouse Angular 1.0</a></li>
+  <li><a href="#treehouse_d3">Treehouse D3</a></li>
 </ul>
 
 <h2><a id="additional">Additional Contents</a></h2>
@@ -625,17 +626,81 @@ the scroll position.</li>
 </ul>
 
 
-<h2><a id="treehouse_angular_and_react">Treehouse Angular and React</a></h2>
+<h2><a id="treehouse_angular_1">Treehouse Angular 1.0</a></h2>
 <ul>
   <li>Why? Angular is scalable and takes little code.  It's very fast and responsive because the first
   call to the server gets the Angular client side application and additional AJAX calls typically are only asking
 for a small amount of data, not a new HTML page.</li>
-  <li></li>
-  <li></li>
-  <li></li>
-
+  <li>Scope is one of the most important parts.  Views, directives, and controllers are other important parts.  Depending on the controller,
+  the functions available differ due to their scope.  Defining a new function inside an inner scope, it will override other functions with the same name.</li>
+  <li>You define the app creation in app.js with angular.module("yourAppName", []).  Then the controllers are defined with .controller('itsName', function($scope) {...}).  Then place
+  controllers in the HTML.  If the controller HTML div contains another controller, it inherits those methods for itself.
+  </li>
+  <li>ng-model directive -> bind this value in the input to a object in the scope; ng-model="todo.name".  This updates variables in real time.
+  To evaluate an angular variable use two curly braces like this {{todo.name}}.  ng-click=" editing = !editing" makes a toggle.
+  ng-hide="" when true, hide the content.  ng-repeat="someitem in todos", repeats HTML using JS (might loop through an array).
+  The ng-repeat lets you work with each item separately in their own scopes.  ng-class={'yourClass': expression}, if the expression is true, the class is added, if false, it won't pass the class to the element.
+  ng-change="myScopeFunctionInController()", a function that watches for a change and it fires if the input changes.
+  You can also do ng-change="todo.edited = true" to set a boolean when changed (first time input changes).
+  .list .edited label:after {content: " edited";}
+  </li>
+  <li>Controllers work on one part of the application.  What if you want a variable to be in another part of the application?  Then use services; services do this with dependency injection.
+  Multiple controllers can use the same service.  A service is always used by making it a dependency of a controller.
+  Do this by making it the second parameter in the controller (after $scope).  Services often ask for data from the server.</li>
+  <li>Put your test data in a mock folder.  Act like you make a REST API call, but just reference the mock data.
+  Services can use $http parameter to get data.<br>
+  this.getTodos = function(callback) { $http.get('mock/todos.json').then(callback) }
+  in the controller: dataService.getTodos(function(response) {
+    console.log(response.data); return response.data;
+  })</li>
+  <li>You can save and delete data with services as well.  If you delete data, you can pass in the index into the delete function,
+  then delete the array real time so we can see the results; also you will tell the back end to delete the data in the db.</li>
+  <li>When the array data is updated, the new data should automatically be rendered to the screen if certain things are set up.</li>
+  <li>Everything prior to this is 90% of the main part of Angular.</li>
 </ul>
 
+<h2><a id="treehouse_d3">Treehouse D3</a></h2>
+<ul>
+  <li>Data driven documents.  There is a D3 link to put in your page.  Selection is important, use d3.select('div').style({'color': 'orange', 'font-size': 40px}).attr('anExampleAttr', 'someValue').
+  The resulting visualization is all HTML/CSS that can be viewed in the console.
+d3.selectAll('.house').classed('frog',true) will give all house class elements the frog class.  If you use false it will remove that class from the element.
+SVG - Scalable vector graphics can be rendered in any modern browser and can be generated with JavaScript.</li>
+<li>Shapes.  svg tag is the parent.  circle tag: use r, cx, and cy attributes.  line tag: use x1, y1, x2, y2, stroke="color", and stroke-width</li>
+<li>Use of D3 selectors and svg together is very powerful!  Make a create function that creates the svg, circles and lines.</li>
+<li>The next step is getting data and working with data.  Data is an array of objects with either arrays, values, or objects associated with each key (Having just an array might happen too).
+D3 has ways to request with d3.json, d3.csv, d3.text, d3.html,  d3.tsv, and d3.xml.  The path is relative.
+d3.json('phones.json', function(error, data) { ... });.  CSV will probably return an array of objects, where each element in the array is a row.</li>
+<li>Put the svg in a div.  Load the csv data and inside the funciton do: dots = viz.selectAll('circle').data(data).enter()..append('circle');
+The selectAll finds nothing yet, the data does a join and makes it an array of length same as csv's row count, enter does something, append creates the circles in the DOM.
+Next do dots.attr('r', function(d) {return d.TMAX}); or change the cx or cy instead of the radius.  Negative values or outlier can be changed to prevent errors.
+Understanding the data(data).enter() is not important, you just do it. It's good to set the height, width, and padding of the SVG (padding: circles away from edge of the SVG).
+Set breakpoints in the browser Console and you can see what the variables are at the breakpoint (debugging).  Changing the stroke and fill of circles ia good way to style them.
+You can do an if else condition for apply different styling.
+</li>
+<li>The "debugger" keyword used in JS will break your App for debugging in the Console on that line.  Use debugging to explore other people's apps online.</li>
+<li>The hardest parts of D3 are over.  We set up variables that don't depend on the data callback ahead of time.
+var yScale = d3.scale.linear().range([height, 0]);  Scales map the domain in your data to a visual range.  Range could be pixel position, size (like r of circle), or a color.
+Scales are like object classes that have different methods and attributes.  The range above gives the minimum value as height and maximum value as 0 (0 is top of page); this seems backwards
+but it is best this way.<br>
+yMax = d3.max(data, function(element) {<br>
+  return parseInt(element.TMAX)<br>
+});<br>
+yMin = d3.min(data, function(element) {<br>
+  return parseInt(element.TMAX)<br>
+});<br>
+This finds the max and min of the TMAX for each element.  This is used in order to set up the y-axis range.
+Better than yMin and yMax is this function which runs through the data once:<br>
+yDomain = d3.extent(data, function(element) {<br>
+  return parseInt(element.TMAX)<br>
+});<br>
+That returns an array of two values: the minimum and maximum.  We plug the array into the domain function of yScale like this:<br>
+yScale.domain(yDomain);
+Later you pass in an integer into the yScale method and it returns a pixel position.  To get the value based on a pixel position use yScale.invert(yourInt);
+</li>
+<li>Time Scaling.  Use the d3 timescale similar to linear scale.  JS date objects.<br>
+var xScale = d3.time.scale().range([0,width]);<br>
+var parseTime = d3.time.format("%Y%m%d");</li>
+</ul>
 </div> <!-- jumbotron -->
 
 </div> <!-- container -->
