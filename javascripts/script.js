@@ -147,6 +147,7 @@ function initAboutPage() {
   on_room_page = 0;
   on_randomize_page = false;
   on_topic_page = false;
+  show_room_drawing = false;
   // Buttons
   button_back_active = false;
   button_next_active = true;
@@ -178,6 +179,7 @@ function initRoomPage(roomId) {
   on_room_page = roomElem.getAttribute("data-room-num");
   on_randomize_page = false;
   on_topic_page = false;
+  show_room_drawing = true;
   // Buttons
   button_back_active = false;
   button_next_active = false;
@@ -211,6 +213,7 @@ function initRandomizePage() {
   on_room_page = getRoomNumGivenLocationIdx(randomNumberStored);
   on_randomize_page = true;
   on_topic_page = false;
+  show_room_drawing = false;
   // Buttons
   button_back_active = false;
   button_next_active = false;
@@ -238,6 +241,7 @@ function initTopicPage(locationIdx) {
   on_about_page = false;
   on_randomize_page = false;
   on_topic_page = true;
+  show_room_drawing = false;
   // Buttons
   button_back_active = true;
   button_next_active = true;
