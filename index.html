@@ -1,377 +1,118 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Commandments</title>
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta name="csrf-token" content="X9TeOimnTEbVoLecxD1gZ5nuMg1EtTZxLOx/AkYZ72g01Q0ePcWevrJcYmtolyv+jTc3t/mGGoR9kzXKzOVxmw==" />
+    <!-- Taken from the Bootstrap Website -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/stylesheet.css">
 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Peter Myers Github Page">
-  <meta name="keywords" content="Blog,Programming,Data Engineering">
-  <meta name="author" content="Peter Myers">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--  <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap-theme.css">
-  <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css">  -->
-  <link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <!-- Custom styles for this template -->
-    <link href="navbar.css" rel="stylesheet">
-<!--  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<!--  <link rel="stylesheet" type="text/css" href="../../../CSS/Programming/main.css"> -->
-<title>Data Engineering</title>
-</head>
+  </head>
 
-<body>
-
-<div class="container">
-    <a class="navbar-brand navbar-center" id="logo" href="#">
-        <img src="0e58299f-db9c-4c8f-a849-bdecc754b2db.png" alt="Logo, Data Engineering">
-    </a>
+  <body ng-app="theApp">
+    <div dir-one></div>
+    <!-- Jumbotron and header controller-->
+    <div ng-controller="headerCtrl" class="container" id="changing_container">
+      <div ng-click="changeParagraph()" class="jumbotron text-center" id="changing_jumbotron">
+        <h1 id="changing_header" class="noPointerE"></h1>
+        <p id="changing_paragraph" class="noPointerE"><br><br><br><br></p>
+      </div>
     </div>
 
-<div class="container">
-<nav class="navbar navbar-default" role="navigation">
+    <!-- Nav Bar -->
 
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+      <nav class="navbar navbar-toggleable navbar-light bg-faded">
+        <div class="container nav_adjustment" id="buttons-div">
+        <a class="navbar-brand" href="">Nav</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" id="nav_about" href="">About</a>
+            <div id="nav_dropdown_room" class="nav-item nav-link dropdown">
+              <a id="nav_label_room" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Room<span class="caret"></span></a>
+               <ul class="dropdown-menu">
+            <li><a class="nav-item nav-link" id="nav_room_1" data-room-num=1 href="">Room 1</a></li>
+            <li><a class="nav-item nav-link" id="nav_room_2" data-room-num=2 href="">Room 2</a></li>
+            <li><a class="nav-item nav-link" id="nav_room_3" data-room-num=3 href="">Room 3</a></li>
+            <li><a class="nav-item nav-link" id="nav_room_4" data-room-num=4 href="">Room 4</a></li>
+            <li><a class="nav-item nav-link" id="nav_room_5" data-room-num=5 href="">Room 5</a></li>
+            <li><a class="nav-item nav-link" id="nav_room_6" data-room-num=6 href="">Room 6</a></li>
+          </ul>
+          </div>
+            <a class="nav-item nav-link" id="nav_randomize" href="">Randomize</a>
+            <!-- <a class="nav-item nav-link disabled" href="">Disabled</a> -->
+          </div>
+        </div>
+
+        </div>
+      </nav>
+      <!-- Nav Bar END -->
+
+
+
+    <div id="svg_div" class="container">
+      <div id="about" class="noPointerE">
+      <div id="about1">
+        <h2>Summary</h2>
+        <p>This page aims to teach you a trick to permanently remember 170 of Jesus' commandments.  Click on the verse above to see other verses persuading you to learn Jesus' commandments well.</p>
+        <h2>How to Use</h2>
+        <!-- not using a list because it is on two pages -->
+          <p>1. Choose a room in your house you know well.<br>
+          2. Pick a direction for the front of the room.<br>
+          3. In this application, navigate to a location by clicking "Room".</p>
+     </div>
+      <div id="about2">
+        <p>
+          <br><br> <!-- lazy way of not adding padding in css -->
+          <p>4. Imagine that location in the room in your house, where #1 is the front of the room, #9 is the ceiling, and #10 is the floor.<br>
+          5. Use your imagination and picture three objects that are related to the three commandments in that location.<br><br>
+          The room button above will take you to one of the six rooms.  Rooms store up to 30 commandments.
+        It is recommended to start at room one and location one and move forward from there.
+        <br><br>
+        The randomize button is useful to quiz yourself once you are done.  This can help fully ingrain this in your memory.
+        </p>
+      </div>
+    </div>
+      <!-- dynamically add these in -->
+      <div id="topic_content" class="noPointerE">
+        <h2 id="topic_room_number"></h2>
+        <p id="topic_para"></p>
+      </div>
+
+      <div id="random_content_flashcard" class="noPointerE">
+        <h2 id="random_content_flashcard_room"></h2>
+      </div>
+
     </div>
 
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-left">
-            <li><a href="#itemonelink">Projects</a></li>
-            <li><a href="Notes/HTML/Programming/Java/Main.html">Notes</a></li>
-        </ul>
 
-        <ul class="nav navbar-nav navbar-right">
-
-            <li><a>Contact at peterjmyers1@gmail.com</a></li>
-            <li></li>
-        </ul>
-
-
-    </div>
-</nav>
-</div>
-
-<div class="container">
-<div class="jumbotron">
-<h2>Overview</h2>
-</div>
-<h2>Problem Solving</h2>
-<p>Find a problem and write a sentence for the solution.</p>
-<p>Four steps: Prepare, Plan, Perform, and Perfect.  Preparing may involve collecting tools and documentation for help.</p>
-
-<br>
-<h2>How to Continue Learning</h2>
-<p>Projects, cookbook solutions, documentation.</p>
-
-<h2>Five Team Dysfunctions</h2>
-<p>Five fingers</p>
-<ol>
-	<li>A piggybank</li>
-	<li>A scarecrow</li>
-	<li>A ring</li>
-	<li>A beer bottle</li>
-	<li>A graph</li>
-</ol>
-
-
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<ul>
-<li>Speed through everything as fast as possible.</li>
-<li>Do Python projects for "cuoa ff integrity dp" work projects.</li>
-<li>Everything will be a waste of time outside of doing projects (Books/lectures).</li>
-<li>Only do something else if it helps you to do a more difficult project.</li>
-<li>Only focus on Data Science and Warehousing</li>
-<li>Personal projects cannot be over 3 days and do two programming projects a week.</li>
-<li>Always be shipping should be your motto at work.</li>
-<li>When stuck on a project idea, mix a number and a letter (ordered by priority):<ul>
-    <li>A) Need a technology for the job soon</li>
-    <li>B) Related to something important to the job (like analyzing churn)</li>
-    <li>C) Mentioned in the Job Descriptions in this field</li></ul></li>
-<ol>
-<li>you don't know already</li>
-<li>you know it</li>
-</ol>
-</ul>
-
-<a href= "https://www.tablegroup.com/books/dysfunctions">Link here</a>
-<h2>Three Day Project</h2>
-
-<ul>
-    <li>Day 1: Get some basic functionality working, learn basics, make mistakes.</li>
-    <li>Day 2: Complete functionality, refactor, eliminate bugs.</li>
-    <li>Day 3: Complete Documentation, refactor, push to online repo, etc.</li>
-</ul>
-<p><a href="https://www.google.com/search?q=three+day+project+paradigm&oq=three+day+project+paradigm&aqs=chrome..69i57j69i60.3479j0j7&sourceid=chrome&ie=UTF-8">Found here</a></p>
-
-<h2>How to design software:</h2>
-<ol>
-<li>obtain requirements</li>
-<li>draw use case diagram (Draw the actors, and draw a line to what they need from the program; what they need are the goals of the program)</li>
-<li>create folders for groups</li>
-<li>choose one goal prioritize the one that is<ol>
-<li>    most important</li>
-<li>    most difficult</li>
-<li>    most unknown</li></ol></li>
-<li>Write a use case for that goal:<ol>
-<li>    clear value step</li>
-<li>    start and stop</li>
-<li>    external initiator</li>
-<li>    happy path and alternative paths</li></ol></li>
-<li>Circle all nouns and consider each as a potential class. <br /></li>
-<li>Draw UML of classes.  All verbs are potential methods to add.</li>
-<li>Add getters and setters and relationships</li>
-<li>Code</li>
-<li>Ask self:<ol>
-<li>    Does this satisfy the customer or goal?</li>
-<li>    Are OOP used?</li>
-<li>    Flexible for change?</li></ol></li>
-<li>Repeat 4 to 10 until all goals are complete</li>
-</ol>
-<p>(Ideas from Head First OOAD)</p>
-
-<h2>How to do a data project:</h2>
-<ol>
-<li>Choose a datastore.</li>
-<li>Model the data with a diagram</li>
-<li>Build the model in your program (Remove redundancy, PK, FK, indexes, proper data types)</li>
-<li>Find how to create test data for unit tests later</li>
-<li>How to load data into your model</li>
-<li>Automate producers for the models</li>
-<li>Build consumers for the models (Including aggregation functions) (Optional UI)</li>
-<li>Automate unit tests using the test data</li>
-<li>Data Integrity Scripts and alerts</li>
-<li>Performance tuning</li>
-<li>Monitor Scheduled ETL Jobs</li>
-<li>Documentation in README (Title, executive summary, example, features, installation, support, FAQ)</li>
-</ol>
-<p>(Ideas from Quora Forum Answer)</p>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<h1>Old Info<h1>
-<div class="container">
-<div class="jumbotron">
-<h1>Data Engineering</h1>
-<p class="text-warning">Work on projects using these tools.  For project ideas, visit Kaggle or make up your own.
-Solve a problem, then work on a new problem.</p>
-
-<h2>When starting out</h2>
-<p>Store code on GitHub, but have a separate portfolio website; people only care about the UI, not the code.</p>
-<p>Create simple user interfaces that solve a simple problem that anyone can easily use. </p>
-<p>For example, I made this video game from scratch in Java.</p>
-</div>
-
-<h2>Useful Skills to Learn</h2>
-<p>Rank 1 to 10, where 10 is knowing enough to use it competently.  Green text seem to be the most important topics.</p>
-<h4>Current Goal: Have rank 10 on the ones I want to use</h4>
-<h3>Common</h3>
-<p class="text-warning">
-<span class="text-success">
-SQL - 10<br>
-Python - 4<br>
-Data Warehouse - 5<br>
-Hadoop - 2<br>
-ETL - 5<br>
-Java - 6<br>
-Scala - 6<br>
-Statistics - 4<br>
-</span>
-R - 5<br>
-MapReduce - 3<br>
-Ruby - 1<br>
-Data Quality - 5<br>
-JavaScript - 4<br>
-UNIX Scripts - 1<br>
-Visio Diagrams - 1<br>
-</p>
-<h3>Producers</h3>
-<p class="text-success">
-Kafka - 3<br>
-</p>
-<h3>Storage Topics</h3>
-<p class="text-warning">
-<span class="text-success">
-MySQL and SQLite (Python API) - 7<br>
-MongoDB (Python API) [easy NoSQL] - 1<br>
-Elasticsearch (Python API) [full-text search] - 5<br>
-Google Drive / Dropbox (Python API) - 1<br>
-AWS [cheap cloud computing] - 1<br>
-Redis (Python API) - 2<br>
-Memcached (Python API) - 2<br>
-Cassandra (Python API) - 1<br>
-</span>
-HBASE - 1<br>
-Redshift  - 1<br>
-Vertica - 1<br>
-Bigquery - 1<br>
-Snowflake - 1<br>
-</p>
-<h3>Consumers</h3>
-<span class="text-success">
-Hive - 1<br>
-Spark - 3<br>
-</span>
-<h3>Orchestration Tools</h3>
-<p class="text-warning">
-<span class="text-success">Luigi - 2<br></span>
-Celery - 1<br>
-Airflow - 1<br>
-</p>
-
-<h2>Repeatable Project Steps</h2>
-<ol class="text-warning">
-	<li>Get a simple idea from some place like kaggle  or make it up on your own. </li>
-<li>	Choose a datastore.	</li>
-<li>	Model the data with a diagram</li>
-<li>	Build the model in your program (Remove redundancy, PK, FK, indexes, proper data types)</li>
-<li>	Find how to create test data for unit tests later</li>
-<li>	How to load data into your model</li>
-<li>	Automate producers for the models</li>
-<li>	Build consumers for the models (Including aggregation functions) (Optional UI)</li>
-<li>	Automate unit tests using the test data</li>
-<li>	Data Integrity Scripts and alerts	</li>
-<li>	Performance tuning</li>
-<li>	Monitor Scheduled ETL Jobs</li>
-<li>	Documentation in README (Title, executive summary, example, features, installation, support, FAQ)</li>
-</ol>
-
-
-<h2>Using MySQL Instead of NoSQL With Lots of Data</h2>
-<p>
-Based on advice from the <a href="https://www.wix.engineering/single-post/scaling-to-100m-mysql-is-a-better-nosql">Wix Engineering</a> site.
-</p>
-<ul>
-	<li>Use simple queries</li>
-	<li>Keep redundant data</li>
-	<li>Fields are either text blobs or indexed</li>
-	<li>Don't use transactions</li>
-</ul>
-
-<h2>Nice to Know about Data Store</h2>
-<ol class="text-warning">
-<li>	Backup data and test restoring data	</li>
-<li>	How to alter/delete tables and columns in a datastore</li>
-<li>	How to do advanced level CRUD for this datastore.</li>
-<li>	For loops, procedures, user defined functions, and triggers in the datastore.</li>
-<li>	Queries across two databases in the datastore</li>
-<li>	Programmatically view the Information_Schema</li>
-<li>	Creating and authorizing  Database Users</li>
-</ol>
-</div>
-
-
-<h1>Interesting articles</h1>
-<h3><a href="https://blog.treasuredata.com/blog/2016/03/15/self-study-list-for-data-engineers-and-aspiring-data-architects/">A Self-Study List for Data Engineers and Aspiring Data Architects</a></h3>
-
-<h3>If you're interested in Data Science, here are some <a href="http://www.datasciencecentral.com/profiles/blogs/20-cheat-sheets-python-ml-data-science?utm_content=buffer8e61d&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer">cheat sheets.</a></h3>
-<div data-datacamp-exercise data-lang="r">
-	<code data-type="pre-exercise-code">
-		# This will get executed each time the exercise gets initialized
-		b = 6
-	</code>
-	<code data-type="sample-code">
-		# Create a variable a, equal to 5
-
-
-		# Print out a
-
-
-	</code>
-	<code data-type="solution">
-		# Create a variable a, equal to 5
-		a <- 5
-
-		# Print out a
-		print(a)
-	</code>
-	<code data-type="sct">
-		test_object("a")
-		test_function("print")
-		success_msg("Great job!")
-	</code>
-	<div data-type="hint">Use the assignment operator (<code><-</code>) to create the variable <code>a</code>.</div>
-</div>
-
-
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <!-- https://github.com/datacamp/datacamp-light -->
-  <script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
-
-</body>
+<a href="Notes/HTML/Programming/Java/Main.html">_</a>
+
+
+    <!-- jQuery and Bootstrap -->
+    <script
+  src="http://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <!-- may want both jQueries or just one
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+      <!-- d3 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.js"></script>
+    <!-- angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+  <script type="text/javascript" src="javascripts/app.js"></script>
+  <script type="text/javascript"  src="javascripts/topics_array.js"></script>
+  <script type="text/javascript"  src="javascripts/script.js"></script>
+
+  </body>
 </html>

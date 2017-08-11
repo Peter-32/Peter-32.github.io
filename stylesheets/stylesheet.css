@@ -1,0 +1,65 @@
+body{
+   min-width:400px; /* suppose you want minimun width of 1000px */
+}
+
+h2 {
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+.nav_adjustment {
+  width:auto
+}
+#changing_paragraph {
+  padding-top: 10px;
+}
+
+#changing_jumbotron {
+  padding-bottom: 0px;
+}
+
+#svg_div {
+  /*border-width:1px 0;*/
+  /*list-style:none;*/
+  /*margin:0;
+  padding:0;*/
+  /*text-align:center;*/
+  position:relative;
+  /*height:250px; /* or some other number */
+}
+
+#about, #topic_content, #random_content_flashcard {
+  position:absolute;
+  top:10px;
+  width: 100%;
+}
+
+.btn-primary {
+  margin-bottom: 5px;
+  margin-right: 60px;
+  float: right;
+}
+
+/* This element will not be clickable. */
+#sub_svg_group1, .noPointerE {
+  pointer-events:none;
+}
+
+#topic_content, #random_content_flashcard {
+  text-align: center;
+
+}
+
+#topic_para, #about {
+  width: 80%;
+  left: 10%;
+  position:absolute;
+}
+
+#random_content_flashcard_room {
+  padding-right: 30px;
+}
+
+#topic_room_number, #random_content_flashcard_room {
+  padding-bottom: 40px;
+}
