@@ -1,0 +1,16 @@
+from impala.dbapi import connect<br>
+import ibis<br>
+<br>
+client = ibis.impala.connect(host='irdw-impala.db.impactradius.net', \<br>
+                             port=21050, \<br>
+														                              auth_mechanism="GSSAPI", \<br>
+																													                             timeout=60, \<br>
+																																											                              use_ssl=False, \<br>
+																																																										                             ca_cert=None, \<br>
+																																																																								                              kerberos_service_name='impala')<br>
+<br>
+																																																																																							table = client.table('account', database='irdsma_prod')<br>
+<br>
+																																																																																							table.count().execute()<br>
+<br>
+																																																																																							client.sql('select * from irdsma_prod.account').execute()<br>
