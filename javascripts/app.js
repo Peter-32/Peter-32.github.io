@@ -1,8 +1,8 @@
 angular.module("theApp", [])
 .controller('headerCtrl', function($scope) {
   let idx = 0;
-  let para_array = ["Room 1 is my bedroom",
-  "Room 2 is my friend's bedroom",
+  let para_array = ["Room 1 is my room",
+  "Room 2 is my friend's room",
   "Room 3 is the living room"]
   let header_array = ["Topics of Conversion", "Topics of Conversion", "Topics of Conversion"]
   let para = document.getElementById("changing_paragraph")
