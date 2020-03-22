@@ -34,7 +34,7 @@ topics = [
   {verse: 'bronze pickaxe', verse_id: '(Previous jobs)'},
   {verse: 'bronze 🏠', verse_id: '(Where they have lived)'},
   {verse: 'bronze trophy', verse_id: '(Accomplishments)'},
-  {verse: 'green club (cards)', verse_id: '(Clubs)'},
+  {verse: 'green club', verse_id: '(Clubs)'},
   {verse: 'cybertruck', verse_id: '(Cars)'},
   {verse: 'christmas tree', verse_id: '(Holidays)'},
   {verse: 'small printed photo', verse_id: '(Photography)'},
