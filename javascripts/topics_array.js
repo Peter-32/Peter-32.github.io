@@ -12,7 +12,7 @@ topics = [
   {verse: 'book', verse_id: '(Books)'},
   {verse: 'tv', verse_id: '(TV)'},
   {verse: 'plane', verse_id: '(Travel)'},
-  {verse: 'chess, poker', verse_id: '(Hobbies)'},
+  {verse: 'chess, poker, Dark Souls, GC2', verse_id: '(Hobbies)'},
   {verse: 'baby', verse_id: '(Children)'},
   {verse: '🐕', verse_id: '(Pets)'},
   {verse: 'arrow up to right', verse_id: '(Current trends)'},
