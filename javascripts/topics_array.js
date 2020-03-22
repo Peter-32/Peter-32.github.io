@@ -49,7 +49,7 @@ topics = [
   {verse: 'a fish near a hook', verse_id: 'Fishing'},
   {verse: 'Google translate icon', verse_id: 'Languages'},
   {verse: 'heart on a laptop', verse_id: 'Online dating'},
-  {verse: 'lightning above person's head', verse_id: 'Stress'},
+  {verse: "lightning above person's head", verse_id: 'Stress'},
   {verse: '💡 with a brain inside', verse_id: 'Creativity'},
   {verse: 'superman icon', verse_id: 'Heroes'},
   {verse: 'smiling face', verse_id: 'Happiness'},
