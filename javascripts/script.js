@@ -13,7 +13,7 @@ angular.module('theApp')
 
 //// Some important intitializations //////////////////////
 // variables
-// number from 1 to 57
+// number from 1 to 28
 let randomNumberStored = 1;
 let currentLocationIdx = 0;
 // button variables
@@ -83,14 +83,14 @@ function updateButton(button, text, boolean) {
 }
 
 function populateTopicContent(locationIdx) {
-  // 1-57 locationIdx values possible
+  // 1-28 locationIdx values possible
   let topic_para = document.getElementById("topic_para");
   let topic_room_number = document.getElementById("topic_room_number");
   const roomIdx = getRoomNumGivenLocationIdx(locationIdx);
   const topicIdx1 = (3*locationIdx)-2;
   const topicIdx2 = (3*locationIdx)-1;
   const topicIdx3 = (3*locationIdx);
-  if (locationIdx > 57) {
+  if (locationIdx > 28) {
     topic_room_number.innerHTML = "No Content";
     topic_para.innerHTML = "";
   } else {
@@ -104,7 +104,7 @@ function populateTopicContent(locationIdx) {
 }
 
 function changeTheRandomNumber() {
-  randomNumberStored = Math.floor(Math.random() * 57) + 1;
+  randomNumberStored = Math.floor(Math.random() * 28) + 1;
 }
 
 function getRoomNumGivenLocationIdx(locationIdx) {
