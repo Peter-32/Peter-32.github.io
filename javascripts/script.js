@@ -236,7 +236,7 @@ function initTopicPage(locationIdx) {
   // page listeners
   $("#box_drawing").unbind();
   // variables
-  currentLocationIdx = Math.min(locationIdx,58);
+  currentLocationIdx = Math.min(locationIdx,29);
   on_room_page = getRoomNumGivenLocationIdx(currentLocationIdx);
   on_about_page = false;
   on_randomize_page = false;
