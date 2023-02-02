@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Topics of Conversion</title>
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta name="csrf-token" content="X9TeOimnTEbVoLecxD1gZ5nuMg1EtTZxLOx/AkYZ72g01Q0ePcWevrJcYmtolyv+jTc3t/mGGoR9kzXKzOVxmw==" />
+    <!-- Taken from the Bootstrap Website -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Jesus, God, commandments, memorize, disciple, Great Commission" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/stylesheet.css">
+
+  </head>
+
+  <body ng-app="theApp">
+    <div dir-one></div>
+    <!-- Jumbotron and header controller-->
+    <div ng-controller="headerCtrl" class="container" id="changing_container">
+      <div ng-click="changeParagraph()" class="jumbotron text-center" id="changing_jumbotron">
+        <h1 id="changing_header" class="noPointerE"></h1>
+        <p id="changing_paragraph" class="noPointerE"><br><br><br><br></p>
+      </div>
+    </div>
+
+    <!-- Nav Bar -->
+
+      <nav class="navbar navbar-toggleable navbar-light bg-faded">
+        <div class="container nav_adjustment" id="buttons-div">
+        <a class="navbar-brand" href="">Nav</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" id="nav_about" href="">About</a>
+            <div id="nav_dropdown_room" class="nav-item nav-link dropdown">
+              <a id="nav_label_room" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Room<span class="caret"></span></a>
+               <ul class="dropdown-menu">
+            <li><a class="nav-item nav-link" id="nav_room_1" data-room-num=1 href="">Room 1</a></li>
+            <li><a class="nav-item nav-link" id="nav_room_2" data-room-num=2 href="">Room 2</a></li>
+            <li><a class="nav-item nav-link" id="nav_room_3" data-room-num=3 href="">Room 3</a></li>
+          </ul>
+          </div>
+            <a class="nav-item nav-link" id="nav_randomize" href="">Randomize</a>
+            <!-- <a class="nav-item nav-link disabled" href="">Disabled</a> -->
+          </div>
+        </div>
+
+        </div>
+      </nav>
+      <!-- Nav Bar END -->
+
+
+
+    <div id="svg_div" class="container">
+      <div id="about" class="noPointerE">
+      <div id="about1">
+        <h2>Summary</h2>
+        <p>This page aims to teach you a trick to permanently remember many topics of conversion.</p>
+        <h2>How to Use</h2>
+        <!-- not using a list because it is on two pages -->
+          <p>1. Choose one to three room in your house you know well.<br>
+          2. Pick a direction for the front of all rooms.<br>
+          3. In this application, navigate to a location by clicking "Room".</p>
+     </div>
+      <div id="about2">
+        <p>
+          <br><br> <!-- lazy way of not adding padding in css -->
+          <p>4. Imagine or walk to that room in your house, where #1 is the front of the room, #9 is the ceiling, and #10 is the floor.<br>
+          5. Use your imagination and picture three or more objects that are related to the three topics in that location.<br><br>
+          Each room has 30 topics.  It is recommended to start at room one and location one and move forward from there.
+        <br><br>
+        The randomize button is useful to quiz yourself once you are done.  This can help fully ingrain this in your memory.<br>
+        </p>
+      </div>
+    </div>
+      <!-- dynamically add these in -->
+      <div id="topic_content" class="noPointerE">
+        <h2 id="topic_room_number"></h2>
+        <p id="topic_para"></p>
+      </div>
+
+      <div id="random_content_flashcard" class="noPointerE">
+        <h2 id="random_content_flashcard_room"></h2>
+      </div>
+
+    </div>
+
+
+<a href="Notes/HTML/Programming/Java/Main.html">_</a>
+
+
+    <!-- jQuery and Bootstrap -->
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <!-- may want both jQueries or just one
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+      <!-- d3 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.js"></script>
+    <!-- angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+  <script type="text/javascript" src="javascripts/app.js"></script>
+  <script type="text/javascript"  src="javascripts/topics_array.js"></script>
+  <script type="text/javascript"  src="javascripts/script.js"></script>
+
+  </body>
+</html>
