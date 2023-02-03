@@ -44,6 +44,10 @@ tr:nth-child(even) {
 	font-size: 100%;
 } 
 
+#allcontent span {
+	font-size: 100%;
+} 
+
 #allcontent li {
 	font-size: 100%;
 } 
